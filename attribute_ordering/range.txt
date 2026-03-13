@@ -1,6 +1,7 @@
 Blank
 1 mile
 10 feet
+20 feet
 100 feet
 120 feet
 150 feet
