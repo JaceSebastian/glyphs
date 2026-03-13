@@ -5,9 +5,10 @@ functions a spell might need
     """
 import matplotlib.pyplot as plt #There's almost certainly a better way than matplotlib but oh well
 import numpy as np
+import matplotlib.patheffects as pe
 from collections.abc import Callable
 from necklaces import default_generation
-from svg2tikz import convert_svg
+#from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
@@ -151,13 +152,14 @@ class spell():
              savename = "output.png",
              output_dpi = 200,
              axs = None,
-             dot_color = 'k',
-             cmap = 'magma',
+             dot_color = 'none',
+             # cmap = 'magma',
+             cmap = 'copper',
              line_color = 'darkred',
-             dot_size = 50,
+             dot_size = 20,
              legend_fontsize = 10,
              legend_anchor = (1,0.75),
-             show_name = False):
+             show_name = False, glow=True):
         assert self.n_pol == self.binary_array.shape[1]
         assert self.n_att == self.binary_array.shape[0]
         cmap = plt.get_cmap(cmap)
@@ -170,8 +172,8 @@ class spell():
         axs.set_aspect('equal')
         
         #draw the points
-        axs.scatter(x_vals[0],y_vals[0],color = dot_color,marker = "o",s = dot_size)
-        axs.scatter(x_vals[1:],y_vals[1:],color = dot_color,marker = "o",s = dot_size,facecolors = 'none')
+        axs.scatter(x_vals[0],y_vals[0],color = dot_color,marker = "o",s = dot_size, zorder=0)
+        axs.scatter(x_vals[1:],y_vals[1:],color = dot_color,marker = "o",s = dot_size/2, zorder=0)
 
         if show_all_paths:
             self.draw_all_paths(x_vals,y_vals,axs)
@@ -179,7 +181,7 @@ class spell():
         for i in range(self.n_att):
             k = i + 1
             if annotate:
-                color = cmap(0.9*i/(self.n_att))
+                color = cmap(0.8*i/(self.n_att))
                 linewidth = 1 + 3*i/self.n_att
             else:
                 color = line_color
@@ -193,12 +195,32 @@ class spell():
                     Q = [x_vals[(j+k)%self.n_pol],y_vals[(j+k)%self.n_pol]]
                     line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
                     
-                    axs.plot(line_x,line_y,
-                             ls = "-",
-                             lw = linewidth,
-                             color = color,
-                             label = self.att_strs[i] if (labelled is False) and annotate == True else None,
-                             zorder = 0)
+                    if glow:
+                        line, = axs.plot(
+                            line_x, line_y,
+                            ls="-",
+                            lw=linewidth,
+                            color=color,
+                            solid_capstyle="butt",
+                            solid_joinstyle="miter",
+                            label=self.att_strs[i] if (labelled is False) and annotate else None,
+                            zorder=3
+                        )
+
+                        line.set_path_effects([
+                        pe.Stroke(linewidth=linewidth+6, foreground=color, alpha=0.15),
+                        pe.Stroke(linewidth=linewidth+3, foreground=color, alpha=0.25),
+                        pe.Normal()
+                        ])
+                    else:
+                        axs.plot(
+                        line_x, line_y,
+                        ls="-",
+                        lw=linewidth,
+                        color=color,
+                        label=self.att_strs[i] if (labelled is False) and annotate else None,
+                        zorder=0
+                        )
                     labelled = True
         if self.concentration:
             axs.plot(0,0,"",markersize = 10,marker = ".",color = dot_color)
@@ -214,8 +236,8 @@ class spell():
             plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight')
         else:
             plt.show()
-        if args.format == "tikz":
-            convert_svg(savename, "latexcode.tex")
+        #if args.format == "tikz":
+         #   convert_svg(savename, "latexcode.tex")
 
 
 
@@ -231,7 +253,7 @@ class spell():
                          ls = all_ls,
                          color = all_c,
                          alpha = all_alpha,
-                         lw = all_lw)
+                         lw = all_lw, zorder=4)
                 
 if __name__ == "__main__":
     test_inp = custom_spell_input(3,"evocation",

@@ -35,7 +35,7 @@ if __name__=="__main__":
     parser.add_argument("--annotate",help = "Whether to annotate the spell dir",action = "store_true")
     parser.add_argument("--show_all_paths",help = "Whether to show all possible paths",action = "store_true")
     parser.add_argument("--save_dpi",help = "DPI to save image at",default = 200)
-    parser.add_argument("--cmap",help = "Colour map to use for annotating",default = "magma")
+    parser.add_argument("--cmap",help = "Colour map to use for annotating",default = "summer")
     parser.add_argument("--dot_color",help = "Colour of the dots in the drawing",default = 'k')
     parser.add_argument("--line_color",help = "Colour of the lines (if not annotating)",default = 'darkred')
 
