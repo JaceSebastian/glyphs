@@ -1,3 +1,5 @@
+#TODO is make curve protocole.
+
 """Aim is to create a class that contains all the useful
 functions a spell might need
     """
@@ -5,9 +7,11 @@ import matplotlib.pyplot as plt #There's almost certainly a better way than matp
 import numpy as np
 from collections.abc import Callable
 from necklaces import default_generation
+from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
+  
 class custom_spell_input():
     """Class for custom inputting of spell data. Usually use the argparse object but this lets you do it in a code way
     """
@@ -176,8 +180,10 @@ class spell():
             k = i + 1
             if annotate:
                 color = cmap(0.9*i/(self.n_att))
+                linewidth = 1 + 3*i/self.n_att
             else:
                 color = line_color
+                linewidth = 2
             labelled = False
             for j,elem in enumerate(self.binary_array[i]):
                 
@@ -189,7 +195,7 @@ class spell():
                     
                     axs.plot(line_x,line_y,
                              ls = "-",
-                             lw = 2,
+                             lw = linewidth,
                              color = color,
                              label = self.att_strs[i] if (labelled is False) and annotate == True else None,
                              zorder = 0)
@@ -208,6 +214,8 @@ class spell():
             plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight')
         else:
             plt.show()
+        if args.format == "tikz":
+            convert_svg(savename, "latexcode.tex")
 
 
 

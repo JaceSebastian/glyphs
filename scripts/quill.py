@@ -39,6 +39,11 @@ if __name__=="__main__":
     parser.add_argument("--dot_color",help = "Colour of the dots in the drawing",default = 'k')
     parser.add_argument("--line_color",help = "Colour of the lines (if not annotating)",default = 'darkred')
 
+
+    #output options
+    parser.add_argument("--format",choices=["svg", "png"],default="svg",help="output format is svg by default")
+    
+    
     args = parser.parse_args()
     spell_obj = spell(args)
     spell_obj.draw(args.annotate,
