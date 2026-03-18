@@ -1,4 +1,5 @@
-#TODO is make curve protocole.
+#TODO is make curve protocol.
+# get svg2tikz functioning.
 
 """Aim is to create a class that contains all the useful
 functions a spell might need
@@ -147,6 +148,8 @@ class spell():
         self.range_b = binary_values[4]
         self.duration_b = binary_values[5]
 
+
+
     def draw(self,annotate = False,
              show_all_paths = False,
              savename = "output.png",
@@ -172,8 +175,32 @@ class spell():
         axs.set_aspect('equal')
         
         #draw the points
-        axs.scatter(x_vals[0],y_vals[0],color = dot_color,marker = "o",s = dot_size, zorder=0)
-        axs.scatter(x_vals[1:],y_vals[1:],color = dot_color,marker = "o",s = dot_size/2, zorder=0)
+        if annotate:
+            dot_color = cmap(.3)
+        halos = [
+            (dot_size+4, 0.05),
+            (dot_size+2, 0.12),
+            (dot_size+1, 0.25)
+        ]
+        for w, a in halos:
+            axs.scatter(
+                x_vals,
+                y_vals,
+                s=w,
+                color=dot_color,
+                alpha=a,
+                edgecolors='none',
+                zorder=2
+            )
+
+        # draw main dots
+        axs.scatter(
+            x_vals,
+            y_vals,
+            s=dot_size,
+            color=dot_color,
+            zorder=3
+         )
 
         if show_all_paths:
             self.draw_all_paths(x_vals,y_vals,axs)
@@ -183,6 +210,7 @@ class spell():
             if annotate:
                 color = cmap(0.8*i/(self.n_att))
                 linewidth = 1 + 3*i/self.n_att
+                dot_color
             else:
                 color = line_color
                 linewidth = 2
@@ -196,22 +224,20 @@ class spell():
                     line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
                     
                     if glow:
-                        line, = axs.plot(
-                            line_x, line_y,
-                            ls="-",
-                            lw=linewidth,
-                            color=color,
-                            solid_capstyle="butt",
-                            solid_joinstyle="miter",
-                            label=self.att_strs[i] if (labelled is False) and annotate else None,
-                            zorder=3
-                        )
+              
+                     # layered halo
+                        halos = [
+                            (linewidth + 8, 0.05),  # widest, faintest
+                            (linewidth + 5, 0.1),
+                            (linewidth + 3, 0.2)
+                        ]
+
+                        line, = axs.plot(line_x, line_y, lw=linewidth, color=color, zorder=1)
 
                         line.set_path_effects([
-                        pe.Stroke(linewidth=linewidth+6, foreground=color, alpha=0.15),
-                        pe.Stroke(linewidth=linewidth+3, foreground=color, alpha=0.25),
-                        pe.Normal()
-                        ])
+                            pe.Stroke(linewidth=w, foreground=color, alpha=a)
+                            for w, a in halos
+                        ] + [pe.Normal()])
                     else:
                         axs.plot(
                         line_x, line_y,
@@ -226,14 +252,14 @@ class spell():
             axs.plot(0,0,"",markersize = 10,marker = ".",color = dot_color)
         if self.ritual:
             axs.plot(0,0,"",markersize = 20,marker = "o",color=dot_color,mfc='none',linewidth = 20)
-        if annotate:
-            axs.legend(fontsize = legend_fontsize,bbox_to_anchor = legend_anchor)
+       # if annotate:
+           # axs.legend(fontsize = legend_fontsize,bbox_to_anchor = legend_anchor)
         #save_figure
         axs.set_axis_off()
         if show_name:
             axs.set_title(self.__name__)
         if savename is not None:
-            plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight')
+            plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight', transparent=True)
         else:
             plt.show()
         #if args.format == "tikz":
@@ -272,6 +298,6 @@ if __name__ == "__main__":
     test_obj.binary_array = np.zeros((test_obj.n_att,test_obj.n_pol))
     test_obj.binary_array[0] = np.array([0,0,0,0,1])
     test_obj.draw(savename = None,show_all_paths=True,annotate=False,
-                  show_name=True)
+                  show_name=False)
     
     

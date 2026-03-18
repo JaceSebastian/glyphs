@@ -30,7 +30,7 @@ if __name__=="__main__":
     parser.add_argument("-c","--concentration",help = "include if spell is ritual",action = "store_true")
 
     #plot variables
-    parser.add_argument("-spell_name",help = "Spell Name for Title",default = "Test")
+    parser.add_argument("-spell_name",help = "Spell Name for Title",default = "Glyph")
     parser.add_argument("--savename",help = "Savename of plot",default = "output.png")
     parser.add_argument("--annotate",help = "Whether to annotate the spell dir",action = "store_true")
     parser.add_argument("--show_all_paths",help = "Whether to show all possible paths",action = "store_true")
