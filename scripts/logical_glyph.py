@@ -9,14 +9,14 @@ import os
 import bases
 import line_shapes
 
-class deonticglyph(glyph):
+class logicalglyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.is_deontic = True
+        self.is_Logical = True
         self.class_number = 4
-        self.class_name = "Deontic"
+        self.class_name = "Logical Operators"
         self.attribute_num = 1
         self.atributes = {"Binary", "Unary"}
         self.glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
-        test_obj = deonticglyph(
+        test_obj = logicalglyph(
                          bases.polygon,
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
@@ -71,10 +71,10 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     #plt.show()
-    plt.savefig("deonticlist.png", transparent=True)
+    plt.savefig("logiclist.png", transparent=True)
 
  
-    # test_obj = deonticglyph(
+    # test_obj = logicglyph(
     #                  bases.polygon,
     #                  base_kwargs = [],
     #                  line_fn = line_shapes.straight,

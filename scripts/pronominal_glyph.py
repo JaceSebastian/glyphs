@@ -9,38 +9,45 @@ import os
 import bases
 import line_shapes
 
-class deonticglyph(glyph):
+class Pronounglyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.is_deontic = True
-        self.class_number = 4
-        self.class_name = "Deontic"
+        self.is_pronoun = True
+        self.class_number = 5
+        self.class_name = "Pronoun-ish"
         self.attribute_num = 1
         self.atributes = {"Binary", "Unary"}
-        self.glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+        self.glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative"]
 
 
 
     def _getBinaryArray(self, word,orientation = "North"):
         if(word not in self.glyph_list):
             KeyError("Not a Valid Glyph")
-        
+
+        #at some point, this will be able to smart orient rotation for each attribute
         match(word):
-            case "IS":
-                return np.array([[1,0,1,0],[0,0,0,0]])
-            case "ISNT":
-                return np.array([[1,1,1,1],[0,0,0,0]])
-            case "NOT":
-                return np.array([[1,0,1,1],[0,0,0,0]])
-            case "AND":
-                return np.array([[1,0,0,0],[0,1,0,0]])
-            case "OR":
-                return np.array([[0,0,1,0],[1,1,0,0]])
-            case "EITHER" |"XOR":
-                return np.array([[0,0,0,0],[1,1,0,0]])
-        return np.array([[0,0,0,0],[0,0,0,0]])
+            case "Summoner":
+                return np.array([[0,0,0,0,0],[0,1,1,1,0]])
+            case "Demon":
+                return np.array([[0,0,0,0,0],[0,1,0,1,0]])
+            case "Nominative": #No markings
+                return np.array([[0,0,0,0,0],[0,0,0,0,0]])
+            case "Accusative":
+                return np.array([[1,0,0,0,0],[0,0,0,0,0]])
+            case "Genitive":
+                return np.array([[0,1,0,0,1],[0,0,0,0,0]])
+            case "Dative":
+                return np.array([[0,0,1,1,0],[0,0,0,0,0]])
+            case "Summoner's":
+                return np.array([[0,1,0,0,1],[0,1,1,1,0]])
+            case "to the Demon":
+                return np.array([[0,0,1,1,0],[0,1,0,1,0]])
+
+
+        return np.array([[0,0,0,0,0],[0,0,0,0,0]])
     
 
 
@@ -48,19 +55,19 @@ class deonticglyph(glyph):
 
 
 if __name__ == "__main__":
-    glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+    glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative", "Summoner's", "to the Demon"]
     n = len(glyph_list)
 
-    fig, axes = plt.subplots(3, 2, figsize=(3, 7))  # adjust grid to taste
+    fig, axes = plt.subplots(4, 2, figsize=(4, 8))  # adjust grid to taste
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
-        test_obj = deonticglyph(
+        test_obj = Pronounglyph(
                          bases.polygon,
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 4
+        test_obj.class_number = 5
         test_obj.attribute_number = 2
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
@@ -71,10 +78,10 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     #plt.show()
-    plt.savefig("deonticlist.png", transparent=True)
+    plt.savefig("pronounlist.png", transparent=True)
 
  
-    # test_obj = deonticglyph(
+    # test_obj = Pronounglyph(
     #                  bases.polygon,
     #                  base_kwargs = [],
     #                  line_fn = line_shapes.straight,

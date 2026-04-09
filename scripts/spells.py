@@ -286,14 +286,14 @@ if __name__ == "__main__":
                                   "fire","sphere (20)",
                                   "150 feet","Instantaneous",
                                   spell_name="")
-    # test_obj = spell(test_inp,
-    #                  bases.polygon,
-    #                  base_kwargs = [],
-    #                  line_fn = line_shapes.straight,
-    #                  line_kwargs = [])
-    test_obj = spell(test_inp,ignore_atts=True,
-                     n_pol = 5,n_att = 2,
-                     base_kwargs = [1,-2*np.pi/5])
+    test_obj = spell(test_inp,
+                     bases.polygon,
+                     base_kwargs = [],
+                     line_fn = line_shapes.straight,
+                     line_kwargs = [])
+    # test_obj = spell(test_inp,ignore_atts=True,
+    #                  n_pol = 5,n_att = 2,
+    #                  base_kwargs = [1,-2*np.pi/5])
     
     test_obj.binary_array = np.zeros((test_obj.n_att,test_obj.n_pol))
     test_obj.binary_array[0] = np.array([0,0,0,0,1])

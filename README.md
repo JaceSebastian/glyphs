@@ -1,3 +1,26 @@
+
+
+
+
+### Sample Command LIne Code:
+```
+$ python3 ./scripts/quill.py -lvl 1 -sch Necromancy -dmg Poison -a "cone (15)" -ran "1 mile" -dur "1 minute" --annotate
+
+
+
+ python3 ./scripts/quill.py -lvl 8 -sch Abjuration -dmg Cold -a "cone (15)" -ran "1 mile" -dur "1 minute" --annotate
+
+```
+
+
+
+
+
+
+
+
+
+## Gorilla Of Desnity Notes
 # Writing Spells in D&D
 
 The goal of this is to make a more robust package for my spellwriting system (detailed [here](https://www.drivethrurpg.com/en/product/429711/the-spell-writing-guide), though it has updated now)

@@ -25,13 +25,11 @@ if __name__=="__main__":
     parser.add_argument("-dur","--duration",help = "necessary input: duration of the spell, format is `<n> <units>` e.g. `1 hour`. Also inlcludes the `Up to...`",
                         required = True)
     
-    #concentration and ritual
-    parser.add_argument("-r","--ritual",help = "include if spell is ritual",action = "store_true")
-    parser.add_argument("-c","--concentration",help = "include if spell is ritual",action = "store_true")
+ 
 
     #plot variables
     parser.add_argument("-spell_name",help = "Spell Name for Title",default = None)
-    parser.add_argument("--savename",help = "Savename of plot",default = "output.png")
+    parser.add_argument("--savename",help = "Savename of plot",default = None)
     parser.add_argument("--annotate",help = "Whether to annotate the spell dir",action = "store_true")
     parser.add_argument("--show_all_paths",help = "Whether to show all possible paths",action = "store_true")
     parser.add_argument("--save_dpi",help = "DPI to save image at",default = 200)
