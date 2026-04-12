@@ -1,0 +1,120 @@
+ Class ???: Clauses
+ - temporal, causal, purpose, result, relative
+ - subclause ending indicators
+ - Complementizer clauses
+
+Class 7:
+- Prepositions
+---
+Class Nine:
+- Times
+- Locations
+- Durations
+- Distances
+
+Class 8:
+- Boundary
+- Number
+    - 0-7
+- Type
+- Operators
+
+
+Class 10: Adjectives
+- Class
+    - Predicate (Might need case or a dummy noun)
+    - Adjective
+    - Adverb
+    - Modifer morpheme for Verb (bite to bitingly)
+    - modifer morpheme for Noun (wood to wooden)
+- Domain
+    - Certainty (knowingly, complete, true(truthfully))
+    - Ability (Survivable, Harmful, healing, capable)
+    - Dimension (big, small, narrow)
+    - Value (good, proper, safe, beautiful)
+    - Color/property (red, wooden, rough, hard, material, social, emotional, psychological)
+    - Age (new, worn, old, +fast, slow)
+  
+    - Social/culturally defined (royal, bound, demonic, mortal)
+
+- Modifers
+    - Negation
+    - degree (very, slightly, )
+    - Superlative
+
+
+Class Eleven: Syllabary
+- Syllable Structure
+    - CV (unmarked)
+    - C (coda of previous syllable)
+    - C (syllabic consonant or non coda consonat ie f in fli)
+    - V (no onset consonant)
+    - V (coda of previous syllable)
+- Consonant Place
+    - Bilabial
+    - labial
+    - Dental
+    - Alveolar
+    - Postalveolar
+    - Retroflex
+    - Palatal
+    - Velar 
+    - Uvular 
+    - Pharengeal 
+    - Glottal
+- Consonant Manner
+    - Voiced Plosive
+    - Unvoiced Plosive
+    - Nasal
+    - Voiced Fricative
+    - Unvoiced Fricative
+    - Approximate
+    - Lateral Approximate
+- Vowel
+    - a 
+    - e 
+    - i 
+    - o 
+    - u
+    - y
+    - ʊ
+    - ə
+    - ɔ
+    - ɑ
+    - ɤ
+- Features and Secondary Articulations
+    - Long vowel
+    - aspirated vowel (can only be short)
+    - nasal vowel
+    - pharengealized
+    - labialized
+    - palatalized
+    - aspirated
+    - unvoiced (consonant, or vowel if V only syllable)
+    - NonPulmonic: ejective if unvoiced or implosive if voiced.
+    - unreleased
+    XXX dental (in place feature)
+
+
+Class Twelve: Verbs
+-Conjugation:
+    - Genitive
+    - Infinitive (running)
+    - Nominalizer (the running)
+    - Participlizer
+    - Head Agreement-S
+    - Head Agreement-D
+    - Head Agreement-Singular
+    - Head Agreement-Plural
+- Tense:
+    - Present
+    - Present Continuous
+    - Present Perfect
+    - Gnomic (outside bond-service duration)
+    - Gnomic (during bond-service onlyl)
+    - Past (simple or perfect)
+
+Class Thirteen: Nouns
+- Case
+- Number/mass
+- Demonstratives

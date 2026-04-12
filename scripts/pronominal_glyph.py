@@ -19,7 +19,7 @@ class Pronounglyph(glyph):
         self.class_name = "Pronoun-ish"
         self.attribute_num = 1
         self.atributes = {"Binary", "Unary"}
-        self.glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative"]
+        self.glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative", "Instrumental"]
 
 
 
@@ -28,23 +28,25 @@ class Pronounglyph(glyph):
             KeyError("Not a Valid Glyph")
 
         #at some point, this will be able to smart orient rotation for each attribute
-        match(word):
+        match(word): #on pentagram order is [right top, right bottom, left bottom, right top, top]
             case "Summoner":
-                return np.array([[0,0,0,0,0],[0,1,1,1,0]])
+                return np.array([[0,0,0,0,0],[0,0,1,1,1]])
             case "Demon":
-                return np.array([[0,0,0,0,0],[0,1,0,1,0]])
+                return np.array([[0,0,0,0,0],[1,0,1,0,0]])
             case "Nominative": #No markings
                 return np.array([[0,0,0,0,0],[0,0,0,0,0]])
             case "Accusative":
-                return np.array([[1,0,0,0,0],[0,0,0,0,0]])
+                return np.array([[0,1,0,0,0],[0,0,0,0,0]])
             case "Genitive":
-                return np.array([[0,1,0,0,1],[0,0,0,0,0]])
+                return np.array([[1,0,1,0,0],[0,0,0,0,0]])
             case "Dative":
-                return np.array([[0,0,1,1,0],[0,0,0,0,0]])
+                return np.array([[0,0,0,1,1],[0,0,0,0,0]])
+            case "Instrumental":
+                return np.array([[0,0,1,1,1],[0,0,0,0,0]])
             case "Summoner's":
-                return np.array([[0,1,0,0,1],[0,1,1,1,0]])
+                return np.array([[1,0,1,0,0],[0,0,1,1,1]])
             case "to the Demon":
-                return np.array([[0,0,1,1,0],[0,1,0,1,0]])
+                return np.array([[0,1,1,0,0],[1,0,1,0,0]])
 
 
         return np.array([[0,0,0,0,0],[0,0,0,0,0]])
@@ -55,10 +57,10 @@ class Pronounglyph(glyph):
 
 
 if __name__ == "__main__":
-    glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative", "Summoner's", "to the Demon"]
+    glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative", "Instrumental", "Summoner's", "to the Demon"]
     n = len(glyph_list)
 
-    fig, axes = plt.subplots(4, 2, figsize=(4, 8))  # adjust grid to taste
+    fig, axes = plt.subplots(3,3, figsize=(7, 7))  # adjust grid to taste
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
@@ -71,14 +73,14 @@ if __name__ == "__main__":
         test_obj.attribute_number = 2
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
-        test_obj.draw(savename=None, show_all_paths=True, annotate=True,
+        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
                       show_name=False, axs=axes[i])
         axes[i].set_title(word)
 
 
     plt.tight_layout()
-    #plt.show()
-    plt.savefig("pronounlist.png", transparent=True)
+    plt.show()
+    #plt.savefig("pronounlist.png", transparent=True)
 
  
     # test_obj = Pronounglyph(

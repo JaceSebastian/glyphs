@@ -15,11 +15,11 @@ class deonticglyph(glyph):
 
         # subclass-specific initialization
         self.is_deontic = True
-        self.class_number = 4
+        self.class_number = 3
         self.class_name = "Deontic"
         self.attribute_num = 1
-        self.atributes = {"Binary", "Unary"}
-        self.glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+        self.atributes = {}
+        self.glyph_list= ["Obligatory", "Permissable", "Forbidden", "Omissible"]
 
 
 
@@ -28,19 +28,16 @@ class deonticglyph(glyph):
             KeyError("Not a Valid Glyph")
         
         match(word):
-            case "IS":
-                return np.array([[1,0,1,0],[0,0,0,0]])
-            case "ISNT":
-                return np.array([[1,1,1,1],[0,0,0,0]])
-            case "NOT":
-                return np.array([[1,0,1,1],[0,0,0,0]])
-            case "AND":
-                return np.array([[1,0,0,0],[0,1,0,0]])
-            case "OR":
-                return np.array([[0,0,1,0],[1,1,0,0]])
-            case "EITHER" |"XOR":
-                return np.array([[0,0,0,0],[1,1,0,0]])
-        return np.array([[0,0,0,0],[0,0,0,0]])
+            case "Obligatory":
+                return np.array([[0,1,1]])
+            case "Permissable":
+                return np.array([[0,0,1]])
+            case "Forbidden":
+                return np.array([[1,1,1]])
+            case "Omissible":
+                return np.array([[0,0,0]])
+       
+        return np.array([[0,0,0]])
     
 
 
@@ -48,10 +45,10 @@ class deonticglyph(glyph):
 
 
 if __name__ == "__main__":
-    glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+    glyph_list= ["Obligatory", "Permissable", "Forbidden", "Omissible"]
     n = len(glyph_list)
 
-    fig, axes = plt.subplots(3, 2, figsize=(3, 7))  # adjust grid to taste
+    fig, axes = plt.subplots(2, 2, figsize=(6, 6))  # adjust grid to taste
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
@@ -60,8 +57,7 @@ if __name__ == "__main__":
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 4
-        test_obj.attribute_number = 2
+        test_obj.attribute_number = 1
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
         test_obj.draw(savename=None, show_all_paths=True, annotate=True,
@@ -70,22 +66,7 @@ if __name__ == "__main__":
 
 
     plt.tight_layout()
-    #plt.show()
-    plt.savefig("deonticlist.png", transparent=True)
+    plt.show()
 
- 
-    # test_obj = deonticglyph(
-    #                  bases.polygon,
-    #                  base_kwargs = [],
-    #                  line_fn = line_shapes.straight,
-    #                  line_kwargs = [])
-    # test_obj.class_number = 4
-    # test_obj.attribute_number =2
-
-    
-    # test_obj.binary_array = test_obj._getBinaryArray("OR")
-
-    # test_obj.draw(savename = None,show_all_paths=True,annotate=True,
-    #               show_name=False)
 
 

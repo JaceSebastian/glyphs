@@ -28,7 +28,7 @@ class glyph():
         self.line_fn = line_fn
         self.line_kwargs = line_kwargs
         
-        self.class_number = 3
+        self.class_number = -1
         self.attribute_number = 0
 
         self.class_name = ""
@@ -51,7 +51,7 @@ class glyph():
                 dot_size = 20,
                 legend_fontsize = 10,
                 legend_anchor = (1,0.75),
-                show_name = False, glow=True):
+                show_name = False):
             #print(f"Attribute num {self.attribute_number} shape {self.binary_array.shape[0]}")
             assert self.class_number == self.binary_array.shape[1]
             assert self.attribute_number == self.binary_array.shape[0]
@@ -113,7 +113,7 @@ class glyph():
                         Q = [x_vals[(j+k)%self.class_number],y_vals[(j+k)%self.class_number]]
                         line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
                         
-                        if glow:
+                        if annotate:
                 
                         # layered halo
                             halos = [
