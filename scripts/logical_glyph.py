@@ -15,7 +15,7 @@ class logicalglyph(glyph):
 
         # subclass-specific initialization
         self.is_Logical = True
-        self.class_number = 4
+        self.num = 4
         self.class_name = "Logical Operators"
         self.attribute_num = 1
         self.atributes = {"Binary", "Unary"}
@@ -60,7 +60,7 @@ if __name__ == "__main__":
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 4
+        test_obj.num = 4
         test_obj.attribute_number = 2
         test_obj.binary_array = test_obj._getBinaryArray(word)
 

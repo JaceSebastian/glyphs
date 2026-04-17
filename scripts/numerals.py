@@ -14,10 +14,11 @@ class NumeralGlyph(glyph):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.is_number = True
-        self.class_number = 8
+        self.num = 8
+        self.attr_num = 4
+
         self.class_name = "Numbers"
-        self.attribute_num = 4
+        self.is_number = True
         self.attributes = ["Boundary","Number", "Type", "Operators"]
         self.glyph_list=[]
 
@@ -100,11 +101,11 @@ if __name__ == "__main__":
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 8
+        test_obj.num = 8
         test_obj.attribute_number = 4
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
-        test_obj.draw(savename=None, show_all_paths=True, annotate=True,
+        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
                       show_name=False, axs=axes[i])
         axes[i].set_title(word)
 

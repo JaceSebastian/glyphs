@@ -15,9 +15,10 @@ class deonticglyph(glyph):
 
         # subclass-specific initialization
         self.is_deontic = True
-        self.class_number = 3
-        self.class_name = "Deontic"
+        self.num = 3
         self.attribute_num = 1
+        
+        self.class_name = "Deontic"
         self.atributes = {}
         self.glyph_list= ["Obligatory", "Permissable", "Forbidden", "Omissible"]
 

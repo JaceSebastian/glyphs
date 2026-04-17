@@ -28,17 +28,10 @@ class glyph():
         self.line_fn = line_fn
         self.line_kwargs = line_kwargs
         
-        self.class_number = -1
+        self.num = -1
         self.attribute_number = 0
-
-        self.class_name = ""
-        self.class_names = ["Relativeizer", "Punctuation", "Recursion", "Deontic", "Logical", "Pronouns", "AFFIXES?", "SUBORDINATORS?","Numbers","Prepositions?","Adjectives/Adverbs?","Verbs","Syllabary","Nouns"]
-
-
-
-
         """This is where the information for each line is held."""
-        #self.binary_array = np.zeros((self.n_att,self.class_number),dtype = int)
+        self.binary_array = np.zeros((self.n_att,self.class_number),dtype = int)
 
     def draw(self,annotate = False,
                 show_all_paths = False,
@@ -53,10 +46,10 @@ class glyph():
                 legend_anchor = (1,0.75),
                 show_name = False):
             #print(f"Attribute num {self.attribute_number} shape {self.binary_array.shape[0]}")
-            assert self.class_number == self.binary_array.shape[1]
+            assert self.num == self.binary_array.shape[1]
             assert self.attribute_number == self.binary_array.shape[0]
             cmap = plt.get_cmap(cmap)
-            x_vals,y_vals = self.base_fn(self.class_number,*self.base_kwargs)
+            x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
             if axs is None:
                 fig,axs = plt.subplots(1,1)
@@ -110,7 +103,7 @@ class glyph():
                     if elem == 1:
                         #if element is 1
                         P = [x_vals[j],y_vals[j]]
-                        Q = [x_vals[(j+k)%self.class_number],y_vals[(j+k)%self.class_number]]
+                        Q = [x_vals[(j+k)%self.num],y_vals[(j+k)%self.num]]
                         line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
                         
                         if annotate:
@@ -145,14 +138,14 @@ class glyph():
             if savename is not None:
                 plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight', transparent=True)
             elif axs is None:
-                plt.show()
+                plt.show(transparent=True)
     
     def draw_all_paths(self,x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
         #loop for all k
         for k in range(1,self.attribute_number+1):
-            for i in range(self.class_number):
+            for i in range(self.num):
                 P = [x_vals[i],y_vals[i]]
-                Q = [x_vals[(i+k)%self.class_number],y_vals[(i+k)%self.class_number]]
+                Q = [x_vals[(i+k)%self.num],y_vals[(i+k)%self.num]]
                 line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
                 axs.plot(line_x,line_y,
                         ls = all_ls,

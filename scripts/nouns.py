@@ -18,15 +18,16 @@ class NounGlyph(glyph):
 
         # subclass-specific initialization  
         self.is_number = True
-        self.class_number = 13
+        self.num = 13
         self.class_name = "Numbers"
-        self.attribute_num = 6
+        self.attr_num = 6
         self.attr_names = ["Case", "Number", "Determiner"]
         self.attributes = ["Nominative", "Accusative", "Genitive", "Dative", "Instrumental","This", "That", "These", "Those", "A", "Some"]
         attr_masks = {"singular": np.array([1, 0, 0, 0, 0]),
                       "a":   np.array([0, 1, 0, 0, 0]),
                       "b":  np.array([0, 0, 1, 0, 0]),
                     }
+        #todo, change attr_masks to read in from csv
 
     def orient_array(arr, orientation="North"):
         assert arr is np.array()
@@ -39,7 +40,7 @@ class NounGlyph(glyph):
 
     def _getBinaryArray(self, features,orientation = "North"):
         '''at some point, this will be able to smart orient rotation for each attribute'''
-        result = np.zeros((self.attribute_num, self.class_number))
+        result = np.zeros((self.attr_num, self.num))
         for feat in features:
             if(feat not in self.attributes):
                 raise KeyError("Not a Valid Glyph")
@@ -67,7 +68,7 @@ if __name__ == "__main__":
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 8
+        test_obj.num = 8
         test_obj.attribute_number = 4
         test_obj.binary_array = test_obj._getBinaryArray(word)
 

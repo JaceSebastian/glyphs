@@ -4,18 +4,17 @@ import numpy as np
 import matplotlib.patheffects as pe
 from collections.abc import Callable
 from necklaces import default_generation
-#from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
 
-class Pronounglyph(glyph):
+class PronounGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
         self.is_pronoun = True
-        self.class_number = 5
+        self.num = 5
         self.class_name = "Pronoun-ish"
         self.attribute_num = 1
         self.atributes = {"Binary", "Unary"}
@@ -28,6 +27,7 @@ class Pronounglyph(glyph):
             KeyError("Not a Valid Glyph")
 
         #at some point, this will be able to smart orient rotation for each attribute
+        # todo, throw error if trying to add two features for one attribute. ie summoner && demon.
         match(word): #on pentagram order is [right top, right bottom, left bottom, right top, top]
             case "Summoner":
                 return np.array([[0,0,0,0,0],[0,0,1,1,1]])
@@ -64,12 +64,12 @@ if __name__ == "__main__":
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
-        test_obj = Pronounglyph(
+        test_obj = PronounGlyph(
                          bases.polygon,
                          base_kwargs = [],
                          line_fn = line_shapes.straight,
                          line_kwargs = [])
-        test_obj.class_number = 5
+        test_obj.num = 5
         test_obj.attribute_number = 2
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
@@ -79,11 +79,11 @@ if __name__ == "__main__":
 
 
     plt.tight_layout()
-    plt.show()
-    #plt.savefig("pronounlist.png", transparent=True)
+    #plt.show()
+    plt.savefig("pronounlist.png", transparent=True)
 
  
-    # test_obj = Pronounglyph(
+    # test_obj = PronounGlyph(
     #                  bases.polygon,
     #                  base_kwargs = [],
     #                  line_fn = line_shapes.straight,

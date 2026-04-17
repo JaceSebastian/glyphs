@@ -1,12 +1,59 @@
+ Classes -> Shape
+    Cartouche -> Circle (used to partion off spelled out proper names)
+    Punctuation -> Dot 
+    Recursion -> Line/brackets
+    Deontic Logic -> Triangle
+    Logical Operators -> Square
+    Pronouns -> Pentagon
+    Prepositions? -> Hexagon
+    Suordinating? -> Septagon
+    Numerals -> Octogon
+    Morphemes/affixes -> Nonagon
+    AdjP -> Decagon
+    Syllabary -> Hendecagon
+    Verb -> Dodecagon   
+    DP-> Triskaidecagon
+
+
+ 
  Class ???: Clauses
  - temporal, causal, purpose, result, relative
  - subclause ending indicators
  - Complementizer clauses
+ Class 6 or 7: Subordinating Clauses
+ - Sequencing
+    - Before
+    - After
+    - While
+    - Until
+    - When
+    - Where
+- Subordinating
+    - Because
+    - Since
+    -? Although
+    - For/in order to
+    - if
+    - hypothetical if
+    -? counterfactual if
+    - except
+    - so X as (before an adjective, so long as, so much as)
+    - more X than
+    - less X than
+    - Lest/unless
+    - why
+    - how
+    - LET
+- Relative Pronouns
+    - who/that/which/what
+    - whoever/whichever/whenever/whereever
+    - someone/something/sometime
 
-Class 7:
+
+
+Class 6/9:
 - Prepositions
----
-Class Nine:
+Class Six/Nine:
 - Times
 - Locations
 - Durations
@@ -113,8 +160,24 @@ Class Twelve: Verbs
     - Gnomic (outside bond-service duration)
     - Gnomic (during bond-service onlyl)
     - Past (simple or perfect)
+- Valency
+    - Passive
+    - Causative
+    - Benefactive
+    - Malefactive
+    - Intransitive
+    - Monovalent/Transitive (Unmarked)
+    - Divalent 
+    - Reflexive
 
 Class Thirteen: Nouns
 - Case
-- Number/mass
+    -ACC (Unmarked)
+- Number/mass/Partitive
 - Demonstratives
+    -The (unmarked)
+    -This/These
+    -That/those
+    -a/some
+    -None, any, few, some?????
+
