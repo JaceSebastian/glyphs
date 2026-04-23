@@ -8,6 +8,9 @@ import os
 import bases
 import line_shapes
 
+import csv
+import ast
+
 class glyph():
     """unlike Spells, This is simply going to draw a glyph, given the literal information.
         The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented
@@ -28,10 +31,11 @@ class glyph():
         self.line_fn = line_fn
         self.line_kwargs = line_kwargs
         
-        self.num = -1
-        self.attribute_number = 0
+        self.num = 0
+        self.attr_num = 0
+        self.text_file_base:str = r"./attribute_ordering/"
         """This is where the information for each line is held."""
-        self.binary_array = np.zeros((self.n_att,self.class_number),dtype = int)
+        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
 
     def draw(self,annotate = False,
                 show_all_paths = False,
@@ -40,14 +44,14 @@ class glyph():
                 axs = None,
                 dot_color = 'none',
                 cmap = 'summer',
-                line_color = 'darkred',
+                line_color = 'maroon',
                 dot_size = 20,
                 legend_fontsize = 10,
                 legend_anchor = (1,0.75),
                 show_name = False):
-            #print(f"Attribute num {self.attribute_number} shape {self.binary_array.shape[0]}")
+            #print(f"Attribute num {self.attr_num} shape {self.binary_array.shape[0]}")
             assert self.num == self.binary_array.shape[1]
-            assert self.attribute_number == self.binary_array.shape[0]
+            assert self.attr_num== self.binary_array.shape[0]
             cmap = plt.get_cmap(cmap)
             x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
@@ -60,21 +64,21 @@ class glyph():
             #draw the points
             if annotate:
                 dot_color = cmap(.3)
-            halos = [
-                (dot_size+4, 0.05),
-                (dot_size+2, 0.12),
-                (dot_size+1, 0.25)
-            ]
-            for w, a in halos:
-                axs.scatter(
-                    x_vals,
-                    y_vals,
-                    s=w,
-                    color=dot_color,
-                    alpha=a,
-                    edgecolors='none',
-                    zorder=2
-                )
+                halos = [
+                    (dot_size+4, 0.05),
+                    (dot_size+2, 0.12),
+                    (dot_size+1, 0.25)
+                ]
+                for w, a in halos:
+                    axs.scatter(
+                        x_vals,
+                        y_vals,
+                        s=w,
+                        color=dot_color,
+                        alpha=a,
+                        edgecolors='none',
+                        zorder=2
+                    )
 
             # draw main dots
             axs.scatter(
@@ -88,11 +92,11 @@ class glyph():
             if show_all_paths:
                 self.draw_all_paths(x_vals,y_vals,axs)
 
-            for i in range(self.attribute_number):
-                k = i + 1
+            for i in range(self.attr_num):
+                k = i+1
                 if annotate:
-                    color = cmap(0.8*i/(self.attribute_number))
-                    linewidth = 4- 3*i/self.attribute_number
+                    color = cmap(0.8*i/(self.attr_num))
+                    linewidth = 4- 3*i/self.attr_num
                     dot_color
                 else:
                     color = line_color
@@ -142,7 +146,7 @@ class glyph():
     
     def draw_all_paths(self,x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
         #loop for all k
-        for k in range(1,self.attribute_number+1):
+        for k in range(1,self.attr_num+1):
             for i in range(self.num):
                 P = [x_vals[i],y_vals[i]]
                 Q = [x_vals[(i+k)%self.num],y_vals[(i+k)%self.num]]

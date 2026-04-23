@@ -17,7 +17,7 @@ class PronounGlyph(glyph):
         self.num = 5
         self.class_name = "Pronoun-ish"
         self.attribute_num = 1
-        self.atributes = {"Binary", "Unary"}
+        self.atributes = {"Subject", "Case"}
         self.glyph_list= ["Summoner", "Demon", "Nominative", "Accusative", "Genitive", "Dative", "Instrumental"]
 
 

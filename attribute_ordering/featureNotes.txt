@@ -12,12 +12,12 @@
     AdjP -> Decagon
     Syllabary -> Hendecagon
     Verb -> Dodecagon   
-    DP-> Triskaidecagon
+    DP/Nouns-> Triskaidecagon
 
 
  
  Class ???: Clauses
- - temporal, causal, purpose, result, relative
+ - temporal/sequencing, causal, purpose, result, relative, concessive (except, but), comparative, conditional
  - subclause ending indicators
  - Complementizer clauses
  Class 6 or 7: Subordinating Clauses
@@ -44,7 +44,10 @@
     - why
     - how
     - LET
+    - THAT
+
 - Relative Pronouns
+    - generic relativeizer end symbol
     - who/that/which/what
     - whoever/whichever/whenever/whereever
     - someone/something/sometime
@@ -53,11 +56,17 @@
 
 Class 6/9:
 - Prepositions
-Class Six/Nine:
+Class Seven/Nine:
 - Times
 - Locations
 - Durations
 - Distances
+- Pronouns 
+    - whoever
+    -whenever
+    -whereever
+    -whatever
+    -something
 
 Class 8:
 - Boundary
@@ -67,13 +76,23 @@ Class 8:
 - Operators
 
 
+Class 9: Morphemes
+- Anything that might be useful, but can't function as an indepentdent morpheme.
+- Class changing Morphemes (-less, -ly)
+- Modifer morpheme for Verb->adverb (bite to bitingly)
+- modifer morpheme for Noun->adjective (wood to wooden)
+- Modifers
+    - Negation (un- )
+    - degree (very, slightly, )
+    - Superlative
+
+
 Class 10: Adjectives
 - Class
     - Predicate (Might need case or a dummy noun)
     - Adjective
     - Adverb
-    - Modifer morpheme for Verb (bite to bitingly)
-    - modifer morpheme for Noun (wood to wooden)
+   
 - Domain
     - Certainty (knowingly, complete, true(truthfully))
     - Ability (Survivable, Harmful, healing, capable)
@@ -81,23 +100,18 @@ Class 10: Adjectives
     - Value (good, proper, safe, beautiful)
     - Color/property (red, wooden, rough, hard, material, social, emotional, psychological)
     - Age (new, worn, old, +fast, slow)
-  
+    - Movment (quickly, slowly, smoothly)
     - Social/culturally defined (royal, bound, demonic, mortal)
-
-- Modifers
-    - Negation
-    - degree (very, slightly, )
-    - Superlative
 
 
 Class Eleven: Syllabary
-- Syllable Structure
+- Syllable Structure (5)
     - CV (unmarked)
     - C (coda of previous syllable)
-    - C (syllabic consonant or non coda consonat ie f in fli)
+    - C (syllabic consonant or nonfinal consonant clusder ie f in fli)
     - V (no onset consonant)
     - V (coda of previous syllable)
-- Consonant Place
+- Consonant Place (11)
     - Bilabial
     - labial
     - Dental
@@ -109,7 +123,7 @@ Class Eleven: Syllabary
     - Uvular 
     - Pharengeal 
     - Glottal
-- Consonant Manner
+- Consonant Manner (7) TRY TO EXPAND
     - Voiced Plosive
     - Unvoiced Plosive
     - Nasal
@@ -117,7 +131,7 @@ Class Eleven: Syllabary
     - Unvoiced Fricative
     - Approximate
     - Lateral Approximate
-- Vowel
+- Vowel (11)
     - a 
     - e 
     - i 
@@ -129,7 +143,7 @@ Class Eleven: Syllabary
     - ɔ
     - ɑ
     - ɤ
-- Features and Secondary Articulations
+- Features and Secondary Articulations(10) TRY TO REDUCE
     - Long vowel
     - aspirated vowel (can only be short)
     - nasal vowel
@@ -140,7 +154,6 @@ Class Eleven: Syllabary
     - unvoiced (consonant, or vowel if V only syllable)
     - NonPulmonic: ejective if unvoiced or implosive if voiced.
     - unreleased
-    XXX dental (in place feature)
 
 
 Class Twelve: Verbs

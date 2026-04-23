@@ -10,31 +10,31 @@ import bases
 import line_shapes
 import csv
 
-
-class deonticglyph(glyph):
+class SequiGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.is_deontic = True
-        self.num = 3
-        self.attr_num = 1
+        self.is_coordinator = True
+        self.num = 6
+        self.attr_num = 3
+        self.binary_array = np.array([[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]])
         
-        self.class_name = "Deontic"
-        self.atributes = {}
-        self.glyph_list= ["Obligatory", "Permissable", "Forbidden", "Omissible"]
+        self.class_name = "Sequi"
+        self.atributes = {"Sequencing", "Sequent", "Consequence"}
+        self.glyph_list= []
         self.encondings = None
-        self.text_file = self.text_file_base +"class3.csv"
+        self.text_file = self.text_file_base +"class6.csv"
 
-        # with open(self.text_file, newline="") as f:
-        #     reader = csv.DictReader(f)
-        #     for row in reader:
-        #         word = row["Word"].strip()
-        #         call = row[" call"].strip()      # note the leading space in your header
-        #         encoding = ast.literal_eval(row[" encoding"].strip())
+        with open(self.txt_file_base+"class3.csv", newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                word = row["Word"].strip()
+                call = row[" call"].strip()      # note the leading space in your header
+                encoding = ast.literal_eval(row[" encoding"].strip())
 
-        #         self.glyph_list.append(word)
-        #         self.encodings[word] = encoding
+                self.glyph_list.append(word)
+                self.encodings[word] = encoding
 
 
 
@@ -42,17 +42,7 @@ class deonticglyph(glyph):
         if(word not in self.glyph_list):
             KeyError("Not a Valid Glyph")
         
-        match(word):
-            case "Obligatory":
-                return np.array([[0,1,1]])
-            case "Permissable":
-                return np.array([[0,0,1]])
-            case "Forbidden":
-                return np.array([[1,1,1]])
-            case "Omissible":
-                return np.array([[0,0,0]])
-       
-        return np.array([[0,0,0]])
+        #TODO
     
 
 
@@ -67,7 +57,7 @@ if __name__ == "__main__":
     axes = axes.flatten()
 
     for i, word in enumerate(glyph_list):
-        test_obj = deonticglyph(
+        test_obj = sequiGlyph(
                          bases.polygon,
                          base_kwargs = [],
                          line_fn = line_shapes.straight,

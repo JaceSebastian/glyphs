@@ -18,8 +18,8 @@ class logicalglyph(glyph):
         self.num = 4
         self.class_name = "Logical Operators"
         self.attribute_num = 1
-        self.atributes = {"Binary", "Unary"}
-        self.glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+        self.atributes = {["Binary", "Unary"]}
+        self.glyph_list= ["IS", "ISN'T", "NO", "AND", "OR", "XOR"]
 
 
 
@@ -30,9 +30,9 @@ class logicalglyph(glyph):
         match(word):
             case "IS":
                 return np.array([[1,0,1,0],[0,0,0,0]])
-            case "ISNT":
+            case "ISN'T":
                 return np.array([[1,1,1,1],[0,0,0,0]])
-            case "NOT":
+            case "NO":
                 return np.array([[1,0,1,1],[0,0,0,0]])
             case "AND":
                 return np.array([[1,0,0,0],[0,1,0,0]])
@@ -48,7 +48,7 @@ class logicalglyph(glyph):
 
 
 if __name__ == "__main__":
-    glyph_list= ["IS", "ISNT", "NOT", "AND", "OR", "XOR"]
+    glyph_list= ["IS", "ISN'T", "NO", "AND", "OR", "XOR"]
     n = len(glyph_list)
 
     fig, axes = plt.subplots(3, 2, figsize=(3, 7))  # adjust grid to taste
