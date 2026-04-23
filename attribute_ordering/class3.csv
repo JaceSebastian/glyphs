@@ -1,5 +1,17 @@
-Word, call, encoding
-"Obligatory", "Ob", "[0,1,1]"
-"Permissable", "P", "[0,0,1]"
-"Forbidden", "F", "[1,1,1]"
-"Omissible","Om", "[0,0,0]"
+feature, call, encoding
+Null, Null, "[0,0,0]"
+Obligatory, Ob, "[0,1,1]"
+Permissable, P, "[0,0,1]"
+Forbidden, F, "[1,1,1]"
+Omissible, Om, "[0,0,0]"
+Glyphs
+command, feature1, rotation1
+must, Obligatory, 0
+ought, Omissible, 0
+may, Permissable, 0
+"must not", Forbidden, 0
+"can't", Forbidden, 0
+will, Obligatory, 0
+should, Omissible, 0
+might, Permissable,0
+

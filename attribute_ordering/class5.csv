@@ -1,0 +1,29 @@
+feature, encoding
+Null, "[[0,0,0,0,0],[0,0,0,0,0]]"
+Summoner,"[[0,0,0,0,0],[0,0,1,1,1]]"
+Demon,"[[0,0,0,0,0],[1,0,1,0,0]]"
+Nominative,"[[0,0,0,0,0],[0,0,0,0,0]]"
+Accusative,"[[0,1,0,0,0],[0,0,0,0,0]]"
+Genitive,"[[1,0,1,0,0],[0,0,0,0,0]]"            
+Dative,"[[0,0,0,1,1],[0,0,0,0,0]]"
+Instrumental, "[[1,1,1,0,0],[0,0,0,0,0]]"
+Glyphs
+command, feature1, rotation1, feature2, rotation2
+Nom, Null, 0, Nominative, 0
+Acc, Null, 0, Accusative, 0
+Gen, Null, 0, Genitive,0
+Dat, Null, 0, Dative, 0
+Instr, Null, 0, Instrumental, 0
+The Summoner, Summoner, 0, Nominative, 0
+Summoner, Summoner, 0, Accusative, 0
+Summoner's, Summoner, 0, Genitive, 0
+To Summoner, Summoner, 0, Dative, 0
+With Summoner, Summoner, 0, Instrumental, 3
+The Demon, Demon, 0, Nominative, 0
+Demon, Demon, 0, Accusative, 0
+Demon's, Demon, 0, Genitive, 3
+To Demon, Demon, 0, Dative, 3
+With Demon, Demon, 0, Instrumental, 3
+
+
+

@@ -1,5 +1,10 @@
 This is a modification of Gorilla of Destiny's repo for DnD spell writing, used for my own constructed language project centered around a theoretical language for demon summoning and binding contracts.
 
+For now, to see all possible glyphs for a class, cd to glyphs folder, and run code like so
+'''
+$ python3 ./scripts/deonticGlyph.py
+'''
+
 A rough correspondence for glyphs:
  Classes -> Shape
     Cartouche -> Circle (used to partion off spelled out proper names)

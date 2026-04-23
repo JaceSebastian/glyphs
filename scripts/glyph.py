@@ -11,6 +11,7 @@ import line_shapes
 import csv
 import ast
 
+
 class glyph():
     """unlike Spells, This is simply going to draw a glyph, given the literal information.
         The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented
@@ -36,7 +37,30 @@ class glyph():
         self.text_file_base:str = r"./attribute_ordering/"
         """This is where the information for each line is held."""
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
-
+        self.attributes = []
+        self.glyph_list= {}
+        self.encodings = {}
+    
+    def _clear_binary(self):
+        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
+    
+    def rotateGlyph(self, binary_encoding, rotation):
+        if rotation == 0: return binary_encoding
+        #encoding is a list of lists
+        for i in range(len(binary_encoding)):
+            if np.any(binary_encoding[i]):
+                binary_encoding[i] = np.roll(binary_encoding[i], rotation)
+        return binary_encoding
+    
+    def _getBinaryArray(self, word):
+        if(word not in self.glyph_list):
+            raise KeyError("Not a Valid Glyph")
+        for feature_name, rotation in self.glyph_list[word]:
+                fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
+                fencoding = self.rotateGlyph(fencoding, rotation) 
+                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+        return self.binary_array
+    
     def draw(self,annotate = False,
                 show_all_paths = False,
                 savename = "output.png",

@@ -7,8 +7,12 @@ import math
 def polygon(n,radius = 1,start_angle = None):
     #Creates x,y data for an n-sided polygon
     if start_angle == None:
-        #start_angle = np.pi/n
-        start_angle = 0
+        if n == 4:
+            start_angle = 0
+        elif n %2 == 0:
+            start_angle = np.pi/n
+        else:
+            start_angle = 0
     small_angle = [start_angle + i * 2*np.pi/n for i in np.arange(1,n+1)]
     x,y = (radius * np.sin(small_angle), radius * np.cos(small_angle))
     return(x,y)

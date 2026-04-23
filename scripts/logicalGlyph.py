@@ -4,22 +4,22 @@ import numpy as np
 import matplotlib.patheffects as pe
 from collections.abc import Callable
 from necklaces import default_generation
+#from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
 import csv
-import ast
 import math
+import ast
 
-class sequiGlyph(glyph):
+class logicalGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # subclass-specific initialization
-        self.num = 6
-        self.attr_num = 3
-        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
-        self.text_file = self.text_file_base +"class6.csv"
+  # subclass-specific initialization
+        self.num = 4
+        self.attr_num = 2   
+        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
+        self.text_file = self.text_file_base +"class4.csv"
 
         with open(self.text_file, newline="") as f:
             featurereader = csv.DictReader(f, skipinitialspace=True)
@@ -35,16 +35,21 @@ class sequiGlyph(glyph):
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
-                for j in range(1, self.attr_num + 1):
+                for j in range(1, self.attr_num ): #NOT +1 since only 1dimension used.
                     feature = row[f'feature{j}'].strip()
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
-            #print(self.glyph_list)
+            
+"""
+TODO:
+Update features to equal 2, think about having condtionF or conditionTrue? then update line 38 for j in range()
+"""
+
 
 
 if __name__ == "__main__":
-    test_obj = sequiGlyph(
+    test_obj = logicalGlyph(
                      bases.polygon,
                      base_kwargs=[],
                      line_fn=line_shapes.straight,
@@ -52,11 +57,10 @@ if __name__ == "__main__":
 
     commands = list(test_obj.glyph_list.keys())
     n = len(commands)
-    rows = 5 #sequencing keys + null
-    cols = math.ceil(n / rows)
-    
+    cols = math.ceil(math.sqrt(n))
+    rows = math.ceil(n / cols)
 
-    cell_size = 1.25  # inches per cell, adjust to taste
+    cell_size = 1.5  # inches per cell, adjust to taste
     fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
 
     axes = axes.flatten()
@@ -64,13 +68,9 @@ if __name__ == "__main__":
     for i, word in enumerate(commands):
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
-        r = i % rows
-        c = i // rows
-        idx = r * cols + c
-
         test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[idx])
-        axes[idx].set_title(word.capitalize(), pad=-6, y=-0.1) 
+                      show_name=False, axs=axes[i])
+        axes[i].set_title(word.capitalize(), pad=-6, y=-0.1) 
         #reset binary array
         test_obj._clear_binary()
 
@@ -80,8 +80,9 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
-    #plt.savefig("sequilist.png", transparent=True)
+    #plt.savefig("logiclist.png", transparent=True)
 
+ 
 
 
 

@@ -1,0 +1,55 @@
+feature,group,encoding
+null, _,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+prior, sequencing,"[[0,1,0,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+posterior, sequencing,"[[0,1,0,0,1,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+simultaineous, sequencing,"[[1,1,1,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+hypothetical, sequencing,"[[1,0,1,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+condition, sequent,"[[0,0,0,0,0,0],[1,1,0,1,1,0],[0,0,0,0,0,0]]"
+concession, sequent,"[[0,0,0,0,0,0],[0,1,0,1,0,1],[0,0,0,0,0,0]]"
+exception, sequent,"[[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]"
+comparison, sequent,"[[0,0,0,0,0,0],[1,0,0,1,0,0],[0,0,0,0,0,0]]"
+purpose, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
+cause, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,0,0,0,0,0]]"
+result, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,1,0,0,0,]]"
+Glyphs
+command, feature1, rotation1, feature2, rotation2, feature3, rotation3
+REL, null, 0, null, 0, null, 0
+Before, prior, 0, null, 0, null, 0
+After, posterior, 0, null, 0, null, 0
+While, simultaineous, 0, null, 0, null, 0
+Where, hypothetical, 0, null, 0, null, 0
+"If", null, 0, condition, 0, null, 0
+"If (Protasis)", prior, 0, condition,0, null, 0
+Then,posterior, 0, condition,0, null, 0
+When,simultaineous, 0, condition,0, null, 0
+Supposing, hypothetical, 0, condition, 0, null, 0
+But,null, 0, concession, 0, null, 0
+Though,prior, 0, concession,0, null, 0
+Otherwise,posterior, 0, concession,0, null, 0
+Although,simultaineous, 0, concession,0, null, 0
+Lest,hypothetical, 0, concession, 0, null, 0
+"Except, Yet",null, 0, exception, 0, null, 0
+Unless,prior, 0, exception,0, null, 0
+Despite,posterior, 0, exception,0, null, 0
+Until,simultaineous, 0, exception,0, null, 0
+"Even If",hypothetical, 0, exception, 0, null, 0
+Also,null, 0, comparison, 0, null, 0
+As,prior, 0, comparison,0, null, 0
+Like,posterior, 0, comparison,0, null, 0
+"As well as",simultaineous, 0, comparison,0, null, 0
+"As if",hypothetical, 0, comparison, 0, null, 0
+For, null,0, null, 0, purpose, 0
+"(In Order) To", prior, 0, null, 0, purpose, 0
+"So (that)", posterior, 0, null, 0, purpose, 0
+By,simultaineous, 3, null, 0, purpose, 0
+"That (Archaic)", hypothetical, 0, null, 0, purpose, 0
+Let,null,0, null, 0, cause, 0
+Because,  prior, 3, null, 0, cause, 3
+"Due to",posterior, 0, null, 0, cause, 0
+Since,simultaineous, 0, null, 0, cause, 0
+"In the case",hypothetical, 0, null, 0, cause, 0
+"Such that",null,0, null, 0, result, 0
+Once, prior, 0, null, 0,result, 0
+"Therefore, Hence",posterior, 0, null, 0, result, 0
+"As, Given",simultaineous, 0, null, 0, result, 0
+"As Soon As",hypothetical, 0, null, 0, result, 0

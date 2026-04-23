@@ -1,0 +1,16 @@
+feature, group, encoding
+NULL, Unary, "[[0,0,0,0],[0,0,0,0]]"
+IS, Unary, "[[1,0,1,0],[0,0,0,0]]"
+ISNT, Unary, "[[1,1,1,1],[0,0,0,0]]"
+NO, Unary,"[[1,0,1,1],[0,0,0,0]]"
+AND, Binary,"[[1,0,0,0],[0,1,0,0]]"
+OR, Binary,"[[0,0,1,0],[1,1,0,0]]"
+XOR, Binary, "[[0,0,0,0],[1,1,0,0]]"
+Glyphs
+command, feature1, rotation1
+is, IS, 0
+isn't, ISNT, 0
+no, NO, 0
+and, AND, 0
+or, OR, 0
+either, XOR, 0
