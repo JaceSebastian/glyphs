@@ -11,7 +11,7 @@ import csv
 import ast
 import math
 
-class NumeralGlyph(glyph):
+class syllableGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,7 +44,7 @@ class NumeralGlyph(glyph):
 
 
 if __name__ == "__main__":
-    test_obj = NumeralGlyph(
+    test_obj = syllableGlyph(
                      bases.polygon,
                      base_kwargs=[],
                      line_fn=line_shapes.straight,

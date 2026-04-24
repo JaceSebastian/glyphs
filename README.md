@@ -5,6 +5,18 @@ For now, to see all possible glyphs for a class, cd to glyphs folder, and run co
 $ python3 ./scripts/deonticGlyph.py
 '''
 
+For the stylus:
+```
+# defaults — clean output
+python stylus.py --words NOM:5 ACC:5
+
+# annotated, all paths shown, wider cells
+python stylus.py --words NOM:5 ACC:5 --annotate --show-all-paths --cell-size 2.5
+
+# save to file, 3 columns
+python stylus.py --file input.txt --savename output.png --cols 3
+```
+
 A rough correspondence for glyphs:
  Classes -> Shape
     Cartouche -> Circle (used to partion off spelled out proper names)

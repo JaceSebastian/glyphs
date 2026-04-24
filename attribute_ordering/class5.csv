@@ -2,6 +2,8 @@ feature, encoding
 Null, "[[0,0,0,0,0],[0,0,0,0,0]]"
 Summoner,"[[0,0,0,0,0],[0,0,1,1,1]]"
 Demon,"[[0,0,0,0,0],[1,0,1,0,0]]"
+Bondservice,"[[0,0,0,0,0],[1,1,0,1,0]]"
+Vitality,"[[0,0,0,0,0],[1,1,1,1,1]]"
 Nominative,"[[0,0,0,0,0],[0,0,0,0,0]]"
 Accusative,"[[0,1,0,0,0],[0,0,0,0,0]]"
 Genitive,"[[1,0,1,0,0],[0,0,0,0,0]]"            
@@ -9,7 +11,7 @@ Dative,"[[0,0,0,1,1],[0,0,0,0,0]]"
 Instrumental, "[[1,1,1,0,0],[0,0,0,0,0]]"
 Glyphs
 command, feature1, rotation1, feature2, rotation2
-Nom, Null, 0, Nominative, 0
+NOM, Null, 0, Nominative, 0
 Acc, Null, 0, Accusative, 0
 Gen, Null, 0, Genitive,0
 Dat, Null, 0, Dative, 0
@@ -24,6 +26,17 @@ Demon, Demon, 0, Accusative, 0
 Demon's, Demon, 0, Genitive, 3
 To Demon, Demon, 0, Dative, 3
 With Demon, Demon, 0, Instrumental, 3
+The Bondservice, Bondservice, 0, Nominative, 0
+Bondservice, Bondservice, 0, Accusative, 0
+Bondservice's, Bondservice, 0, Genitive, 0
+To Bondservice, Bondservice, 0, Dative, 0
+With the Bondservice, Bondservice, 0, Instrumental, 0
+This Vitality, Vitality, 0, Nominative, 0
+Vitality, Vitality, 0, Accusative, 0
+Vitality's, Vitality, 0, Genitive, 0
+To Vitality, Vitality, 0, Dative, 0
+With Vitality, Vitality, 0, Instrumental, 0
+
 
 
 

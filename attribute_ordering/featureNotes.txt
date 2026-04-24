@@ -15,12 +15,19 @@
     DP/Nouns-> Triskaidecagon
 
 
- 
- Class ???: Clauses
- - temporal/sequencing, causal, purpose, result, relative, concessive (except, but), comparative, conditional
- - subclause ending indicators
- - Complementizer clauses
- Class 6 or 7: Subordinating Clauses
+Class 5: Pronouns:
+- Case
+
+- References (short list for ease of writing)
+    - Summoner entering bargain
+    - Demon entering bargain
+    - Summoner's Vitality
+    - Demon's bondservice
+    - Circle/Contract/Binding at hand
+
+
+
+ Class 6: Subordinating Clauses
  - Sequencing
     - Before
     - After
@@ -54,19 +61,22 @@
 
 
 
-Class 6/9:
+Class 7:????
 - Prepositions
-Class Seven/Nine:
-- Times
-- Locations
-- Durations
-- Distances
+- Pronouns something whatever?
 - Pronouns 
     - whoever
     -whenever
     -whereever
     -whatever
     -something
+- Class changing morphemes.
+- Times
+- Locations
+- Durations
+- Distances
+
+
 
 Class 8:
 - Boundary
@@ -76,8 +86,8 @@ Class 8:
 - Operators
 
 
-Class 9: Morphemes
-- Anything that might be useful, but can't function as an indepentdent morpheme.
+Class Nine:
+- Adjectives and adverbs
 - Class changing Morphemes (-less, -ly)
 - Modifer morpheme for Verb->adverb (bite to bitingly)
 - modifer morpheme for Noun->adjective (wood to wooden)
@@ -85,14 +95,10 @@ Class 9: Morphemes
     - Negation (un- )
     - degree (very, slightly, )
     - Superlative
-
-
-Class 10: Adjectives
 - Class
     - Predicate (Might need case or a dummy noun)
     - Adjective
     - Adverb
-   
 - Domain
     - Certainty (knowingly, complete, true(truthfully))
     - Ability (Survivable, Harmful, healing, capable)
@@ -102,6 +108,45 @@ Class 10: Adjectives
     - Age (new, worn, old, +fast, slow)
     - Movment (quickly, slowly, smoothly)
     - Social/culturally defined (royal, bound, demonic, mortal)
+
+
+Class 10: Verbs
+-Conjugation:
+    - Genitive
+    - Infinitive (running)
+    - Nominalizer (the running)
+    - Participlizer
+    - Head Agreement-S
+    - Head Agreement-D
+    - Head Agreement-Singular
+    - Head Agreement-Plural
+- Tense:
+    - Present
+    - Present Continuous
+    - Present Perfect
+    - Gnomic (outside bond-service duration)
+    - Gnomic (during bond-service onlyl)
+    - Past (simple or perfect)
+- Valency (Might separate)
+    - Passive
+    - Causative
+    - Benefactive
+    - Malefactive
+    - Intransitive
+    - Monovalent/Transitive (Unmarked)
+    - Divalent 
+    - Reflexive
+
+-Semantics
+    - Movement (transit, return, cross, come, manifest, go, take, carry,)
+    - Serve (report, follow, fight, protect,defend, guardfetch, destroy, construct, locate)
+    - Vitality(store, replenish, commit, forfeit, consume, store, gift, steal, siphon,)
+    - Spellcasting (invoke, compel, banish, ward, summon,bargain)
+    - Oaths (swear, obey, declare, supersede, bind, hold, allow, )
+    - Harm (might be movement + causative?, kill from die, wound, deprive, mislead)
+    - Speech(answer, lie, reveal, inform, deceive, reveal, )
+    - Know(know, believe, intend, forget, remember, memorize, measure/assess, evaluate)
+    - Exist (be, live, persist, cease/end, make, create, call-as, endure)
 
 
 Class Eleven: Syllabary
@@ -156,49 +201,11 @@ Class Eleven: Syllabary
 
 
 
-Class Twelve: Verbs
--Conjugation:
-    - Genitive
-    - Infinitive (running)
-    - Nominalizer (the running)
-    - Participlizer
-    - Head Agreement-S
-    - Head Agreement-D
-    - Head Agreement-Singular
-    - Head Agreement-Plural
-- Tense:
-    - Present
-    - Present Continuous
-    - Present Perfect
-    - Gnomic (outside bond-service duration)
-    - Gnomic (during bond-service onlyl)
-    - Past (simple or perfect)
-- Valency (Might separate)
-    - Passive
-    - Causative
-    - Benefactive
-    - Malefactive
-    - Intransitive
-    - Monovalent/Transitive (Unmarked)
-    - Divalent 
-    - Reflexive
+Class Twelve: Nouns
+- Note that words like vitality and circle and bondservice might be better in class 5
 
--Semantics
-    - Movement (transit, return, cross, come, manifest, go, take, carry,)
-    - Serve (report, follow, fight, protect,defend, guardfetch, destroy, construct, locate)
-    - Vitality(store, replenish, commit, forfeit, consume, store, gift, steal, siphon,)
-    - Spellcasting (invoke, compel, banish, ward, summon,bargain)
-    - Oaths (swear, obey, declare, supersede, bind, hold, allow, )
-    - Harm (might be movement + causative?, kill from die, wound, deprive, mislead)
-    - Speech(answer, lie, reveal, inform, deceive, reveal, )
-    - Know(know, believe, intend, forget, remember, memorize, measure/assess, evaluate)
-    - Exist (be, live, persist, cease/end, make, create, call-as, endure)
-
-
-
-Class Thirteen: Nouns
 - Case
-    -ACC (Unmarked)
+    -ACC (Marked (to match pronouns))
 - Number/mass/Partitive
 - Demonstratives
     -The (unmarked)

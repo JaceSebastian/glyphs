@@ -1,56 +1,184 @@
-"""Goal here is to make a script that can take in the spell attributes
-on the command line and output a png as required. Also useful if it can
-return a spell class
-"""
-from spells import spell
 import argparse
-import line_shapes
+import math
+import ast
+import matplotlib.pyplot as plt
 import bases
+import line_shapes
+from logicalGlyph import logicalGlyph
+from deonticGlyph import deonticGlyph
+from pronounGlyph import PronounGlyph
+from sequiGlyph import sequiGlyph
+from NumeralGlyph import NumeralGlyph
+from syllabaryGlyph import syllableGlyph
 
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser()
-    #necessary ones
-
-    parser.add_argument("-lvl","--level",help = "necessary input: level of the spell",
-                        required = True)
-    parser.add_argument("-sch","--school",help = "necessary input: school of the spell",
-                        required = True)
-    parser.add_argument("-dmg","--damagetype",help = "necessary input: damage type of spell",
-                        required = True)
-    parser.add_argument("-a","--aoe",help = "necessary input: AoE of the spell, format is `<shape> (<size>)` e.g. `cube (30)` CHECK THE TXT FILES IF YOU CAN'T FIND WHAT YOU'RE LOOKING FOR. ADD TO THE FILES IF WHAT YOU WANT ISN'T THERE (e.g. a new damage type, or a mix of the two)",
-                        required = True)
-    parser.add_argument("-ran","--range",help = "necessary input: range of the spell, format is `<size> <units>` e.g. `30 feet`. Also inlcudes one word versions like `Self`.",
-                        required = True)
-    parser.add_argument("-dur","--duration",help = "necessary input: duration of the spell, format is `<n> <units>` e.g. `1 hour`. Also inlcludes the `Up to...`",
-                        required = True)
-    
- 
-
-    #plot variables
-    parser.add_argument("-spell_name",help = "Spell Name for Title",default = None)
-    parser.add_argument("--savename",help = "Savename of plot",default = None)
-    parser.add_argument("--annotate",help = "Whether to annotate the spell dir",action = "store_true")
-    parser.add_argument("--show_all_paths",help = "Whether to show all possible paths",action = "store_true")
-    parser.add_argument("--save_dpi",help = "DPI to save image at",default = 200)
-    parser.add_argument("--cmap",help = "Colour map to use for annotating",default = "summer")
-    parser.add_argument("--dot_color",help = "Colour of the dots in the drawing",default = 'k')
-    parser.add_argument("--line_color",help = "Colour of the lines (if not annotating)",default = 'darkred')
+# ── Hardcoded class index ──────────────────────────────────────────────────────
+# Each entry: index → (GlyphClass, base_fn, base_kwargs, line_fn, line_kwargs)
+CLASS_MAP = {
+    3: deonticGlyph,
+    4: logicalGlyph,
+    5: PronounGlyph,
+    6: sequiGlyph,
+    8: NumeralGlyph,
+    11: syllableGlyph,
+    #If I want to make non circular, should probably do something here? like 11l for line? 12: (PronounGlyph, bases.polygon, [], line_shapes.straight, []),
+}
 
 
-    #output options
-    parser.add_argument("--format",choices=["svg", "png"],default="svg",help="output format is svg by default")
-    
-    
+# ── Parsing ────────────────────────────────────────────────────────────────────
+
+def parse_feature_token(token: str) -> tuple[str, int]:
+    """
+    Parse a single feature token into (feature, rotation).
+    'long a'  → ('long a', 0)
+    'p:1'     → ('p', 1)
+    'long a:90' → ('long a', 90)
+    """
+    token = token.strip()
+    if ":" in token:
+        feat, rot = token.rsplit(":", 1)
+        return feat.strip(), int(rot.strip())
+    return token, 0
+
+
+def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
+    """
+    Parse a single typewriter spec string into (lookup, class_index).
+
+    Keyword:  'PA:11'            → ('PA', 11)
+    Features: '[p, long a]:11'   → ([('p',0), ('long a',0)], 11)
+    Mixed:    '[p:1, long a]:11' → ([('p',1), ('long a',0)], 11)
+    """
+    spec = spec.strip()
+
+    # Split off the class index — always the last ':INT' not inside brackets
+    # Find the last colon that's outside brackets
+    depth = 0
+    split_pos = None
+    for i, ch in enumerate(spec):
+        if ch == "[":
+            depth += 1
+        elif ch == "]":
+            depth -= 1
+        elif ch == ":" and depth == 0:
+            split_pos = i  # keep updating — we want the LAST one
+
+    if split_pos is None:
+        raise ValueError(f"No class index found in spec '{spec}'. Expected format: 'LABEL:INT' or '[feat]:INT'")
+
+    body = spec[:split_pos].strip()
+    class_index = int(spec[split_pos + 1:].strip())
+
+    if body.startswith("[") and body.endswith("]"):
+        # Feature list
+        inner = body[1:-1]  # strip brackets
+        tokens = [t.strip() for t in inner.split(",")]
+        features = [parse_feature_token(t) for t in tokens if t]
+        return features, class_index
+    else:
+        # Keyword
+        return body, class_index
+
+
+def parse_file(filepath: str) -> list[str]:
+    """Read a .txt file and return a list of spec strings, one per non-comment line."""
+    specs = []
+    with open(filepath) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            specs.append(line)
+    return specs
+
+
+# ── Rendering ──────────────────────────────────────────────────────────────────
+
+def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
+    lookup, class_index = parse_spec(spec_str)
+
+    if class_index not in CLASS_MAP:
+        raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+
+    obj = CLASS_MAP[class_index]()
+    obj._getBinaryArray(lookup)
+    obj.draw(axs=ax, **draw_kwargs)
+    obj._clear_binary()
+    return lookup
+
+
+def plot_glyphs(spec_strings: list[str], n: int | None = None,
+                cols: int = 5, cell_size: float = 1.5, draw_kwargs: dict = {}):
+    if n is not None:
+        spec_strings = spec_strings[:n]
+
+    count = len(spec_strings)
+    cols = min(cols, count)
+    rows = math.ceil(count / cols)
+
+    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
+    axes = axes.flatten() if count > 1 else [axes]
+
+    for i, spec_str in enumerate(spec_strings):
+        try:
+            label = resolve_and_draw(spec_str, axes[i], draw_kwargs)
+            axes[i].set_title(label.capitalize(), pad=-6, y=-0.1)
+        except (ValueError, KeyError) as e:
+            print(f"Skipping '{spec_str}': {e}")
+            axes[i].set_visible(False)
+
+    for j in range(count, len(axes)):
+        axes[j].set_visible(False)
+
+    plt.tight_layout()
+    plt.show()
+
+# ── CLI ────────────────────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Typewriter: render conlang glyphs from labels or feature lists."
+    )
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument(
+        "--words", nargs="+", metavar="SPEC",
+        help="One or more specs, e.g.  PA:11  '[p, long a]:11'  '[p:1, long a]:11'"
+    )
+    source.add_argument(
+        "--file", metavar="PATH",
+        help="Path to a .txt file with one spec per line"
+    )
+    parser.add_argument(
+        "--n", type=int, default=None,
+        help="Max number of glyphs to render"
+    )
+
+        # draw() passthrough args
+    parser.add_argument("--annotate",       action="store_true", default=False)
+    parser.add_argument("--show-all-paths", action="store_true", default=False)
+    parser.add_argument("--show-name",      action="store_true", default=False)
+    parser.add_argument("--savename",       type=str,            default=None)
+    parser.add_argument("--cell-size",      type=float,          default=1.5)
+    parser.add_argument("--cols",           type=int,            default=5)
+
     args = parser.parse_args()
-    spell_obj = spell(args)
-    spell_obj.draw(args.annotate,
-                   show_all_paths=args.show_all_paths,
-                   savename = args.savename,output_dpi=int(args.save_dpi),
-                   line_color = args.line_color,
-                   dot_color = args.dot_color,
-                   cmap = args.cmap,
-                   show_name = True)
+
+    draw_kwargs = {
+        "annotate":       args.annotate,
+        "show_all_paths": args.show_all_paths,
+        "show_name":      args.show_name,
+        "savename":       args.savename,
+    }
 
 
-    
+    if args.file:
+        specs = parse_file(args.file)
+    else:
+        specs = args.words
+
+    plot_glyphs(specs, n=args.n, cols=args.cols,
+                cell_size=args.cell_size, draw_kwargs=draw_kwargs)
+
+
+if __name__ == "__main__":
+    main()
