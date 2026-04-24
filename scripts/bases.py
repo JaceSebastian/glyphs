@@ -7,7 +7,7 @@ import math
 def polygon(n,radius = 1,start_angle = None):
     #Creates x,y data for an n-sided polygon
     if start_angle == None:
-        if n == 4:
+        if n % 4 == 0:
             start_angle = 0
         elif n %2 == 0:
             start_angle = np.pi/n

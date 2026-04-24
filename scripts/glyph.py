@@ -89,7 +89,7 @@ class glyph():
             if annotate:
                 dot_color = cmap(.3)
                 halos = [
-                    (dot_size+4, 0.05),
+                    (dot_size+3, 0.05),
                     (dot_size+2, 0.12),
                     (dot_size+1, 0.25)
                 ]
@@ -138,9 +138,9 @@ class glyph():
                 
                         # layered halo
                             halos = [
-                                (linewidth + 8, 0.05),  # widest, faintest
-                                (linewidth + 5, 0.1),
-                                (linewidth + 3, 0.2)
+                                (linewidth + 5, 0.05),  # widest, faintest
+                                (linewidth + 3, 0.1),
+                                (linewidth + 1, 0.2)
                             ]
 
                             line, = axs.plot(line_x, line_y, lw=linewidth, color=color, zorder=1)

@@ -151,9 +151,9 @@ Class Eleven: Syllabary
     - labialized
     - palatalized
     - aspirated
-    - unvoiced (consonant, or vowel if V only syllable)
-    - NonPulmonic: ejective if unvoiced or implosive if voiced.
     - unreleased
+    - NonPulmonic: ejective if unvoiced or implosive if voiced.
+
 
 
 Class Twelve: Verbs
@@ -173,7 +173,7 @@ Class Twelve: Verbs
     - Gnomic (outside bond-service duration)
     - Gnomic (during bond-service onlyl)
     - Past (simple or perfect)
-- Valency
+- Valency (Might separate)
     - Passive
     - Causative
     - Benefactive
@@ -182,6 +182,19 @@ Class Twelve: Verbs
     - Monovalent/Transitive (Unmarked)
     - Divalent 
     - Reflexive
+
+-Semantics
+    - Movement (transit, return, cross, come, manifest, go, take, carry,)
+    - Serve (report, follow, fight, protect,defend, guardfetch, destroy, construct, locate)
+    - Vitality(store, replenish, commit, forfeit, consume, store, gift, steal, siphon,)
+    - Spellcasting (invoke, compel, banish, ward, summon,bargain)
+    - Oaths (swear, obey, declare, supersede, bind, hold, allow, )
+    - Harm (might be movement + causative?, kill from die, wound, deprive, mislead)
+    - Speech(answer, lie, reveal, inform, deceive, reveal, )
+    - Know(know, believe, intend, forget, remember, memorize, measure/assess, evaluate)
+    - Exist (be, live, persist, cease/end, make, create, call-as, endure)
+
+
 
 Class Thirteen: Nouns
 - Case

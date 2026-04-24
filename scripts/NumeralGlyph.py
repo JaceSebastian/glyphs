@@ -11,15 +11,15 @@ import csv
 import ast
 import math
 
-class sequiGlyph(glyph):
+class NumeralGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.num = 6
-        self.attr_num = 3
+        self.num = 8
+        self.attr_num = 4
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
-        self.text_file = self.text_file_base +"class6.csv"
+        self.text_file = self.text_file_base +"class8.csv"
 
         with open(self.text_file, newline="") as f:
             featurereader = csv.DictReader(f, skipinitialspace=True)
@@ -44,7 +44,7 @@ class sequiGlyph(glyph):
 
 
 if __name__ == "__main__":
-    test_obj = sequiGlyph(
+    test_obj = NumeralGlyph(
                      bases.polygon,
                      base_kwargs=[],
                      line_fn=line_shapes.straight,
@@ -52,8 +52,8 @@ if __name__ == "__main__":
 
     commands = list(test_obj.glyph_list.keys())
     n = len(commands)
-    rows = 5 #sequencing keys + null
-    cols = math.ceil(n / rows)
+    cols = 8 #sequencing keys + null
+    rows = math.ceil(n / cols)
     
 
     cell_size = 1.25  # inches per cell, adjust to taste
@@ -64,14 +64,9 @@ if __name__ == "__main__":
     for i, word in enumerate(commands):
         test_obj.binary_array = test_obj._getBinaryArray(word)
 
-        #to swap rows and columns
-        r = i % rows
-        c = i // rows
-        idx = r * cols + c
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[idx])
-        axes[idx].set_title(word.capitalize(), pad=-6, y=-0.1) 
+        test_obj.draw(savename=None, show_all_paths=True, annotate=True,
+                      show_name=False, axs=axes[i])
+        axes[i].set_title(word.capitalize(), pad=-6, y=-0.1) 
         #reset binary array
         test_obj._clear_binary()
 
@@ -81,7 +76,7 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
-    #plt.savefig("sequilist.png", transparent=True)
+    #plt.savefig("numeralslist.png", transparent=True)
 
 
 
