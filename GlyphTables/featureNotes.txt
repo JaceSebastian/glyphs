@@ -66,15 +66,18 @@ Class 7:Morphemes or class changing morphemes
     - (Add Case if not Nom to gerundives)
     - ToAdj or ToAdv (wood to wooden, fear to fearless to fearlessly)
     - To
+    - "-able" V-Adj
+    - "be-" noun to verb (friend to befriend) 
+    - "-al" provence to provential. space to spatial etc.
     - Modifers AdjV 
         - Negation (un- )
-        - degree (very, slightly, )
-        
+        - degree (very, slightly, )    
         - -less, Absence
         - -ful, Presence
         - ToAdverb (-ly)
-
--Case (see if I can add to class?)
+        - pre, post, for
+        -re, com-, sub- hyper= hypo- 
+- Case (see if I can add to class?)
 - Valency (Might be able to squeeze in here)
     - Causative
     - Benefactive
@@ -94,24 +97,29 @@ Class 8:
 
 
 Class Nine: Adjectives and adverbs
+*Since most of these are pairs ie hot & cold, they should be visually similar pairs, maybe set k=3 for negative versus positive forms?
 - Class
     - Predicate (Might need case or a dummy noun)
     - Adjective (intersective) skilled builder (a builder and someone who is skilled at something)
-    - Adjective (subsective) skilled builder (someone skilled at building), think a fast tortise is still slow, just fast for a tortise.
-    - Adjcetive (assumed) fake X, formerly alive, 
+    - Adjective (subsective is default) skilled builder (someone skilled at building), think a fast tortise is still slow, just fast for a tortise.
     - Adverb
     - Superlative
-    -Comparative
+    - Comparative
 - Domain
     - Certainty (knowingly, complete, true(truthfully))
     - Ability (Survivable, Harmful, healing, capable)
     - Dimension (big, small, narrow)
     - Value (good, proper, safe, beautiful)
     - Color/property (red, wooden, rough, hard, material, social, emotional, psychological)
-    - Age (new, worn, old, +fast, slow)
-    - Movment (quickly, slowly, smoothly)
+    - Age (new, worn, old)
+    - Movement (fast/quick, quickly, slowly, smoothly, subsequent)
     - Social/culturally defined (royal, bound, demonic, mortal)
+    ? Relational,(same, different, mutual, shared, gifted, necessary, dependant,)
+    ? Degree (very, slightly, almost) not sure if this langauge needs it.
+    ? Quantity (some, all, none, a few, most, singular,whole, partial, always, never)
 
+- Base:
+    -since all of these are specturms (hot-cold) I am going to show opposites by flipping binary encoding ordering ie [][a][b][] is hot, so [][b][a][] is cold
     
 
 Class 10: Verbs
@@ -211,7 +219,7 @@ Class Twelve: Nouns
     -indef dual
     -definite dual
     -any
-    -some
+    -every,each
 
     * this is how indefinite pronouns like somehow, anyone, whereever are made, with morphes any.person or some.time
   
@@ -247,3 +255,33 @@ Class Twelve: Nouns
 - Distances
 
 ----------------------------------------------------------------
+
+
+	Value	Ability	dimension	property	age/distance	social/cultural	color	Quantity
+_								all
+good, 	good/right			good/quality	recent		green	some
+bad,	bad/wrong			poor/bad	outdated/dilapidated		red	most
+willing,	willling	aware	smooth	soft/malleable,	near	blessed/favored	beautiful	half
+unwilling	unwilling or resentful,	unconcious, unaware	rough	hard,	far	cursed	ugly	a few
+full or complete, 	complete			full	inside	content/pleased	white	none
+empty, 	incomplete			empty	outside	isolated/deprived	black	always
+true, 	real	true, 		natural/raw/untreated		same		never
+false,	fake	false,		artificial/prepared/crafted		different		sometimes
+clear obvious,	obvious,	deliberate,	tiny,	clear/transparent		known		frequently
+vast unclear,	unclear/inferred,	accidental,	vast,	opaque/hidden	ancient	unknown		
+big,	great		big,	strong,	old	royal, divine		
+small,	low/small		small,	weak,	young	common, physical		
+long or tall,		likely	long or tall,		established,former			
+short,		unlikely	short,		novel, unproven			
+thick or deep,	safe,	allowed	thick or deep,		gradual,			
+thin,	dangerous,	forced	thin,		sudden,			
+open,	useful,	free,		open,	new, fresh	unfamiliar?		
+closed,	harmful,	bound,		closed	used/aged	loyal,		
+hot,				hot	fast,	angry	bright	
+cold,				cold	slow,	sad	dull	
+clean,	pure			clean		mortal/human	light	
+dirty,	corrupt/tainted/mixed			dirty		demonic	dark	
+heavy or sharp,	important,	difficult,		heavy or sharp,			defined	
+light or soft,	frivolous	easy,		light or soft,			fuzzy, shadowed	
+healthy,	beneficial	alive		healthy		kind/magnanimous,	blue	
+ill/unhealthy	harmful	dead		unhealthy/ill		cruel,	yellow	

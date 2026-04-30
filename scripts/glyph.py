@@ -166,7 +166,7 @@ class glyph():
             assert self.attr_num== self.binary_array.shape[0]
             cmap = plt.get_cmap(cmap)
             if self.num:
-                dot_size = max(dot_size/(self.num/4), 10)
+                dot_size = max(dot_size/(self.num/4), 6)
             x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
             if axs is None:

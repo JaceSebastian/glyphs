@@ -38,3 +38,6 @@ A rough correspondence for glyphs:
     Syllabary -> Hendecagon
     Verb -> Dodecagon   
     Nouns/Determiner Phrases-> Triskaidecagon
+
+
+    

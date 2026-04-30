@@ -33,6 +33,8 @@ class adjGlyph(glyph):
                 self.encodings[word] = encoding
             glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in glyphreader:
+                if row['command'] == "BREAK":  # sentinel keyword
+                    break
                 word = row['command'].strip()
                 features = []
                 for j in range(1, self.attr_num ): #NOT +1 since only 1dimension used.
@@ -46,7 +48,7 @@ class adjGlyph(glyph):
 if __name__ == "__main__":
     test_obj = adjGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
     commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands)
+    test_obj.demoprint(commands, cell_size=1)
 
 
  
