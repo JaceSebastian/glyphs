@@ -31,7 +31,7 @@ class sequiGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader(f, skipinitialspace=True)
+            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
@@ -42,6 +42,24 @@ class sequiGlyph(glyph):
                 self.glyph_list[word] = features
             #print(self.glyph_list)
 
+    def left_anchor(self, parity: int = 0) -> tuple[float, float]:
+        x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+        right_candidates = np.where(x_vals == min(x_vals))[0]
+        if parity == 0:
+            idx = right_candidates[np.argmin(y_vals[right_candidates])]  # lower-left
+        else:
+            idx = right_candidates[np.argmax(y_vals[right_candidates])]  # upper-left
+        return (float(x_vals[idx]), float(y_vals[idx]+80))
+
+    def right_anchor(self, parity: int = 0) -> tuple[float, float]:
+        x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+        right_candidates = np.where(x_vals == max(x_vals))[0]
+        if parity == 0:
+            idx = right_candidates[np.argmax(y_vals[right_candidates])]  # upper-right
+        else:
+            idx = right_candidates[np.argmin(y_vals[right_candidates])]  # lower-right
+        return (float(x_vals[idx]), float(y_vals[idx]-30))
+
 
 if __name__ == "__main__":
     test_obj = sequiGlyph(
@@ -51,37 +69,7 @@ if __name__ == "__main__":
                      line_kwargs=[])
 
     commands = list(test_obj.glyph_list.keys())
-    n = len(commands)
-    rows = 5 #sequencing keys + null
-    cols = math.ceil(n / rows)
-    
-
-    cell_size = 1.25  # inches per cell, adjust to taste
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
-
-    axes = axes.flatten()
-
-    for i, word in enumerate(commands):
-        test_obj.binary_array = test_obj._getBinaryArray(word)
-
-        #to swap rows and columns
-        r = i % rows
-        c = i // rows
-        idx = r * cols + c
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[idx])
-        axes[idx].set_title(word.capitalize(), pad=-6, y=-0.1) 
-        #reset binary array
-        test_obj._clear_binary()
-
-    # hide any unused subplots
-    for j in range(n, len(axes)):
-        axes[j].set_visible(False)
-
-    plt.tight_layout()
-    plt.show()
-    #plt.savefig("sequilist.png", transparent=True)
+    test_obj.demoprint(commands, Flip=False)
 
 
 

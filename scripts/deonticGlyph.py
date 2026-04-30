@@ -42,19 +42,8 @@ class deonticGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
-            print(self.glyph_list)
 
 
-
-
-    def _getBinaryArray(self, word):
-        if(word not in self.glyph_list):
-            raise KeyError("Not a Valid Glyph")
-        for feature_name, rotation in self.glyph_list[word]:
-                fencoding = np.array([self.encodings[feature_name]])
-                fencoding = np.roll(fencoding, -1*rotation) 
-                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
-        return self.binary_array
 
 if __name__ == "__main__":
     test_obj = deonticGlyph(
@@ -64,30 +53,8 @@ if __name__ == "__main__":
                      line_kwargs=[])
 
     commands = list(test_obj.glyph_list.keys())
-    n = len(commands)
-    cols = math.ceil(math.sqrt(n))
-    rows = math.ceil(n / cols)
+    test_obj.demoprint(commands)
 
-    cell_size = 2  # inches per cell, adjust to taste
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
-
-    axes = axes.flatten()
-
-    for i, word in enumerate(commands):
-        test_obj.binary_array = test_obj._getBinaryArray(word)
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[i])
-        axes[i].set_title(word.capitalize(), pad=-6, y=-0.1) 
-        #reset binary array
-        test_obj._clear_binary()
-
-    # hide any unused subplots
-    for j in range(n, len(axes)):
-        axes[j].set_visible(False)
-
-    plt.tight_layout()
-    plt.show()
 
 
 

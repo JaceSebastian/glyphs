@@ -1,0 +1,12 @@
+feature,group,encoding
+null, _,"[[0,0]]"
+line, linear, "[[1,0]]"
+reverse, linear, "[[0,1]]"
+Glyphs
+command, feature1, rotation1
+Equate, null, 0
+Apposition, line, 0
+Start, line, 0
+(ie, line, 0
+), reverse,0
+End, reverse, 0

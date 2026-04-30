@@ -26,8 +26,7 @@ class syllableGlyph(glyph):
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
-                word = row["feature"].strip()
-                #call = row["call"].strip()   
+                word = row["feature"].strip()  
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
@@ -40,7 +39,6 @@ class syllableGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
-            #print(self.glyph_list)
 
 
 if __name__ == "__main__":
@@ -51,32 +49,7 @@ if __name__ == "__main__":
                      line_kwargs=[])
 
     commands = list(test_obj.glyph_list.keys())
-    n = len(commands)
-    cols = math.ceil(math.sqrt(n+6)) #+6 so not square.
-    rows = math.ceil(n / cols)
-    
-
-    cell_size = 2  # inches per cell, adjust to taste
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
-
-    axes = axes.flatten()
-
-    for i, word in enumerate(commands):
-        test_obj.binary_array = test_obj._getBinaryArray(word)
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[i])
-        axes[i].set_title(word, pad=-6, y=-0.1) 
-        #reset binary array
-        test_obj._clear_binary()
-
-    # hide any unused subplots
-    for j in range(n, len(axes)):
-        axes[j].set_visible(False)
-
-    plt.tight_layout()
-    plt.show()
-    #plt.savefig("SyllabaryExamples.png", transparent=True)
+    test_obj.demoprint(commands, 8)
 
 
 

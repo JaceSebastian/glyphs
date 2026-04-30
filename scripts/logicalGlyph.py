@@ -31,7 +31,7 @@ class logicalGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader(f, skipinitialspace=True)
+            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
@@ -40,47 +40,14 @@ class logicalGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
-            
-"""
-TODO:
-Update features to equal 2, think about having condtionF or conditionTrue? then update line 38 for j in range()
-"""
 
 
 
 if __name__ == "__main__":
-    test_obj = logicalGlyph(
-                     bases.polygon,
-                     base_kwargs=[],
-                     line_fn=line_shapes.straight,
-                     line_kwargs=[])
-
+    test_obj = logicalGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
     commands = list(test_obj.glyph_list.keys())
-    n = len(commands)
-    cols = math.ceil(math.sqrt(n))
-    rows = math.ceil(n / cols)
+    test_obj.demoprint(commands)
 
-    cell_size = 1.5  # inches per cell, adjust to taste
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
-
-    axes = axes.flatten()
-
-    for i, word in enumerate(commands):
-        test_obj.binary_array = test_obj._getBinaryArray(word)
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[i])
-        axes[i].set_title(word.capitalize(), pad=-6, y=-0.1) 
-        #reset binary array
-        test_obj._clear_binary()
-
-    # hide any unused subplots
-    for j in range(n, len(axes)):
-        axes[j].set_visible(False)
-
-    plt.tight_layout()
-    plt.show()
-    #plt.savefig("logiclist.png", transparent=True)
 
  
 

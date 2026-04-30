@@ -1,0 +1,43 @@
+feature, gloss, encoding
+Null,"", "[[0,0,0,0,0],[0,0,0,0,0]]"
+Summoner, "Summoner","[[0,0,0,0,0],[0,0,1,1,1]]"
+Demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
+Bondservice, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
+Otherworld, "Otherworld", "[[0,0,0,0,0],[0,0,0,1,0]]"
+Vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
+Bindings or vows, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
+
+Nom,"","[[0,0,0,0,0],[0,0,0,0,0]]"
+Acc,"","[[0,1,0,0,0],[0,0,0,0,0]]"
+Gen,"Of","[[1,0,1,0,0],[0,0,0,0,0]]"            
+Dat,"For","[[0,0,0,1,1],[0,0,0,0,0]]"
+Loc,"To", "[[1,1,1,1,1],[0,0,0,0,0]]"
+Inst,"With", "[[1,1,1,0,0],[0,0,0,0,0]]"
+Glyphs
+command, feature1, rotation1, feature2, rotation2
+Nominative, Null, 0, Nom, 0
+Accusative, Null, 0, Acc, 0
+Genitive, Null, 0, Gen,0
+Dative, Null, 0, Dat, 0
+Locative, Null, 0, Loc, 0
+Instrumental, Null, 0, Inst, 0
+The Summoner, Summoner, 0, Nom, 0
+The Demon, Demon, 0, Acc, 0
+Of the Bondservice, Bondservice, 0, Gen,0
+For the Bindings, Bindings or vows, 0, Dat, 0
+To the Otherworld, Otherworld, 0, Loc,0
+By the Vitality, Vitality, 0, Instr,0
+
+#none of these should be printed in __main__
+Bindings, Bindings or vows,0,Nom,0
+Summoner, Summoner, 0, Acc, 0
+Summoner's, Summoner, 0, Gen, 0
+To Summoner, Summoner, 0, Dat, 0
+With Summoner, Summoner, 0, Inst, 3
+Demon.Acc, Demon, 0, Acc, 0
+Demon's, Demon, 0, Gen, 3
+With Vitality, Vitality, 0, Inst, 0
+
+
+
+

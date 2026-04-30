@@ -10,6 +10,7 @@ import line_shapes
 
 import csv
 import ast
+import math
 
 
 class glyph():
@@ -34,14 +35,66 @@ class glyph():
         
         self.num = 0
         self.attr_num = 0
-        self.text_file_base:str = r"./attribute_ordering/"
+        self.text_file_base:str = r"./GlyphTables/"
         """This is where the information for each line is held."""
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
-        self.attributes = []
+        self.attributes = []#Not sure if this is ever used
         self.glyph_list= {}
+        self.feature_list={}
         self.encodings = {}
+        self.glossing = "Gloss Default"
+
+    def demoprint(self, printList, cols=None, Flip=False, cell_size=1.5, save=False, 
+              savename="demoprint.png", draw_kwargs={}):
+        commands = printList
+        
+        n = len(commands)
+        if (cols == None):
+            cols = math.ceil(math.sqrt(n))
+        else:
+            cols = min(cols, n)
+        rows = math.ceil(n / cols)
+
+        fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
+        axes = np.array(axes).flatten() if n > 1 else [axes]
+
+        for i, word in enumerate(commands):
+            self.binary_array = self._getBinaryArray(word)
+
+            if Flip:
+                r = i % rows
+                c = i // rows
+                idx = r * cols + c
+            else:
+                idx = i
+
+            self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[idx], **draw_kwargs)
+            #self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[i], **draw_kwargs)
+            
+            fig_width_inches = fig.get_size_inches()[0]
+            ax_width_inches = axes[i].get_position().width * fig_width_inches
+            fontsize = ax_width_inches * 10
+            fontsize = max(fontsize, 8)  # minimum font size of 8
+            axes[i].set_title(word, pad=-6, y=-0.1, fontsize=fontsize)
+            pos = axes[i].get_position()
+            # fig.text(pos.x0 + pos.width/2, pos.y0 - 0.02, 
+            #      word.capitalize(),
+            #      ha='center', va='top',
+            #      fontsize=cell_size * 4)
+            self._clear_binary()
+
+        for j in range(n, len(axes)):
+            axes[j].set_visible(False)
+
+        plt.tight_layout(rect=[0, 0.05, 1, 1])
+        
+        if save:
+            plt.savefig(savename, dpi=200, bbox_inches='tight', transparent=True)
+        else:
+            plt.show()
     
     def _clear_binary(self):
+        self.glossing = ""
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
     
     def rotateGlyph(self, binary_encoding, rotation):
@@ -53,6 +106,7 @@ class glyph():
         return binary_encoding
     
     def _getBinaryArray(self, word):
+        self.glossing = word
         if(word not in self.glyph_list):
             raise KeyError("Not a Valid Glyph")
         for feature_name, rotation in self.glyph_list[word]:
@@ -61,22 +115,58 @@ class glyph():
                 self.binary_array = np.bitwise_or(self.binary_array, fencoding)
         return self.binary_array
     
+    def _makeGlossing(self, det=None, root="", case=None):
+        """This should always be overwritten for glyph class"""
+        self.glossing = root
+    
+    def left_anchor(self, parity=0) -> tuple[float, float]:
+        """Point where an incoming glyph connects to me."""
+        x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+        if len(x_vals) == 0:
+            raise ValueError(
+                f"{self.__class__.__name__}.right_anchor(): base_fn returned empty arrays"
+            )
+        
+        idx = np.argmin(x_vals)
+        return (float(x_vals[idx]), float(y_vals[idx]))
+
+    def right_anchor(self, parity=0) -> tuple[float, float]:
+        """Point where I connect to an outgoing glyph."""
+        x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+    
+        if len(x_vals) == 0:
+            raise ValueError(
+                f"{self.__class__.__name__}.right_anchor(): base_fn returned empty arrays"
+            )
+        
+        idx = np.argmax(x_vals)
+        return (float(x_vals[idx]), float(y_vals[idx]))
+
+    def join_to(self, other):
+        """Left Side glyph's right anchor attaches to left anchor of other glyph.
+        Override to allow for line alinements to avoid confusion or overlap."""
+
+        raise NotImplementedError
+      
+    
     def draw(self,annotate = False,
                 show_all_paths = False,
                 savename = "output.png",
                 output_dpi = 200,
                 axs = None,
-                dot_color = 'none',
+                dot_color = 'maroon',
                 cmap = 'summer',
                 line_color = 'maroon',
-                dot_size = 20,
-                legend_fontsize = 10,
+                dot_size = 30,
+                legend_fontsize = 8,
                 legend_anchor = (1,0.75),
                 show_name = False):
             #print(f"Attribute num {self.attr_num} shape {self.binary_array.shape[0]}")
             assert self.num == self.binary_array.shape[1]
             assert self.attr_num== self.binary_array.shape[0]
             cmap = plt.get_cmap(cmap)
+            if self.num:
+                dot_size = max(dot_size/(self.num/4), 10)
             x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
             if axs is None:
@@ -84,10 +174,12 @@ class glyph():
             else:
                 fig = plt.gcf()
             axs.set_aspect('equal')
+            axs.margins(0.1)
             
             #draw the points
             if annotate:
                 dot_color = cmap(.3)
+                
                 halos = [
                     (dot_size+3, 0.05),
                     (dot_size+2, 0.12),
@@ -110,7 +202,7 @@ class glyph():
                 y_vals,
                 s=dot_size,
                 color=dot_color,
-                zorder=3
+                zorder=2
             )
 
             if show_all_paths:
@@ -164,9 +256,9 @@ class glyph():
             if show_name:
                 axs.set_title(self.__name__)
             if savename is not None:
-                plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight', transparent=True)
+                plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight', pad_inches=0.5, transparent=True)
             elif axs is None:
-                plt.show(transparent=True)
+                plt.show(transparent=True, pad_inches=0.5,)
     
     def draw_all_paths(self,x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
         #loop for all k

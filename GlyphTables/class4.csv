@@ -8,9 +8,9 @@ OR, Binary,"[[0,0,1,0],[1,1,0,0]]"
 XOR, Binary, "[[0,0,0,0],[1,1,0,0]]"
 Glyphs
 command, feature1, rotation1
-is, IS, 0
-isn't, ISNT, 0
-no, NO, 0
-and, AND, 0
-or, OR, 0
-either, XOR, 0
+Is, IS, 0
+Isn't, ISNT, 0
+No, NO, 0
+And, AND, 0
+Or, OR, 0
+Either, XOR, 0

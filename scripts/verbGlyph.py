@@ -11,15 +11,15 @@ import csv
 import ast
 import math
 
-class NumeralGlyph(glyph):
+class verbGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.num = 8
-        self.attr_num = 4
+        self.num = 10
+        self.attr_num = 5
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
-        self.text_file = self.text_file_base +"class8.csv"
+        self.text_file = self.text_file_base +"class10.csv"
 
         with open(self.text_file, newline="") as f:
             featurereader = csv.DictReader(f, skipinitialspace=True)
@@ -31,7 +31,7 @@ class NumeralGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
+            glyphreader = csv.DictReader(f, skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
@@ -43,11 +43,14 @@ class NumeralGlyph(glyph):
 
 
 if __name__ == "__main__":
-    test_obj = NumeralGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
+    test_obj = verbGlyph(
+                     bases.polygon,
+                     base_kwargs=[],
+                     line_fn=line_shapes.straight,
+                     line_kwargs=[])
 
     commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands, 8)
-
+    test_obj.demoprint(commands, 5, Flip=True)
 
 
 

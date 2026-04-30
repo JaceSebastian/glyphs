@@ -1,0 +1,249 @@
+ Classes -> Shape
+    Cartouche -> Circle (used to partion off spelled out proper names)
+    Punctuation -> Dot 
+    Apposition -> Line/brackets
+    Deontic Logic -> Triangle
+    Logical Operators -> Square
+    Pronouns -> Pentagon
+    Subordinators -> Hexagon
+    Morphemes -> Septagon
+    Numerals -> Octogon
+    Adjectives -> Nonagon
+    Verb -> Decagon
+    Syllabary -> Hendecagon 
+    DP/Nouns-> Dodecagon 
+    _ ->Triskaidecagon
+
+
+Class 5: Pronouns:
+- Case
+    - Add Locative Case TODO
+
+- References (short list for ease of writing)
+    - Summoner entering bargain
+    - Demon entering bargain
+    - Summoner's Vitality
+    - Demon's bondservice
+    - Circle/Contract/Binding at hand
+
+    - Relative Pronoun?
+    - generic relativeizer end symbol
+    - who/that/which/what
+    - whoever/whichever/whenever/whereever
+    - someone/something/sometime
+
+
+
+ Class 6: Subordinating Clauses
+ - Sequencing
+    - Before
+    - After
+    - While
+    - Until
+    - When
+    - Where
+- Subordinating
+    - Because
+    - Since
+    -? Although
+    - For/in order to
+    - if
+    - hypothetical if
+    -? counterfactual if
+    - except
+    - so X as (before an adjective, so long as, so much as)
+    - more X than
+    - less X than
+    - Lest/unless
+    - why
+    - how
+    - LET
+    - THAT
+
+
+Class 7:Morphemes or class changing morphemes
+- Primary class Changing 
+    - (Add Case if not Nom to gerundives)
+    - ToAdj or ToAdv (wood to wooden, fear to fearless to fearlessly)
+    - To
+    - Modifers AdjV 
+        - Negation (un- )
+        - degree (very, slightly, )
+        
+        - -less, Absence
+        - -ful, Presence
+        - ToAdverb (-ly)
+
+-Case (see if I can add to class?)
+- Valency (Might be able to squeeze in here)
+    - Causative
+    - Benefactive
+    - Malefactive
+    - Intransitive
+    - Monovalent/Transitive (Unmarked)
+    - Divalent 
+    - Reflexive
+
+
+Class 8:
+- Boundary
+- Number
+    - 0-7
+- Type (see if I can add most/few/all/none?)
+- Operators
+
+
+Class Nine: Adjectives and adverbs
+- Class
+    - Predicate (Might need case or a dummy noun)
+    - Adjective (intersective) skilled builder (a builder and someone who is skilled at something)
+    - Adjective (subsective) skilled builder (someone skilled at building), think a fast tortise is still slow, just fast for a tortise.
+    - Adjcetive (assumed) fake X, formerly alive, 
+    - Adverb
+    - Superlative
+    -Comparative
+- Domain
+    - Certainty (knowingly, complete, true(truthfully))
+    - Ability (Survivable, Harmful, healing, capable)
+    - Dimension (big, small, narrow)
+    - Value (good, proper, safe, beautiful)
+    - Color/property (red, wooden, rough, hard, material, social, emotional, psychological)
+    - Age (new, worn, old, +fast, slow)
+    - Movment (quickly, slowly, smoothly)
+    - Social/culturally defined (royal, bound, demonic, mortal)
+
+    
+
+Class 10: Verbs
+-Conjugation (F1)
+    - Infinitive/Gerundive
+    - Infinitive (running) (same as gerundive)
+    X Nominalizer (the running)(needs to be elsewhere to get case and definite article)
+    - Present Participlize
+    - Past Participle
+    - Present Simple
+    - Present Continuous
+    - Present Perfect
+    - Passive (takes Nom like latin)
+    - Passive Perfect
+    - Past
+    - Past Perfect
+
+-Semantics (F2)
+    - Movement (transit, return, cross, come, manifest, go, take, carry,)
+    - Serve (report, follow, fight, protect,defend, guardfetch, destroy, construct, locate)
+    - Vitality(store, replenish, commit, forfeit, consume, store, gift, steal, siphon,)
+    - Spellcasting (invoke, compel, banish, ward, summon,bargain)
+    - Oaths (swear, obey, declare, supersede, bind, hold, allow, )
+    - Harm (might be movement + causative?, kill from die, wound, deprive, mislead)
+    - Speech(answer, lie, reveal, inform, deceive, reveal, )
+    - Know(know, believe, intend, forget, remember, memorize, measure/assess, evaluate)
+    - Exist (be, live, persist, cease/end, make, create, call-as, endure, endure)
+
+-Base Glyph (Last 3 features)
+    - Idea is that a lot of words are an action/movement and a metaphorical extension, ie invoke = call/shout + spellcasting 
+        so one can guess the meaning of a lot of glyphs, yet there is enough variety to have unique verbs as needed.
+        ie root die has +harm=murder, +oath=release oath, +service=kill, assassinate, +existance=end, +speech=conclude
+        - follow+oath is following clauses in bargain, not physically following, which helps with demon's trying to misinterpret
+
+Class Eleven: Syllabary
+- Syllable Structure (5)
+    - CV (unmarked)
+    - C (coda of previous syllable)
+    - C (syllabic consonant or nonfinal consonant clusder ie f in fli)
+    - V (no onset consonant)
+    - V (coda of previous syllable)
+- Consonant Place (11)
+    - Bilabial
+    - labial
+    - Dental
+    - Alveolar
+    - Postalveolar
+    - Retroflex
+    - Palatal
+    - Velar 
+    - Uvular 
+    - Pharengeal 
+    - Glottal
+- Consonant Manner (7) TRY TO EXPAND
+    - Voiced Plosive
+    - Unvoiced Plosive
+    - Nasal
+    - Voiced Fricative
+    - Unvoiced Fricative
+    - Approximate
+    - Lateral Approximate
+- Vowel (11)
+    - a 
+    - e 
+    - i 
+    - o 
+    - u
+    - y
+    - ʊ
+    - ə
+    - ɔ
+    - ɑ
+    - ɤ
+- Features and Secondary Articulations(10) TRY TO REDUCE
+    - Long vowel
+    - aspirated vowel (can only be short)
+    - nasal vowel
+    - pharengealized
+    - labialized
+    - palatalized
+    - aspirated
+    - unreleased
+    - NonPulmonic: ejective if unvoiced or implosive if voiced.
+
+
+Class Twelve: Nouns
+- Note that words like vitality and circle and bondservice might be better in class 5
+
+- Case
+    -ACC (Marked (to match pronouns))
+    -LOC TO ADD
+- Count: Number/mass/Partitive
+    - indef sg 
+    - indef Plural
+    - definite sg
+    -definite Plural
+    -indef dual
+    -definite dual
+    -any
+    -some
+
+    * this is how indefinite pronouns like somehow, anyone, whereever are made, with morphes any.person or some.time
+  
+                  No demonstrative pronouns - Demonstratives
+                            -The (unmarked)
+                            -This/These
+                            -That/those
+                            -a/some
+- Semantic Fields
+    -Places/domains
+    -times
+    -titles/names (Otherworld, domicile, home, city)
+    - Measures (distances, durations, "rule" "law" "line")
+    -theories/ideas ()
+    -Quality of Preceeding Adjective (kind > kindness, fast > speed, strong > strength)
+    -Act of preceding verb in gerundive form (serve > service)
+
+
+
+-------------------------------------------------------------
+- Prepositions(in case)
+- Pronouns something whatever?
+- Pronouns ()
+    - whoever
+    -whenever
+    -whereever
+    -whatever
+    -something
+- Class changing morphemes (handled in class 9 n/v to adj/adv)
+- Times
+- Locations
+- Durations
+- Distances
+
+----------------------------------------------------------------

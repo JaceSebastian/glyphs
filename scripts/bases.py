@@ -4,7 +4,7 @@ import math
 #---------File for defining spell bases----------#
 # every base must haave an input of n and return (x,y)
 
-def polygon(n,radius = 1,start_angle = None):
+def polygon(n,radius = 1,start_angle = None, x_offset =0.0):
     #Creates x,y data for an n-sided polygon
     if start_angle == None:
         if n % 4 == 0:
@@ -14,14 +14,19 @@ def polygon(n,radius = 1,start_angle = None):
         else:
             start_angle = 0
     small_angle = [start_angle + i * 2*np.pi/n for i in np.arange(1,n+1)]
-    x,y = (radius * np.sin(small_angle), radius * np.cos(small_angle))
+    x,y = (radius * np.sin(small_angle)+x_offset, radius * np.cos(small_angle))
     return(x,y)
 
-def line(n):
-    #makes a horizontal line of n-points
-    x = np.arange(0,n)
-    y = np.zeros((1,n))
-    return(x,y[0])
+def line(n, vertical=True, x_offset=0.0):
+    #makes a line with n points on it.
+    if vertical:
+        x = np.zeros((1, n))
+        y = np.arange(0, n)
+        return (x[0], y)
+    else:
+        x = np.arange(0, n)+x_offset
+        y = np.zeros((1, n))
+        return (x, y[0])
 
 def quadratic(n,a = 1,b=0,c=0):
     #Creates x,y data for a quadratic equation beginning at 0 and bouncing between positive and negative values

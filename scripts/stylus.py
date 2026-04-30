@@ -2,25 +2,29 @@ import argparse
 import math
 import ast
 import matplotlib.pyplot as plt
-import bases
-import line_shapes
+from appositionGlyph import appositionGlyph
 from logicalGlyph import logicalGlyph
 from deonticGlyph import deonticGlyph
 from pronounGlyph import PronounGlyph
 from sequiGlyph import sequiGlyph
 from NumeralGlyph import NumeralGlyph
+from verbGlyph import verbGlyph
 from syllabaryGlyph import syllableGlyph
+from nounGlyph import nounGlyph
 
 
 # ── Hardcoded class index ──────────────────────────────────────────────────────
 # Each entry: index → (GlyphClass, base_fn, base_kwargs, line_fn, line_kwargs)
 CLASS_MAP = {
+    2: appositionGlyph,
     3: deonticGlyph,
     4: logicalGlyph,
     5: PronounGlyph,
     6: sequiGlyph,
     8: NumeralGlyph,
+    10: verbGlyph,
     11: syllableGlyph,
+    12: nounGlyph
     #If I want to make non circular, should probably do something here? like 11l for line? 12: (PronounGlyph, bases.polygon, [], line_shapes.straight, []),
 }
 
@@ -78,6 +82,24 @@ def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
     else:
         # Keyword
         return body, class_index
+    
+def parse_ligature(spec: str) -> list[str]:
+    """Split a ligature spec on '+' outside brackets."""
+    parts = []
+    depth = 0
+    current = []
+    for ch in spec:
+        if ch == '[':
+            depth += 1
+        elif ch == ']':
+            depth -= 1
+        elif ch == '+' and depth == 0:
+            parts.append(''.join(current).strip())
+            current = []
+            continue
+        current.append(ch)
+    parts.append(''.join(current).strip())
+    return parts
 
 
 def parse_file(filepath: str) -> list[str]:
@@ -94,21 +116,50 @@ def parse_file(filepath: str) -> list[str]:
 
 # ── Rendering ──────────────────────────────────────────────────────────────────
 
+#def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict, gap: float = 0.2):
 def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
-    lookup, class_index = parse_spec(spec_str)
+    parts = parse_ligature(spec_str)
+    label_parts = []
+    prev_obj = None
+    x_offset = 0.0
 
-    if class_index not in CLASS_MAP:
-        raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+    for i, part in enumerate(parts):
+        lookup, class_index = parse_spec(part)
+        if class_index not in CLASS_MAP:
+            raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
 
-    obj = CLASS_MAP[class_index]()
-    obj._getBinaryArray(lookup)
-    obj.draw(axs=ax, **draw_kwargs)
-    obj._clear_binary()
-    return lookup
+        obj = CLASS_MAP[class_index]()
+
+        if (prev_obj is None) or type(obj) != type(prev_obj):
+            # first glyph: draw at origin
+            x_offset = 0.0
+            y_offset = 0.0
+        else:
+            # align: shift obj so its left_anchor meets prev's right_anchor
+            rx, ry = prev_obj.right_anchor(parity=(i-1)%2)  # where prev glyph exits
+            lx, ly = obj.left_anchor(parity=i % 2)        # where this glyph expects to enter
+            x_offset = rx - lx               # exact geometric join, no arbitrary gap
+
+
+        # inject x_offset into base_fn as before
+        original_base_fn = obj.base_fn
+        obj.base_fn = lambda n, *args, _fn=original_base_fn, _x=x_offset, _y=y_offset: (
+            _fn(n, *args)[0] + _x,
+            _fn(n, *args)[1] + _y
+        )
+
+        obj._getBinaryArray(lookup)
+        obj.draw(axs=ax, **draw_kwargs)
+        label_parts.append(obj.glossing)
+        obj._clear_binary()
+
+        prev_obj = obj  # keep reference so next iteration can call right_anchor()
+
+    return ' '.join(label_parts)
 
 
 def plot_glyphs(spec_strings: list[str], n: int | None = None,
-                cols: int = 5, cell_size: float = 1.5, draw_kwargs: dict = {}):
+                cols: int = 5, cell_size: float = 2.25, draw_kwargs: dict = {}):
     if n is not None:
         spec_strings = spec_strings[:n]
 
@@ -122,7 +173,11 @@ def plot_glyphs(spec_strings: list[str], n: int | None = None,
     for i, spec_str in enumerate(spec_strings):
         try:
             label = resolve_and_draw(spec_str, axes[i], draw_kwargs)
-            axes[i].set_title(label.capitalize(), pad=-6, y=-0.1)
+            fig_width_inches = fig.get_size_inches()[0]
+            ax_width_inches = axes[i].get_position().width * fig_width_inches
+            fontsize = ax_width_inches * 10
+            fontsize = max(fontsize, 8)  # minimum font size of 8
+            axes[i].set_title(label.title(), pad=-6, y=-0.1, fontsize=fontsize)
         except (ValueError, KeyError) as e:
             print(f"Skipping '{spec_str}': {e}")
             axes[i].set_visible(False)

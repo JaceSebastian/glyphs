@@ -155,7 +155,7 @@ class spell():
              savename = "output.png",
              output_dpi = 200,
              axs = None,
-             dot_color = 'none',
+             dot_color = 'darkred',
              # cmap = 'magma',
              cmap = 'copper',
              line_color = 'darkred',

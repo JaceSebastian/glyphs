@@ -31,7 +31,7 @@ class PronounGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader(f, skipinitialspace=True)
+            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
@@ -41,41 +41,59 @@ class PronounGlyph(glyph):
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
             #print(self.glyph_list)
+    
+    def _getBinaryArray(self, word):
+        self.glossing = word
+        self.features = []
+        if(word in self.glyph_list):
+            self.features = self.glyph_list[word]
+            self._makeGlossing(det = "", root = word, case = "Nom")
+        else:
+            self.features = []
+            if ':' in word:
+                det, word = word.split(':', 1)
+                self.features.append((det.strip() if det.strip() else "Def.SG",0))
+            else:
+                det = "The "
+            if '.' in word:
+                word, case = word.split('.', 1)
+                case_feature = case.strip() if case.strip() else "Nom"
+            else:
+                case = "Nom"
+                case_feature = "Nom"
+            self.features.append((word,0))
+            self.features.append((case_feature,0))
+            self._makeGlossing(root=word, case=case_feature)
+        for feature_name, rotation in self.features:
+            fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
+            fencoding = self.rotateGlyph(fencoding, rotation) 
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+        return self.binary_array
+
+
+    def _makeGlossing(self,det="The ", root="_", case="Nom"):
+        return_value = ""
+        if case == "Gen":
+            return_value += "of "
+        elif case == "Loc":
+            return_value += "to/from "
+        elif case == "Dat":
+            return_value += "to "
+        elif case == "Instr":
+            return_value += "by/with "
+        else: #case == "Nom" or case == "Acc":
+            case = None
+
+        return_value += det
+        return_value += root.title()
+        self.glossing = return_value
+        return return_value
 
 
 if __name__ == "__main__":
-    test_obj = PronounGlyph(
-                     bases.polygon,
-                     base_kwargs=[],
-                     line_fn=line_shapes.straight,
-                     line_kwargs=[])
-
-    commands = list(test_obj.glyph_list.keys())
-    n = len(commands)
-    cols = 5 #Hard coded number of cases + null, bad.
-    rows = math.ceil(n / cols)
-
-    cell_size = 1.5  # inches per cell, adjust to taste
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
-
-    axes = axes.flatten()
-
-    for i, word in enumerate(commands):
-        test_obj.binary_array = test_obj._getBinaryArray(word)
-
-        test_obj.draw(savename=None, show_all_paths=True, annotate=False,
-                      show_name=False, axs=axes[i])
-        axes[i].set_title(word.capitalize(), pad=-6, y=-0.1) 
-        #reset binary array
-        test_obj._clear_binary()
-
-    # hide any unused subplots
-    for j in range(n, len(axes)):
-        axes[j].set_visible(False)
-
-    plt.tight_layout()
-    plt.show()
-    #plt.savefig("pronounlist.png", transparent=True)
+    test_obj = PronounGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
+    printList = list(test_obj.glyph_list.keys())[:12] #to avoid redundancies
+    test_obj.demoprint(printList, 4)
 
 
 
