@@ -47,7 +47,7 @@ class adjGlyph(glyph):
 
 if __name__ == "__main__":
     test_obj = adjGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
-    commands = list(test_obj.glyph_list.keys())
+    commands = list(test_obj.glyph_list.keys())[:45]
     test_obj.demoprint(commands, cell_size=1)
 
 

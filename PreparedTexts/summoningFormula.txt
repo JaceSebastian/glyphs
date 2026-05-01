@@ -1,0 +1,27 @@
+#This summoner invokes the demon X by name and commits up to XX percent of the summoner’s stored vitality 
+#to compel the demon to transit himself hence from the otherworld such that the demon ought be held by the circle.
+Summoner.Nom:5
+Invoke.Pres:10
+Demon.Acc:5
+(ie:2
+###Name
+):2
+True Name.Inst:12
+And Simultaineously:6
+Commit.Pres:10
+#XX.UP TO % of
+Established:9
+Vitality.Acc:5
+Summoner.Gen:5
+In Order To:6
+Compel.Inf:10
+Demon.Nom:5
+Transit.Inf:10
+#REFLX:7
+#Hence: to this place to the circle
+The:Circle.Loc:12
+That (Archaic):6
+Demon.Nom:5
+Ought:3
+Hold.Passive Perfect:10
+The:Circle.Inst:12

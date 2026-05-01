@@ -25,9 +25,10 @@ Class 5: Pronouns:
     - Summoner's Vitality
     - Demon's bondservice
     - Circle/Contract/Binding at hand
+    - One/who TODO
+    - What/thing TODO
 
-    - Relative Pronoun?
-    - generic relativeizer end symbol
+    - Relative Pronoun/ who & what/which TODO one
     - who/that/which/what
     - whoever/whichever/whenever/whereever
     - someone/something/sometime
@@ -91,13 +92,12 @@ Class 7:Morphemes or class changing morphemes
 Class 8:
 - Boundary
 - Number
-    - 0-7
-- Type (see if I can add most/few/all/none?)
+    - 0-7 (base 8)
+- Type (percent, fraction, ordinal)
 - Operators
 
 
 Class Nine: Adjectives and adverbs
-*Since most of these are pairs ie hot & cold, they should be visually similar pairs, maybe set k=3 for negative versus positive forms?
 - Class
     - Predicate (Might need case or a dummy noun)
     - Adjective (intersective) skilled builder (a builder and someone who is skilled at something)
@@ -112,12 +112,10 @@ Class Nine: Adjectives and adverbs
     - Value (good, proper, safe, beautiful)
     - Color/property (red, wooden, rough, hard, material, social, emotional, psychological)
     - Age (new, worn, old)
-    - Movement (fast/quick, quickly, slowly, smoothly, subsequent)
     - Social/culturally defined (royal, bound, demonic, mortal)
-    ? Relational,(same, different, mutual, shared, gifted, necessary, dependant,)
-    ? Degree (very, slightly, almost) not sure if this langauge needs it.
-    ? Quantity (some, all, none, a few, most, singular,whole, partial, always, never)
-
+    ? Relational,(same, different, mutual, shared, gifted, necessary, dependant,) RESOLVED(same different added to wordlist)
+    ? Degree (very, slightly, almost) not sure if this langauge needs it. Resolved this is in morphemes.
+    - Quantity (some, all, none, a few, most, singular,whole, partial, always, never)
 - Base:
     -since all of these are specturms (hot-cold) I am going to show opposites by flipping binary encoding ordering ie [][a][b][] is hot, so [][b][a][] is cold
     
@@ -212,24 +210,22 @@ Class Twelve: Nouns
     -ACC (Marked (to match pronouns))
     -LOC TO ADD
 - Count: Number/mass/Partitive
+    - def sg
     - indef sg 
     - indef Plural
     - definite sg
     -definite Plural
-    -indef dual
-    -definite dual
+    -mass: unmarked?
     -any
     -every,each
-
-    * this is how indefinite pronouns like somehow, anyone, whereever are made, with morphes any.person or some.time
-  
-                  No demonstrative pronouns - Demonstratives
-                            -The (unmarked)
-                            -This/These
-                            -That/those
-                            -a/some
+        * this is how indefinite pronouns like somehow, anyone, whereever are made, with morphes any.person or some.time
+    No separate demonstrative pronouns - Demonstratives feature is implicit
+        -The (unmarked)
+        -This/These
+        -That/those
+        -a/some
 - Semantic Fields
-    -Places/domains
+    -Places/domains/ HERE AND THERE
     -times
     -titles/names (Otherworld, domicile, home, city)
     - Measures (distances, durations, "rule" "law" "line")
@@ -243,6 +239,7 @@ Class Twelve: Nouns
 - Prepositions(in case)
 - Pronouns something whatever?
 - Pronouns ()
+    - Key: who, what, why/how
     - whoever
     -whenever
     -whereever
@@ -255,7 +252,7 @@ Class Twelve: Nouns
 - Distances
 
 ----------------------------------------------------------------
-
+Adj Table
 
 	Value	Ability	dimension	property	age/distance	social/cultural	color	Quantity
 _								all

@@ -1,13 +1,13 @@
 If:6
 The Demon:5
-Crosses:10
+Cross.Pres:10
 The:Boundary:12
 The:Circle.Gen:12
 Then:6
 Demon.Nom:5
 Must:3
 Obey:10
-Following:10
+Follow.Participle:10
 Bindings:5
 For:6
 The:Duration:12
@@ -19,6 +19,6 @@ PL:Year.Nom:12
 Or:4
 Until:6
 The Demon:5
-Is Banished:10
+Banish.Passive Perfect:10
 Otherworld.Loc:5
 Before:6+After:6

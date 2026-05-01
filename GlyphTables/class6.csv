@@ -28,21 +28,22 @@ Though,prior, 0, concession,0, null, 0
 Otherwise,posterior, 0, concession,0, null, 0
 Although,simultaineous, 0, concession,0, null, 0
 Lest,hypothetical, 0, concession, 0, null, 0
-"Except, Yet",null, 0, exception, 0, null, 0
+Except/Yet,null, 0, exception, 0, null, 0
 Unless,prior, 0, exception,0, null, 0
 Despite,posterior, 0, exception,0, null, 0
 Until,simultaineous, 0, exception,0, null, 0
-"Even If",hypothetical, 0, exception, 0, null, 0
+Even If,hypothetical, 0, exception, 0, null, 0
 Also,null, 0, comparison, 0, null, 0
 As,prior, 0, comparison,0, null, 0
 Like,posterior, 0, comparison,0, null, 0
 "As well as",simultaineous, 0, comparison,0, null, 0
+And Simultaineously,simultaineous, 0, comparison,0, null, 0
 "As if",hypothetical, 0, comparison, 0, null, 0
 For, null,0, null, 0, purpose, 0
-"(In Order) To", prior, 0, null, 0, purpose, 0
-"So (that)", posterior, 0, null, 0, purpose, 0
+In Order To, prior, 0, null, 0, purpose, 0
+"So That", posterior, 0, null, 0, purpose, 0
 By,simultaineous, 3, null, 0, purpose, 0
-"That (Archaic)", hypothetical, 0, null, 0, purpose, 0
+That (Archaic), hypothetical, 0, null, 0, purpose, 0
 Let,null,0, null, 0, cause, 0
 Because,  prior, 3, null, 0, cause, 3
 "Due to",posterior, 0, null, 0, cause, 0

@@ -30,13 +30,7 @@ By the Vitality, Vitality, 0, Instr,0
 
 #none of these should be printed in __main__
 Bindings, Bindings or vows,0,Nom,0
-Summoner, Summoner, 0, Acc, 0
-Summoner's, Summoner, 0, Gen, 0
-To Summoner, Summoner, 0, Dat, 0
-With Summoner, Summoner, 0, Inst, 3
-Demon.Acc, Demon, 0, Acc, 0
-Demon's, Demon, 0, Gen, 3
-With Vitality, Vitality, 0, Inst, 0
+
 
 
 

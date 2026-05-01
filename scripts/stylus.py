@@ -8,6 +8,7 @@ from deonticGlyph import deonticGlyph
 from pronounGlyph import PronounGlyph
 from sequiGlyph import sequiGlyph
 from NumeralGlyph import NumeralGlyph
+from adjGlyph import adjGlyph
 from verbGlyph import verbGlyph
 from syllabaryGlyph import syllableGlyph
 from nounGlyph import nounGlyph
@@ -22,6 +23,7 @@ CLASS_MAP = {
     5: PronounGlyph,
     6: sequiGlyph,
     8: NumeralGlyph,
+    9: adjGlyph,
     10: verbGlyph,
     11: syllableGlyph,
     12: nounGlyph
@@ -105,7 +107,7 @@ def parse_ligature(spec: str) -> list[str]:
 def parse_file(filepath: str) -> list[str]:
     """Read a .txt file and return a list of spec strings, one per non-comment line."""
     specs = []
-    with open(filepath) as f:
+    with open("PreparedTexts/" +filepath) as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith("#"):

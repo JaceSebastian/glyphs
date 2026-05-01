@@ -67,7 +67,6 @@ age,age, 0, null,0,null,0
 social,social,  0, null,0,null,0
 color,color,  0, null,0,null,0
 
-
 good, null,0, good, 0,adj,0
 bad, null, 0, bad, 0,adj,0
 well,null,0, healthy,0,adj,0
@@ -94,11 +93,6 @@ true,null,0, true, 0, adj,0
 false,null,0,false, 0, adj,0
 big, null,0, big,0, adj,0
 small, null, 0, small,0,adj,0
-quickly, age, 0, hot, 0, adverb, 0
-superlative, null, 0, null,0, superlative,0
-bigger, dimension, 0, big, 0, comparative,0
-Noble, social, 0, big,0, predicate,0
-quantity,quantity,  0, null,0,null,0
 
 all, quantity,0, full,0, null,0
 none (of), quantity,0, empty,0, null,0
@@ -112,9 +106,13 @@ many,quantity,0,unclear,0,null,0
 few, quantity,0,small,0,null,0
 
 
+#BREAK This is where preview/demo cuts off, roughly.
 
-
-BREAK
+quickly, age, 0, hot, 0, adverb, 0
+superlative, null, 0, null,0, superlative,0
+bigger, dimension, 0, big, 0, comparative,0
+Noble, social, 0, big,0, predicate,0
+quantity,quantity, 0, null,0,null,0
 
 good or right,quality,0,good,0,null,0
 best, quality, 0, good, 0, superlative, 0
@@ -191,7 +189,9 @@ common or physical,social,0,small,0,null,0
 
 likely,ability,0,long or tall,0,null,0
 long or tall,dimension,0,long or tall,0,null,0
-established or former,social,0,long or tall,0,null,0
+#synomyms
+Established,social,0,long or tall,0,null,0
+Former,social,0,long or tall,0,null,0
 
 unlikely,ability,0,short,0,null,0
 short,dimension,0,short,0,null,0

@@ -94,7 +94,7 @@ class nounGlyph(glyph):
         features.append(case_feature)
 
         self._makeGlossing(det, root, case)
-        print(features)
+        #print(features)
         for feature_name, rotation in features:
             if feature_name not in self.encodings:
                 print(f"Warning: '{feature_name}' not found in encodings, skipping.")
@@ -114,7 +114,7 @@ class nounGlyph(glyph):
             return_value += "to/from "
         elif case == "Dat":
             return_value += "to "
-        elif case == "Instr":
+        elif case == "Inst":
             return_value += "by/with "
         else: #case == "Nom" or case == "Acc":
             case = None

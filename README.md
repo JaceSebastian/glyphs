@@ -22,22 +22,5 @@ python stylus.py --words NOM:5 ACC:5 --annotate --show-all-paths --cell-size 2.5
 python stylus.py --file input.txt  --cols 3
 ```
 
-A rough correspondence for glyphs:
- Classes -> Shape
-    Cartouche -> Circle (used to partion off spelled out proper names)
-    Punctuation -> Dot 
-    Recursion -> Line/brackets
-    Deontic Logic -> Triangle
-    Logical Operators -> Square
-    Pronouns -> Pentagon
-    Prepositions? -> Hexagon
-    Suordinating? -> Septagon
-    Numerals -> Octogon
-    Morphemes/affixes -> Nonagon
-    AdjP -> Decagon
-    Syllabary -> Hendecagon
-    Verb -> Dodecagon   
-    Nouns/Determiner Phrases-> Triskaidecagon
-
-
-    
+   TODO:
+   add BREAK command to all glyphs to cut off where demoprint should stop using new attribute.
