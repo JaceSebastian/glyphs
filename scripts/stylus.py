@@ -2,6 +2,7 @@ import argparse
 import math
 import ast
 import matplotlib.pyplot as plt
+from punctuationGlyph import punctuationGlyph
 from appositionGlyph import appositionGlyph
 from logicalGlyph import logicalGlyph
 from deonticGlyph import deonticGlyph
@@ -12,21 +13,25 @@ from adjGlyph import adjGlyph
 from verbGlyph import verbGlyph
 from syllabaryGlyph import syllableGlyph
 from nounGlyph import nounGlyph
+from morphemeGlyph import morphemeGlyph
+
 
 
 # ── Hardcoded class index ──────────────────────────────────────────────────────
 # Each entry: index → (GlyphClass, base_fn, base_kwargs, line_fn, line_kwargs)
 CLASS_MAP = {
+    1: punctuationGlyph,
     2: appositionGlyph,
     3: deonticGlyph,
     4: logicalGlyph,
     5: PronounGlyph,
     6: sequiGlyph,
+    7: morphemeGlyph,
     8: NumeralGlyph,
     9: adjGlyph,
     10: verbGlyph,
     11: syllableGlyph,
-    12: nounGlyph
+    12: nounGlyph,
     #If I want to make non circular, should probably do something here? like 11l for line? 12: (PronounGlyph, bases.polygon, [], line_shapes.straight, []),
 }
 
@@ -181,7 +186,7 @@ def plot_glyphs(spec_strings: list[str], n: int | None = None,
             fontsize = max(fontsize, 8)  # minimum font size of 8
             axes[i].set_title(label.title(), pad=-6, y=-0.1, fontsize=fontsize)
         except (ValueError, KeyError) as e:
-            print(f"Skipping '{spec_str}': {e}")
+            print(f"Skipping '{spec_str}': {e} because of {spec_str}.")
             axes[i].set_visible(False)
 
     for j in range(count, len(axes)):
@@ -212,11 +217,11 @@ def main():
 
         # draw() passthrough args
     parser.add_argument("--annotate",       action="store_true", default=False)
-    parser.add_argument("--show-all-paths", action="store_true", default=False)
+    parser.add_argument("--show-all-paths", action="store_true", default=True)
     parser.add_argument("--show-name",      action="store_true", default=False)
     parser.add_argument("--savename",       type=str,            default=None)
-    parser.add_argument("--cell-size",      type=float,          default=1.5)
-    parser.add_argument("--cols",           type=int,            default=5)
+    parser.add_argument("--cell-size",      type=float,          default=1.25)
+    parser.add_argument("--cols",           type=int,            default=7)
 
     args = parser.parse_args()
 

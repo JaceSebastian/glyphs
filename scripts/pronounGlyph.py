@@ -76,11 +76,15 @@ class PronounGlyph(glyph):
         if case == "Gen":
             return_value += "of "
         elif case == "Loc":
-            return_value += "to/from "
+            return_value += "to "
+        elif case == "Ablative":
+            return_value += "from "
         elif case == "Dat":
             return_value += "to "
         elif case == "Instr":
-            return_value += "by/with "
+            return_value += "by "
+        elif case == "Commitative":
+            return_value += "with "
         else: #case == "Nom" or case == "Acc":
             case = None
 

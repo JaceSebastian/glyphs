@@ -14,6 +14,10 @@
     DP/Nouns-> Dodecagon 
     _ ->Triskaidecagon
 
+Class 4:
+-Logical operators, copula, with/without (as logical property)
+-Want to revise to Have: is/isn't, with/without, and, or, not (DP), un (VP)
+
 
 Class 5: Pronouns:
 - Case
@@ -63,30 +67,63 @@ Class 5: Pronouns:
 
 
 Class 7:Morphemes or class changing morphemes
-- Primary class Changing 
-    - (Add Case if not Nom to gerundives)
-    - ToAdj or ToAdv (wood to wooden, fear to fearless to fearlessly)
-    - To
-    - "-able" V-Adj
-    - "be-" noun to verb (friend to befriend) 
-    - "-al" provence to provential. space to spatial etc.
-    - Modifers AdjV 
-        - Negation (un- )
+
+- Primary Class Target (features 1 and 3)
+    - To Noun (definite)
+        -ActOf (contradict -> contradiction)
+        -ResultOf (complete to completion)
+        -QualityOf (pure -> purity, clear to clarity)
+        (might do repeat list to get indefinite forms or plurals?)
+    - To Verb
+        - "be-" noun to verb (friend to befriend) 
+        - "-en" adj to verb (causative) (cold -> chill, red -> redden)
+    - To Adj
+        - ToAdj or ToAdv (wood to wooden (this is participle like redden?), fear to fearless to fearlessly)
+        - To Adverb (adj to adv only since contract language is finite.)
+        - "-able" V-Adj
+        - NtoAdj -less, Absence
+        - NtoAdj -ful, Presence
+        - NtoAdj "-al" provence to provential. space to spatial etc.
+    - Prefixes (Non Class Changing re- wind = rewind)
         - degree (very, slightly, )    
-        - -less, Absence
-        - -ful, Presence
-        - ToAdverb (-ly)
-        - pre, post, for
-        -re, com-, sub- hyper= hypo- 
-- Case (see if I can add to class?)
-- Valency (Might be able to squeeze in here)
-    - Causative
-    - Benefactive
-    - Malefactive
-    - Intransitive
-    - Monovalent/Transitive (Unmarked)
-    - Divalent 
-    - Reflexive
+        - pre-, post-, for-
+        - re, com-, sub- hyper- hypo- 
+    -NULL (Used to create prepositions, applicatives, and Demonstratives)
+        - Applicatives
+            - Causative (VERY IMPORTANT. Not sure if I want to distinguish between A caused B to do it and B was caused to do it?)
+            - Benefactive
+            - Malefactive
+            - Reflexive(VERY IMPORTANT)
+        -Prepostion Marker
+        -Copula Marker (mostly defunct, but exists)
+        -Demonstrative Marker
+
+
+- Conjugation/Declension (feature 2)
+    - Case/Preposition
+        -Nom
+        -Acc 
+        -Gen 
+        -Dat 
+        -Ablative (from)
+        -Loc
+        -Inst
+        -Comitative
+    - Conjugation
+        - Infinitive/Gerundive
+        - Present Participle
+        - Past Participle
+        - Present Simple
+        - Present Perfect
+        - Passive
+        - Passive Perfect
+        - Past
+        - Past Perfect 
+    - Demonstratives
+        -This
+        -These
+        -That
+        -Those
 
 
 Class 8:
@@ -204,17 +241,17 @@ Class Eleven: Syllabary
 
 
 Class Twelve: Nouns
-- Note that words like vitality and circle and bondservice might be better in class 5
+- Note that words like vitality and bondservice might be better in class 5
 
 - Case
-    -ACC (Marked (to match pronouns))
-    -LOC TO ADD
+    -same as pronouns
+    -Ablative todo add.
 - Count: Number/mass/Partitive
     - def sg
     - indef sg 
     - indef Plural
     - definite sg
-    -definite Plural
+    - definite Plural
     -mass: unmarked?
     -any
     -every,each

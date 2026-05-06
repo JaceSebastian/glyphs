@@ -1,0 +1,36 @@
+Supposing:6
+The:Completion:12
+Bondservice.Gen:5
+Or:4
+Banish:10 + ActOf:7
+Otherworld.Loc:5
+True Name.Inst:12
+Demon.Gen:5
+Thence:6
+Demon.Nom:5
+Swear.Pres:10
+Transit.Inf:10
+Reflexive:7
+Otherworld.Ablative:5
+Such that:6
+Demon.Nom:5
+Must Not:3
+Cause:10
+Harm:12
+Summoner.Dat:5
+And:4
+Must Not:3
+Transit.Inf:10
+Any:Thing:12
+REL:6
+Not:4
+Know.Participle:10 + toAdv:7
+Gift.Past:10
+And:4
+Must Not:3
+Utilize:10
+GT:X.%:8 + GT:X.%:8
+Established:9 + Vitality.Nom:5
+Summoner.Gen:5
+Period:1
+

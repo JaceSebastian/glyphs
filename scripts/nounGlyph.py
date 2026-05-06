@@ -31,8 +31,7 @@ class nounGlyph(glyph):
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
-                word = row["feature"].strip()
-                #call = row["call"].strip()   
+                word = row["feature"].strip() 
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding

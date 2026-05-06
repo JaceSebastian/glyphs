@@ -27,11 +27,14 @@ action, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,
 
 call, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0],[0,0,0,1,1,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0]]"
 die, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,1,0,0],[1,1,0,1,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,1,1]]"
+carry over, root,  "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,1,1,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,1]]"
 step over, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,0,1,0,1,0,1,0,1,0],[0,1,0,1,0,1,0,1,0,1],[1,0,0,1,0,0,0,0,0,0]]"
 follow, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0],[0,0,0,1,1,0,0,0,0,0]]"
 send away, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0],[1,1,1,0,1,0,0,0,0,0],[0,0,0,1,1,0,0,0,0,0]]"
 hold, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,1,0,0,1,1]]"
 force, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,1]]"
+yield, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,1,1,0,1,1,0,0],[1,1,0,1,0,0,0,1,1,0],[1,0,0,1,0,0,0,0,1,1]]"
+reverse, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,0,1,0,1,0,1,0,1,0],[0,1,1,1,0,1,0,1,0,1],[1,0,0,1,0,0,0,0,1,1]]"
 #unfilled roots:
 
 
@@ -41,6 +44,7 @@ command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 #command, conjugation, 0, semantic group, 0, root(last 3 features), 0
 
 Invoke, null,0, spellcasting, 0, call, 0,
+Swear, null,0, oath, 0, call,0
 Commit, null,0, oath, 0, hold,0, 
 Hold, null,0, movement, 0, hold, 0, 
 Compel, null,0, spellcasting,0, force,0,
@@ -49,7 +53,14 @@ Cross, null,0, movement,0, step over,0
 Follow, null,0, action, 0, follow,0
 Banish, null,0, spellcasting,0, send away,0
 Obey, null,0, oath,0, follow,0
-#Translate, null,0, speech,0, carry over, 0
+Know, null,0,knowledge,0, hold,0
+Translate, null,0, speech,0, carry over, 0
+Gift, null,0,service,0, yield, 0
+Declare, null,0, speech, 0, call,0
+Command, null,0, oath, 0, force,0
+Contradict, null,0, speech,0, reverse,0
+Heed, null,0, speech, 0, yield,0
+Able, null,0, existence, 0, force,0
 
 #Break here for demo TODO
 

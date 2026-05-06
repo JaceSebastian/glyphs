@@ -12,7 +12,10 @@ Acc,"","[[0,1,0,0,0],[0,0,0,0,0]]"
 Gen,"Of","[[1,0,1,0,0],[0,0,0,0,0]]"            
 Dat,"For","[[0,0,0,1,1],[0,0,0,0,0]]"
 Loc,"To", "[[1,1,1,1,1],[0,0,0,0,0]]"
-Inst,"With", "[[1,1,1,0,0],[0,0,0,0,0]]"
+Ablatiave,"From ", "[[1,1,1,1,0],[0,0,0,0,0]]"
+Inst,"With/By", "[[1,1,1,0,0],[0,0,0,0,0]]"
+Comitative, "With ","[[0,1,1,0,1],[0,0,0,0,0]]"
+
 Glyphs
 command, feature1, rotation1, feature2, rotation2
 Nominative, Null, 0, Nom, 0

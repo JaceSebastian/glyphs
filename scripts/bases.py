@@ -7,7 +7,7 @@ import math
 def polygon(n,radius = 1,start_angle = None, x_offset =0.0):
     #Creates x,y data for an n-sided polygon
     if start_angle == None:
-        if n % 4 == 0:
+        if n % 4 == 0 and n != 4:
             start_angle = 0
         elif n %2 == 0:
             start_angle = np.pi/n
@@ -39,6 +39,7 @@ def quadratic(n,a = 1,b=0,c=0):
     x = np.array(x)
     y = a*x**2 +b*x+c
     return(x,y)
+
 
 def circle(n,radius = 1,theta0 = 0,theta1 = -np.pi/2):
     #creates a circular base between theta0 and theta1

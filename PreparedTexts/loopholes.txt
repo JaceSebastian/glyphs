@@ -1,0 +1,45 @@
+#The demon swears to only obey orders that don't contradict previous orders
+# unless the summoner declares the new order supersedes it. 
+#If the demon is unable to heed an order, the demon swears to inform 
+#the summoner why at its first opportunity. 
+#The demon swears to maintain a manifestation capable of perceiving 
+#the summoner’s orders at all times while in bound-service. 
+#The demon swears to protect the summoner from physical or psychic 
+#attacks to the best of its capabilities at that juncture. 
+Demon.Nom:5
+Swear.Pres:10
+Obey.Inf:10
+Order.Nom:12
+REL:6
+Don't:4
+Contradict.Gerundive:10
+Early.Comparative:9
+Mass:Order.Acc:12
+Unless:6
+Summoner.Nom:5
+Declare.Pres:10
+That:2
+New:9
+The:Order.Nom:12
+#AUG:7 + 
+Command.Pres:10
+Prior.Reference:9
+Period:1
+
+If:6
+Demon.Nom:5
+Un:4
+Able.Pres:10
+Heed:Inf:10
+A:Order.Acc:10
+Then:6
+Demon.Nom:5
+Swear.Pres:10
+Ought:3
+Inform.Inf:10
+Summoner.Acc:5
+Why.Ablative:12
+At:6
+1.Ordinal:8
+Opportunity.Loc:12
+

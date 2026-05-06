@@ -1,0 +1,115 @@
+feature, group, encoding
+null,_, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+
+##################k=3
+toNoun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,1,1,0]]"
+toVerb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,1,0,0,1]]"
+toAdj, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
+noChange, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
+#free morpheme is null.
+FreeMorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+#BoundMorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
+Applicative, target, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,1,1,1,1,1,1]]"
+
+
+#############k=2 (case/conjugation)
+
+#same as Null,
+Nom, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+Pres, conj,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+
+Acc,case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
+Past,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
+
+Gen,case,"[[0,0,0,0,0,0,0],[1,1,1,1,0,0,0],[0,0,0,0,0,0,0]]"
+Participle,conj,"[[0,0,0,0,0,0,0],[1,1,1,1,0,0,0],[0,0,0,0,0,0,0]]"
+
+Dat,case,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
+Past Participle,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
+
+Loc,case,"[[0,0,0,0,0,0,0],[1,0,0,1,1,0,1],[0,0,0,0,0,0,0]]"
+Present Perfect,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,1,0,1],[0,0,0,0,0,0,0]]"
+
+Ablative,case,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
+Past Perfect,conj,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
+
+Inst,case,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
+Passive,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
+
+Comitative,case,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
+Passive Perfect,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
+
+Undefined, _, "[[0,0,0,0,0,0,0],[1,0,0,1,0,1,0],[0,0,0,0,0,0,0]]"
+Undefined2, _, "[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
+
+
+#case ignorable for plural
+Plural, demonstrative, "[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
+Infinitive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
+#I think this can be done with to verb, adposition marker, and case?
+Gerundive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
+
+#This,demonstrative,
+#That,demonstrative,
+#These,demonstrative,
+#Those,demonstrative,
+
+
+
+
+#####   k=1
+#Appositions stack on nouns, so need to be separate from case
+Reflexive,apposition,"[[0,0,0,1,1,1,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+#Causative,apposition,
+#Benefactive,apposition,
+#Malefactive,apposition,
+#Adposition Marker,
+#Demonstrative Marker,
+#Copula Marker, #defunct
+
+#-ful,
+#-less,
+#-al,
+#-able,
+#be-, friend ->befriend,
+-ment, place->placement,"[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+#aug is very for adj, big for nouns, and intensifier run -> dash for verbs
+#AUG,
+
+
+
+
+
+
+
+Glyphs
+command, feature1, rotation1, feature2, rotation2, feature3, rotation3
+toNoun, null,0, null,0, toNoun,0
+toVerb, null,0, null,0, toVerb,0
+toAdj, null,0, null,0, toAdj,0
+noChange, null,0, null,0, noChange,0
+FreeMorpheme, null,0, null,0, FreeMorpheme,0
+#BoundMorpheme, null,0, null,0, BoundMorpheme,0
+Nom/Pres, null,0, Nom, 0, null,0
+Acc/Past, null,0, Acc, 0, null,0
+Gen/Participle, null,0, Gen, 0, null,0
+Dat/Past Participle, null,0, Dat, 0, null,0
+Loc/Perfect, null,0, Loc, 0, null,0
+Ablatiave/Past Perfect, null,0, Ablative, 0, null,0
+Instr/Passive, null,0, Inst, 0, null,0
+Comitative/Passive Perfect, null,0, Comitative, 0, null,0
+Infinitive/Plural, null,0, Infinitive, 0, null,0
+
+
+
+Reflexive, Reflexive,0,null,0, Applicative, 0
+ActOf, -ment, 0, Nom, 0, toNoun,0
+
+
+#none of these should be printed in __main__
+
+
+
+
+
+

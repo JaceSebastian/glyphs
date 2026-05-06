@@ -25,3 +25,5 @@ Demon.Nom:5
 Ought:3
 Hold.Passive Perfect:10
 The:Circle.Inst:12
+Period:1
+
