@@ -72,6 +72,7 @@ Class 7:Morphemes or class changing morphemes
     - To Noun (definite)
         -ActOf (contradict -> contradiction)
         -ResultOf (complete to completion)
+        -Nominalizer (serve > service) TODO
         -QualityOf (pure -> purity, clear to clarity)
         (might do repeat list to get indefinite forms or plurals?)
     - To Verb
@@ -159,9 +160,10 @@ Class Nine: Adjectives and adverbs
 
 Class 10: Verbs
 -Conjugation (F1)
+TODO: Make inf unmarked, gerundive marked!
     - Infinitive/Gerundive
     - Infinitive (running) (same as gerundive)
-    X Nominalizer (the running)(needs to be elsewhere to get case and definite article)
+    X Nominalizer (the running)(needs to be elsewhere to get case and definite article --in 9???)
     - Present Participlize
     - Past Participle
     - Present Simple
@@ -252,11 +254,10 @@ Class Twelve: Nouns
     - indef Plural
     - definite sg
     - definite Plural
+    - unknown number (unmarked TODO)
     -mass: unmarked?
-    -any
-    -every,each
-        * this is how indefinite pronouns like somehow, anyone, whereever are made, with morphes any.person or some.time
-    No separate demonstrative pronouns - Demonstratives feature is implicit
+
+    ??No separate demonstrative pronouns - Demonstratives feature is implicit
         -The (unmarked)
         -This/These
         -That/those
@@ -267,8 +268,8 @@ Class Twelve: Nouns
     -titles/names (Otherworld, domicile, home, city)
     - Measures (distances, durations, "rule" "law" "line")
     -theories/ideas ()
-    -Quality of Preceeding Adjective (kind > kindness, fast > speed, strong > strength)
-    -Act of preceding verb in gerundive form (serve > service)
+    X (in 9) Quality of Preceeding Adjective (kind > kindness, fast > speed, strong > strength)
+    X (In 9) Act of preceding verb in gerundive form (serve > service)
 
 
 

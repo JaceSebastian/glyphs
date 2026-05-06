@@ -94,7 +94,7 @@ false,null,0,false, 0, adj,0
 big, null,0, big,0, adj,0
 small, null, 0, small,0,adj,0
 
-all, quantity,0, full,0, null,0
+entire, quantity,0, full,0, null,0
 none (of), quantity,0, empty,0, null,0
 always, quantity,0, full,0, adverb,0
 never,quantity,0, empty,0, adverb,0

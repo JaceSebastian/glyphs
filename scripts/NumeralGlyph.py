@@ -42,6 +42,96 @@ class NumeralGlyph(glyph):
                 self.glyph_list[word] = features
 
 
+
+    def _getBinaryArray(self, word):
+        '''Handle numeral encoding. Format:
+        "LT:Three.Numerator"
+        "GT:Five.Percentage"
+        bare numerals default to null:NaN.null
+        Checks glyph_list first for aliases (1, one, One) and special combinations.
+        Format: "boundary:Digit.type"
+        '''
+        self.glossing = "Glossing not showing up."
+        
+        # check glyph_list first for aliases and special combinations
+        if word in self.glyph_list:
+            for feature_name, rotation in self.glyph_list[word]:
+                fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
+                fencoding = self.rotateGlyph(fencoding, rotation)
+                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+                self.glossing = word
+            return self.binary_array
+
+        features = []
+
+        # boundary slot
+        if ':' in word:
+            boundary, word = word.split(':', 1)
+            boundary = boundary.strip() if boundary.strip() else None
+            if boundary:
+                features.append((boundary, 0))
+        else:
+            boundary = None
+
+        # type slot
+        if '.' in word:
+            word, numtype = word.split('.', 1)
+            numtype = numtype.strip() if numtype.strip() else None
+        else:
+            numtype = None
+
+        # num slot
+        root = word.strip()
+        if not root:
+            raise ValueError(f"No numeral found in '{word}'")
+        
+        # check glyph_list for digit aliases (1/one/One -> One encoding)
+        if root in self.glyph_list:
+            for feat, rotation in self.glyph_list[root]:
+                features.append((feat, rotation))
+            num_gloss = root
+        else:
+            # direct encoding lookup
+            if root not in self.encodings:
+                raise KeyError(f"'{root}' not found in glyph_list or encodings")
+            features.append((root, 0))
+            num_gloss = root
+
+        # type slot
+        if numtype:
+            features.append((numtype, 0))
+
+        self._makeGlossing(boundary, num_gloss, numtype)
+
+        for feature_name, rotation in features:
+            if feature_name not in self.encodings:
+                print(f"Warning: '{feature_name}' not found in encodings, skipping.")
+                continue
+            fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
+            fencoding = self.rotateGlyph(fencoding, rotation)
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+
+        return self.binary_array
+    
+
+    def _makeGlossing(self, boundary, num, type):
+        return_value = ""
+        match(boundary):
+            case "LEQ":
+                return_value += "<="
+     
+
+        return_value += num.title()
+
+        match(type):
+            case "Percent":
+                return_value +="%"
+
+        self.glossing = return_value
+        return return_value
+
+
+
 if __name__ == "__main__":
     test_obj = NumeralGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
 

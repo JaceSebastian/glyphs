@@ -4,12 +4,12 @@ Summoner.Nom:5
 Invoke.Pres:10
 Demon.Acc:5
 (ie:2
-###Name
+#Name:11
 ):2
 True Name.Inst:12
 And Simultaineously:6
 Commit.Pres:10
-#XX.UP TO % of
+LEQ:NaN.Percent:8
 Established:9
 Vitality.Acc:5
 Summoner.Gen:5
@@ -17,8 +17,8 @@ In Order To:6
 Compel.Inf:10
 Demon.Nom:5
 Transit.Inf:10
-#REFLX:7
-#Hence: to this place to the circle
+Reflexive:7
+#Hence: to this place to the circle Not the sequi hence???
 The:Circle.Loc:12
 That (Archaic):6
 Demon.Nom:5

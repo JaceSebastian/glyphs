@@ -2,7 +2,7 @@ feature, group, encoding
 null,_, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
 ##################k=3
-toNoun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,1,1,0]]"
+toNoun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,1,1,0]]"
 toVerb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,1,0,0,1]]"
 toAdj, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
 noChange, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
@@ -59,7 +59,7 @@ Gerundive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
 
 #####   k=1
 #Appositions stack on nouns, so need to be separate from case
-Reflexive,apposition,"[[0,0,0,1,1,1,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+Reflexive,apposition,"[[1,0,1,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #Causative,apposition,
 #Benefactive,apposition,
 #Malefactive,apposition,
@@ -99,9 +99,6 @@ Ablatiave/Past Perfect, null,0, Ablative, 0, null,0
 Instr/Passive, null,0, Inst, 0, null,0
 Comitative/Passive Perfect, null,0, Comitative, 0, null,0
 Infinitive/Plural, null,0, Infinitive, 0, null,0
-
-
-
 Reflexive, Reflexive,0,null,0, Applicative, 0
 ActOf, -ment, 0, Nom, 0, toNoun,0
 

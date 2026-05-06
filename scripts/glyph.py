@@ -108,7 +108,9 @@ class glyph():
     def _getBinaryArray(self, word):
         self.glossing = word
         if(word not in self.glyph_list):
-            raise KeyError("Not a Valid Glyph")
+            #raise KeyError("Not a Valid Glyph: ", word)
+            print(f"Warning: '{word}' not found in glyph_list or encodings, skipping.")
+            return self.binary_array
         for feature_name, rotation in self.glyph_list[word]:
                 fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
                 fencoding = self.rotateGlyph(fencoding, rotation) 

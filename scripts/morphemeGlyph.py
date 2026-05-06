@@ -51,7 +51,7 @@ if __name__ == "__main__":
                      line_kwargs=[])
 
     commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands, Flip=False)
+    test_obj.demoprint(commands)
 
 
 

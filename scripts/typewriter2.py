@@ -8,7 +8,7 @@ from logicalGlyph import logicalGlyph
 from deonticGlyph import deonticGlyph
 from pronounGlyph import PronounGlyph
 from sequiGlyph import sequiGlyph
-from adjGlyph import adjGlyph
+from morphemeGlyph import morphemeGlyph
 from NumeralGlyph import NumeralGlyph
 from adjGlyph import adjGlyph
 from verbGlyph import verbGlyph
@@ -23,7 +23,7 @@ CLASS_MAP = {
     4: logicalGlyph,
     5: PronounGlyph,
     6: sequiGlyph,
-    7: adjGlyph,
+    7: morphemeGlyph,
     8: NumeralGlyph,
     9: adjGlyph,
     10: verbGlyph,
@@ -31,7 +31,7 @@ CLASS_MAP = {
     12: nounGlyph,
 }
 
-# ── Parsing (unchanged) ────────────────────────────────────────────────────────
+# ── Parsing ────────────────────────────────────────────────────────────────────
 
 def parse_feature_token(token: str) -> tuple[str, int]:
     token = token.strip()
@@ -95,22 +95,25 @@ def parse_file(filepath: str) -> list[str]:
 
 # ── Geometry helpers ───────────────────────────────────────────────────────────
 
-def _get_world_points(obj, x_off: float, y_off: float):
-    """Local polygon points translated into world space."""
+def _get_world_points(obj, x_off: float, y_off: float, scale: float = 1.0):
+    """Local polygon points scaled and translated into world space."""
     x_vals, y_vals = obj.base_fn(obj.num, *obj.base_kwargs)
-    return x_vals + x_off, y_vals + y_off
+    return (x_vals * scale) + x_off, (y_vals * scale) + y_off
 
 
-def _right_anchor_world(obj, x_off: float, y_off: float) -> tuple[float, float]:
+def _right_anchor_world(obj, x_off: float, y_off: float,
+                        scale: float = 1.0) -> tuple[float, float]:
     """Rightmost polygon point in world space."""
-    x_vals, y_vals = _get_world_points(obj, x_off, y_off)
+    x_vals, y_vals = _get_world_points(obj, x_off, y_off, scale)
     idx = np.argmax(x_vals)
     return float(x_vals[idx]), float(y_vals[idx])
 
 
-def _left_anchor_local(obj) -> tuple[float, float]:
-    """Leftmost polygon point in local space (glyph not yet placed)."""
+def _left_anchor_local(obj, scale: float = 1.0) -> tuple[float, float]:
+    """Leftmost polygon point in local space, respecting scale."""
     x_vals, y_vals = obj.base_fn(obj.num, *obj.base_kwargs)
+    x_vals = x_vals * scale
+    y_vals = y_vals * scale
     idx = np.argmin(x_vals)
     return float(x_vals[idx]), float(y_vals[idx])
 
@@ -118,44 +121,42 @@ def _left_anchor_local(obj) -> tuple[float, float]:
 # ── Drawing ────────────────────────────────────────────────────────────────────
 
 def _draw_glyph(obj, ax, x_off: float, y_off: float,
-                line_color: str = 'maroon',
-                dot_color:  str = 'maroon',
+                scale:      float = 1.0,
+                line_color: str   = 'maroon',
+                dot_color:  str   = 'maroon',
                 dot_size:   float = 30,
                 linewidth:  float = 2):
     """Render one glyph's points and chords directly onto ax."""
-    x_vals, y_vals = _get_world_points(obj, x_off, y_off)
+    x_vals, y_vals = _get_world_points(obj, x_off, y_off, scale)
 
-    # polygon points
     ax.scatter(x_vals, y_vals,
                s=dot_size, color=dot_color, zorder=2)
 
-    # chords encoded in binary array
     for i in range(obj.attr_num):
         k = i + 1
         for j, elem in enumerate(obj.binary_array[i]):
             if elem == 1:
-                P = [x_vals[j],               y_vals[j]]
+                P = [x_vals[j],                y_vals[j]]
                 Q = [x_vals[(j + k) % obj.num], y_vals[(j + k) % obj.num]]
                 line_x, line_y = obj.line_fn(P, Q, *obj.line_kwargs)
                 ax.plot(line_x, line_y,
                         ls='-', lw=linewidth,
                         color=line_color, zorder=0)
-                
-    draw_all_paths(obj,x_vals, y_vals,ax)
-    
 
-def draw_all_paths(obj, x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
-        #loop for all k
-        for k in range(1,obj.attr_num+1):
-            for i in range(obj.num):
-                P = [x_vals[i],y_vals[i]]
-                Q = [x_vals[(i+k)%obj.num],y_vals[(i+k)%obj.num]]
-                line_x,line_y =obj.line_fn(P,Q,*obj.line_kwargs)
-                axs.plot(line_x,line_y,
-                        ls = all_ls,
-                        color = all_c,
-                        alpha = all_alpha,
-                        lw = all_lw, zorder=4)
+    draw_all_paths(obj, x_vals, y_vals, ax)
+
+
+def draw_all_paths(obj, x_vals, y_vals, axs,
+                   all_ls='--', all_c='k', all_alpha=0.7, all_lw=0.5):
+    for k in range(1, obj.attr_num + 1):
+        for i in range(obj.num):
+            P = [x_vals[i],               y_vals[i]]
+            Q = [x_vals[(i + k) % obj.num], y_vals[(i + k) % obj.num]]
+            line_x, line_y = obj.line_fn(P, Q, *obj.line_kwargs)
+            axs.plot(line_x, line_y,
+                     ls=all_ls, color=all_c,
+                     alpha=all_alpha, lw=all_lw, zorder=4)
+
 
 # ── Token ──────────────────────────────────────────────────────────────────────
 
@@ -174,7 +175,8 @@ class GlyphToken:
 # ── Layout ─────────────────────────────────────────────────────────────────────
 
 def build_tokens(spec_strings: list[str],
-                 word_gap: float = 0.5) -> list[GlyphToken]:
+                 word_gap: float = 0.5,
+                 scale:    float = 1.0) -> list[GlyphToken]:
     tokens:    list[GlyphToken] = []
     prev_tok   = None
     prev_class = None
@@ -198,15 +200,17 @@ def build_tokens(spec_strings: list[str],
 
             elif is_lig:
                 rx, ry = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off)
-                lx, ly = _left_anchor_local(obj)
+                                             prev_tok.x_off, prev_tok.y_off,
+                                             scale)
+                lx, ly = _left_anchor_local(obj, scale)
                 x_off  = rx - lx
                 y_off  = ry - ly
 
             else:
                 rx, _  = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off)
-                lx, _  = _left_anchor_local(obj)
+                                             prev_tok.x_off, prev_tok.y_off,
+                                             scale)
+                lx, _  = _left_anchor_local(obj, scale)
                 x_off  = rx + word_gap - lx
                 y_off  = 0.0
 
@@ -226,12 +230,18 @@ def render_typewriter(
     line_height  : float = 3.5,
     gloss_offset : float = 1.8,
     gloss_size   : float = 7,
+    scale        : float = 1.0,
     line_color   : str   = 'maroon',
     dot_color    : str   = 'maroon',
     dot_size     : float = 20,
     linewidth    : float = 2,
 ):
-    tokens = build_tokens(spec_strings, word_gap=word_gap)
+    # scale spatial parameters proportionally to glyph size
+    scaled_gap          = word_gap    * scale
+    scaled_line_height  = line_height * scale
+    scaled_gloss_offset = gloss_offset * scale
+
+    tokens = build_tokens(spec_strings, word_gap=scaled_gap, scale=scale)
 
     # ── Line-break pass ───────────────────────────────────────────────────────
     lines        : list[list[GlyphToken]] = []
@@ -239,7 +249,7 @@ def render_typewriter(
     line_x_origin = 0.0
 
     for tok in tokens:
-        rx, _ = _right_anchor_world(tok.obj, tok.x_off, tok.y_off)
+        rx, _ = _right_anchor_world(tok.obj, tok.x_off, tok.y_off, scale)
         extent = rx - line_x_origin
 
         if current_line and extent > max_width:
@@ -255,12 +265,15 @@ def render_typewriter(
         lines.append(current_line)
 
     # ── Draw ──────────────────────────────────────────────────────────────────
-    fig, ax = plt.subplots(1, 1, figsize=(max_width, line_height * len(lines)))
+    fig, ax = plt.subplots(
+        1, 1,
+        figsize=(max_width, scaled_line_height * len(lines))
+    )
     ax.set_aspect('equal')
     ax.set_axis_off()
 
     for line_idx, line_tokens in enumerate(lines):
-        y_shift = -line_idx * line_height
+        y_shift = -line_idx * scaled_line_height
         x_shift = -line_tokens[0].x_off
 
         for tok in line_tokens:
@@ -268,15 +281,16 @@ def render_typewriter(
             y_world = tok.y_off + y_shift
 
             _draw_glyph(tok.obj, ax, x_world, y_world,
+                        scale=scale,
                         line_color=line_color,
                         dot_color=dot_color,
                         dot_size=dot_size,
                         linewidth=linewidth)
 
-            x_vals, _ = _get_world_points(tok.obj, x_world, y_world)
+            x_vals, _ = _get_world_points(tok.obj, x_world, y_world, scale)
             cx = (float(x_vals.min()) + float(x_vals.max())) / 2.0
 
-            ax.text(cx, y_world - gloss_offset, tok.gloss,
+            ax.text(cx, y_world - scaled_gloss_offset, tok.gloss,
                     ha='center', va='top',
                     fontsize=gloss_size, clip_on=False)
 
@@ -300,11 +314,13 @@ def main():
         help="Path to a .txt file with one spec per line"
     )
     parser.add_argument("--n",            type=int,   default=None)
-    parser.add_argument("--max-width",    type=float, default=24.0)
-    parser.add_argument("--word-gap",     type=float, default=0.55)
+    parser.add_argument("--max-width",    type=float, default=22.0)
+    parser.add_argument("--word-gap",     type=float, default=0.50)
     parser.add_argument("--line-height",  type=float, default=3.5)
     parser.add_argument("--gloss-offset", type=float, default=1.8)
-    parser.add_argument("--gloss-size",   type=float, default=8.0)
+    parser.add_argument("--gloss-size",   type=float, default=6.0)
+    parser.add_argument("--scale",        type=float, default=0.5,
+                        help="Uniform scale factor for glyph size (default: 1.0)")
     parser.add_argument("--line-color",   type=str,   default='maroon')
     parser.add_argument("--dot-color",    type=str,   default='maroon')
     parser.add_argument("--dot-size",     type=float, default=20.0)
@@ -324,6 +340,7 @@ def main():
         line_height  = args.line_height,
         gloss_offset = args.gloss_offset,
         gloss_size   = args.gloss_size,
+        scale        = args.scale,
         line_color   = args.line_color,
         dot_color    = args.dot_color,
         dot_size     = args.dot_size,

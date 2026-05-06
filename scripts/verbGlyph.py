@@ -56,6 +56,14 @@ class verbGlyph(glyph):
                 self.binary_array = np.bitwise_or(self.binary_array, fencoding)
                 self.glossing = word
             return self.binary_array
+        
+        # direct encoding hit — bare feature name, no parsing needed
+        if word in self.encodings:
+            fencoding = np.array(self.encodings[word]).reshape(self.attr_num, self.num)
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+            self.glossing = word
+            return self.binary_array
+
         features = []
         if '.' in word:
             word, conjugation = word.split('.', 1)
@@ -64,7 +72,7 @@ class verbGlyph(glyph):
             conjugation = "Inf"
             conj = ("Inf",0)
         
-        root = word.strip()
+        root = word.strip().title()
         if not root:
             raise ValueError(f"No root noun found in '{word}'")
         if root not in self.glyph_list: #eventaully, this should be capable of making glyphs from features? maybe?
@@ -112,6 +120,35 @@ class verbGlyph(glyph):
         
     
         return self.glossing
+    
+    def _getSampleCommands(self, group: str | None = None) -> list[str]:
+        """
+        Returns a list of all renderable specs.
+        If group is specified, only features belonging to that group are included.
+        - individual features (direct encoding keys, skipping null/sentinel)
+        - combined glyphs from glyph_list
+        """
+        commands = []
+
+        # individual features — filtered by group if specified
+        with open(self.text_file, newline="") as f:
+            reader = csv.DictReader(
+                (line for line in f if line.strip() and not line.lstrip().startswith("#")),
+                skipinitialspace=True
+            )
+            for row in reader:
+                feature = row["feature"].strip()
+                if feature.lower() in ("null", "glyphs"):
+                    continue
+                if group is None or row["group"].strip() == group:
+                    commands.append(feature)
+
+        # combined glyphs from glyph_list — no group concept, always included
+        if group is None:
+            for word in self.glyph_list:
+                commands.append(word)
+
+        return commands
 
 
 
@@ -122,8 +159,8 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands, 5, Flip=True)
+    commands = test_obj._getSampleCommands("root")
+    test_obj.demoprint(commands, 5)
 
 
 

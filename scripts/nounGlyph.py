@@ -68,6 +68,13 @@ class nounGlyph(glyph):
                 self.binary_array = np.bitwise_or(self.binary_array, fencoding)
                 self.glossing = word
             return self.binary_array
+        
+         # direct encoding hit — bare feature name, no parsing needed
+        if word in self.encodings:
+            fencoding = np.array(self.encodings[word]).reshape(self.attr_num, self.num)
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+            self.glossing = word
+            return self.binary_array
         features = []
         if ':' in word:
             det, word = word.split(':', 1)
@@ -114,7 +121,7 @@ class nounGlyph(glyph):
         elif case == "Dat":
             return_value += "to "
         elif case == "Inst":
-            return_value += "by/with "
+            return_value += "by "
         else: #case == "Nom" or case == "Acc":
             case = None
 
@@ -130,6 +137,35 @@ class nounGlyph(glyph):
         self.glossing = return_value
         return return_value
 
+    def _getSampleCommands(self, group: str | None = None) -> list[str]:
+        """
+        Returns a list of all renderable specs.
+        If group is specified, only features belonging to that group are included.
+        - individual features (direct encoding keys, skipping null/sentinel)
+        - combined glyphs from glyph_list
+        """
+        commands = []
+
+        # individual features — filtered by group if specified
+        with open(self.text_file, newline="") as f:
+            reader = csv.DictReader(
+                (line for line in f if line.strip() and not line.lstrip().startswith("#")),
+                skipinitialspace=True
+            )
+            for row in reader:
+                feature = row["feature"].strip()
+                if feature.lower() in ("null", "glyphs"):
+                    continue
+                if group is None or row["group"].strip() == group:
+                    commands.append(feature)
+
+        # combined glyphs from glyph_list — no group concept, always included
+        if group is None:
+            for word in self.glyph_list:
+                commands.append(word)
+
+        return commands
+
 if __name__ == "__main__":
     
     test_obj = nounGlyph(
@@ -138,10 +174,8 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
-   # print("running sample_list, not glyph_list")
-    #commands = test_obj.sample_list
-    test_obj.demoprint(commands,cell_size=2)
+    commands = test_obj._getSampleCommands("count")
+    test_obj.demoprint(commands,cell_size=1)
 
 
 
