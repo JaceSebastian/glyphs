@@ -9,8 +9,8 @@ Demon.Gen:5
 Thence:6
 Demon.Nom:5
 Swear.Pres:10
-Transit.Inf:10
-Reflexive:7
+Transit:10
+Itself:7
 Otherworld.Ablative:5
 Such That:6
 Demon.Nom:5
@@ -22,8 +22,8 @@ And:4
 Must Not:3
 Transit.Inf:10
 Any:4 + Thing:12
-REL:6
-Not:4
+That:6
+Is Not:4
 Know.Participle:10 + toAdv:7
 Gift.Past:10
 And:4

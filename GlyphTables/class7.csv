@@ -105,6 +105,8 @@ ActOf, -ment, 0, Nom, 0, toNoun,0
 
 #none of these should be printed in __main__
 
+Itself,Reflexive,0,null,0, Applicative, 0
+
 
 
 

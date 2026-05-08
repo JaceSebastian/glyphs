@@ -44,15 +44,8 @@ class adjGlyph(glyph):
                 self.glyph_list[word] = features
     
     def _getSampleCommands(self, group: str | None = None) -> list[str]:
-        """
-        Returns a list of all renderable specs.
-        If group is specified, only features belonging to that group are included.
-        - individual features (direct encoding keys, skipping null/sentinel)
-        - combined glyphs from glyph_list
-        """
+        #TODO, see if need to modify to just have in glyph.py
         commands = []
-
-        # individual features — filtered by group if specified
         with open(self.text_file, newline="") as f:
             reader = csv.DictReader(
                 (line for line in f if line.strip() and not line.lstrip().startswith("#")),
@@ -64,12 +57,9 @@ class adjGlyph(glyph):
                     break
                 if group is None or row["group"].strip() == group:
                     commands.append(feature)
-
-        # combined glyphs from glyph_list — no group concept, always included
         if group == "glyphs":
             for word in self.glyph_list:
                 commands.append(word)
-
         return commands
 
 

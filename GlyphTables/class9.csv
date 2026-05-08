@@ -84,8 +84,6 @@ quantity,quantity, 0, null,0,null,0
 good or right,quality,0,good,0,null,0
 best, quality, 0, good, 0, superlative, 0
 
-
-
 Right,quality,0,good,0,null,0
 Good,property,0,good,0,null,0
 Recent,age,0,good,0,null,0
