@@ -42,12 +42,42 @@ class adjGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
+    
+    def _getSampleCommands(self, group: str | None = None) -> list[str]:
+        """
+        Returns a list of all renderable specs.
+        If group is specified, only features belonging to that group are included.
+        - individual features (direct encoding keys, skipping null/sentinel)
+        - combined glyphs from glyph_list
+        """
+        commands = []
+
+        # individual features — filtered by group if specified
+        with open(self.text_file, newline="") as f:
+            reader = csv.DictReader(
+                (line for line in f if line.strip() and not line.lstrip().startswith("#")),
+                skipinitialspace=True
+            )
+            for row in reader:
+                feature = row["feature"].strip()
+                if feature.lower() in ("glyphs"):
+                    break
+                if group is None or row["group"].strip() == group:
+                    commands.append(feature)
+
+        # combined glyphs from glyph_list — no group concept, always included
+        if group == "glyphs":
+            for word in self.glyph_list:
+                commands.append(word)
+
+        return commands
 
 
 
 if __name__ == "__main__":
     test_obj = adjGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
-    commands = list(test_obj.glyph_list.keys())[:45]
+    #commands = list(test_obj.glyph_list.keys())[:45]
+    commands = test_obj._getSampleCommands()
     test_obj.demoprint(commands, cell_size=1)
 
 

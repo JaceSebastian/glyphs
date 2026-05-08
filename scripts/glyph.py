@@ -14,10 +14,7 @@ import math
 
 
 class glyph():
-    """unlike Spells, This is simply going to draw a glyph, given the literal information.
-        The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented
-
-
+    """The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented
     """
     
     def __init__(self,base_fn:Callable=bases.polygon,
@@ -68,7 +65,7 @@ class glyph():
             else:
                 idx = i
 
-            self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[idx], **draw_kwargs)
+            self.draw(savename=None, show_all_paths=True, annotate=True,show_name=False, axs=axes[idx], **draw_kwargs)
             #self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[i], **draw_kwargs)
             
             fig_width_inches = fig.get_size_inches()[0]
@@ -108,6 +105,12 @@ class glyph():
     def _getBinaryArray(self, word):
         self.glossing = word
         if(word not in self.glyph_list):
+            # direct encoding hit — bare feature name, no parsing needed
+            if word in self.encodings:
+                fencoding = np.array(self.encodings[word]).reshape(self.attr_num, self.num)
+                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+                self.glossing = word
+                return self.binary_array
             #raise KeyError("Not a Valid Glyph: ", word)
             print(f"Warning: '{word}' not found in glyph_list or encodings, skipping.")
             return self.binary_array
@@ -149,6 +152,9 @@ class glyph():
         Override to allow for line alinements to avoid confusion or overlap."""
 
         raise NotImplementedError
+
+    def cmapToList(num_attr:int, cmapname:str='gist_heat'):
+        raise NotImplementedError
       
     
     def draw(self,annotate = False,
@@ -157,7 +163,7 @@ class glyph():
                 output_dpi = 200,
                 axs = None,
                 dot_color = 'maroon',
-                cmap = 'summer',
+                cmap = 'gist_heat', #summer for glowing green
                 line_color = 'maroon',
                 dot_size = 30,
                 legend_fontsize = 8,
@@ -168,7 +174,7 @@ class glyph():
             assert self.attr_num== self.binary_array.shape[0]
             cmap = plt.get_cmap(cmap)
             if self.num:
-                dot_size = max(dot_size/(self.num/4), 6)
+                dot_size = max(dot_size/(self.num/6), 6)
             x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
             if axs is None:
@@ -213,15 +219,15 @@ class glyph():
             for i in range(self.attr_num):
                 k = i+1
                 if annotate:
-                    color = cmap(0.8*i/(self.attr_num))
-                    linewidth = 4- 3*i/self.attr_num
-                    dot_color
+                    color = cmap(.5*i/(self.attr_num) +.1)
+                    #linewidth = 4- 3*i/self.attr_num
+                    linewidth =  3#TODO dont HARDCODE widths here?
+                    
                 else:
                     color = line_color
                     linewidth = 2
                 labelled = False
                 for j,elem in enumerate(self.binary_array[i]):
-                    
                     if elem == 1:
                         #if element is 1
                         P = [x_vals[j],y_vals[j]]
@@ -233,8 +239,8 @@ class glyph():
                         # layered halo
                             halos = [
                                 (linewidth + 5, 0.05),  # widest, faintest
-                                (linewidth + 3, 0.1),
-                                (linewidth + 1, 0.2)
+                                (linewidth + 2, 0.1),
+                                (linewidth + .5, 0.3)
                             ]
 
                             line, = axs.plot(line_x, line_y, lw=linewidth, color=color, zorder=1)

@@ -81,7 +81,7 @@ class PronounGlyph(glyph):
             return_value += "from "
         elif case == "Dat":
             return_value += "to "
-        elif case == "Instr":
+        elif case == "Inst":
             return_value += "by "
         elif case == "Commitative":
             return_value += "with "

@@ -52,7 +52,7 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
+    commands = list(test_obj.glyph_list.keys())[:4]
     test_obj.demoprint(commands)
 
 

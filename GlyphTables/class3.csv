@@ -7,9 +7,10 @@ Omissible, Om, "[0,0,0]"
 Glyphs
 command, feature1, rotation1
 Must, Obligatory, 0
+Must Not, Forbidden, 0
 Ought, Omissible, 0
 May, Permissable, 0
-Must Not, Forbidden, 0
+
 Can't, Forbidden, 0
 Can Only, Obligatory, 0
 Should, Omissible, 0

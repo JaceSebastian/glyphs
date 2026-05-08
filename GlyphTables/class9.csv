@@ -37,7 +37,7 @@ small, root,"[[0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,0,1,0],[0,0,0,0,0,0,0,0,0],[0,0,0
 long or tall, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
 short, root,"[[0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,1,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
-thick or deep, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
+thickDeep, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 thin, root,"[[0,0,0,0,0,0,0,0,0],[1,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
 open, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,1,0,1,1,0,0,1],[0,0,0,0,0,0,0,0,0]]"
@@ -59,40 +59,7 @@ unhealthy, root,"[[0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,1,0,1],[0,0,0,0,0,0,0,0,0],[0
 Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 # 1:domain 2-3:root 4:category
-quality, quality, 0, null,0,null,0
-ability, ability, 0, null,0,null,0
-dimension, dimension, 0, null,0,null,0
-property, property,  0, null,0,null,0
-age,age, 0, null,0,null,0
-social,social,  0, null,0,null,0
-color,color,  0, null,0,null,0
 
-good, null,0, good, 0,adj,0
-bad, null, 0, bad, 0,adj,0
-well,null,0, healthy,0,adj,0
-ill,null,0, unhealthy,0, adj,0
-sharp,null,0, heavy or sharp, 0, adj,0
-soft,null,0, light or soft, 0, adj, 0
-clean,null,0, clean,0, adj,0
-dirty,null,0, dirty,0 , adj,0
-hot,null,0, hot, 0, adj,0
-cold,null,0,cold,  0, adj,0
-open,null,0,open,  0, adj,0
-closed,null,0,closed, 0, adj,0
-thick,null,0, thick or deep, 0, adj,0
-thin,null,0, thin,  0, adj,0
-tall,null,0, long or tall,  0, adj,0
-short,null,0, short, 0, adj,0
-willing,null,0, willing, 0, adj,0
-unwilling,null,0, unwilling, 0, adj,0
-full,null,0, full,  0, adj,0
-empty,null,0, empty, 0, adj,0
-clear,null,0, clear,  0, adj,0
-unclear,null,0, unclear, 0, adj,0
-true,null,0, true, 0, adj,0
-false,null,0,false, 0, adj,0
-big, null,0, big,0, adj,0
-small, null, 0, small,0,adj,0
 
 entire, quantity,0, full,0, null,0
 none (of), quantity,0, empty,0, null,0
@@ -111,159 +78,170 @@ few, quantity,0,small,0,null,0
 quickly, age, 0, hot, 0, adverb, 0
 superlative, null, 0, null,0, superlative,0
 bigger, dimension, 0, big, 0, comparative,0
-Noble, social, 0, big,0, predicate,0
+Noble, social, 0, big,0, reference,0
 quantity,quantity, 0, null,0,null,0
 
 good or right,quality,0,good,0,null,0
 best, quality, 0, good, 0, superlative, 0
-good or quality,property,0,good,0,null,0
-recent,age,0,good,0,null,0
-green,color,0,good,0,null,0
-
-bad or wrong,quality,0,bad,0,null,0
-poor or bad,property,0,bad,0,null,0
-outdated or dilapidated,age,0,bad,0,null,0
-red,color,0,bad,0,null,0
-willling,quality,0,willing,0,null,0
-aware,ability,0,willing,0,null,0
-smooth,dimension,0,willing,0,null,0
-soft or malleable,property,0,willing,0,null,0
-near,age,0,willing,0,null,0
-blessed or favored,social,0,willing,0,null,0
-beautiful,color,0,willing,0,null,0
-
-unwilling or resentful,quality,0,unwilling,0,null,0
-unconcious or unaware,ability,0,unwilling,0,null,0
-rough,dimension,0,unwilling,0,null,0
-hard,property,0,unwilling,0,null,0
-far,age,0,unwilling,0,null,0
-cursed,social,0,unwilling,0,null,0
-ugly,color,0,unwilling,0,null,0
-
-complete,quality,0,full,0,null,0
-full,property,0,full,0,null,0
-inside,age,0,full,0,null,0
-content or pleased,social,0,full,0,null,0
-white,color,0,full,0,null,0
-
-incomplete,quality,0,empty,0,null,0
-empty,property,0,empty,0,null,0
-outside,age,0,empty,0,null,0
-isolated or deprived,social,0,empty,0,null,0
-black,color,0,empty,0,null,0
-
-real,quality,0,true,0,null,0
-true,ability,0,true,0,null,0
-natural or raw,property,0,true,0,null,0
-same,color,0,true,0,null,0
-
-fake,quality,0,false,0,null,0
-false,ability,0,false,0,null,0
-artificial or processed,property,0,false,0,null,0
-different,color,0,false,0,null,0
-
-obvious,quality,0,clear,0,null,0
-deliberate,ability,0,clear,0,null,0
-tiny,dimension,0,clear,0,null,0
-clear or transparent,property,0,clear,0,null,0
-known,color,0,clear,0,null,0
-
-unclear or inferred,quality,0,unclear,0,null,0
-accidental,ability,0,unclear,0,null,0
-vast,dimension,0,unclear,0,null,0
-opaque or hidden,property,0,unclear,0,null,0
-ancient,age,0,unclear,0,null,0
-unknown,color,0,unclear,0,null,0
-
-great,quality,0,big,0,null,0
-big,dimension,0,big,0,null,0
-strong,property,0,big,0,null,0
-old,age,0,big,0,null,0
-royal or divine,social,0,big,0,null,0
-
-low or small,quality,0,small,0,null,0
-small,dimension,0,small,0,null,0
-weak,property,0,small,0,null,0
-young,age,0,small,0,null,0
-common or physical,social,0,small,0,null,0
-
-likely,ability,0,long or tall,0,null,0
-long or tall,dimension,0,long or tall,0,null,0
-#synomyms
-Established,social,0,long or tall,0,null,0
-Former,social,0,long or tall,0,null,0
-
-unlikely,ability,0,short,0,null,0
-short,dimension,0,short,0,null,0
-novel or unproven,social,0,short,0,null,0
-
-safe,quality,0,thick or deep,0,null,0
-allowed,ability,0,thick or deep,0,null,0
-thick or deep,dimension,0,thick or deep,0,null,0
-gradual,age,0,thick or deep,0,null,0
-
-dangerous,quality,0,thin,0,null,0
-forced,ability,0,thin,0,null,0
-thin,dimension,0,thin,0,null,0
-sudden,age,0,thin,0,null,0
-
-useful,quality,0,open,0,null,0
-free,ability,0,open,0,null,0
-open,dimension,0,open,0,null,0
-new,age,0,open,0,null,0
-fresh,age,0,open,0,null,0
-unfamiliar?,social,0,open,0,null,0
-
-harmful,quality,0,closed,0,null,0
-bound,ability,0,closed,0,null,0
-closed,property,0,closed,0,null,0
-used or aged,age,0,closed,0,null,0
-loyal,social,0,closed,0,null,0
-
-hot,property,0,hot,0,null,0
-fast,age,0,hot,0,null,0
-angry,social,0,hot,0,null,0
-bright,color,0,hot,0,null,0
-
-cold,property,0,cold,0,null,0
-slow,age,0,cold,0,null,0
-sad,social,0,cold,0,null,0
-dull,color,0,cold,0,null,0
-
-pure,quality,0,clean,0,null,0
-clean,property,0,clean,0,null,0
-mortal or human,social,0,clean,0,null,0
-light,color,0,clean,0,null,0
-
-corrupt or tainted or mixed,quality,0,dirty,0,null,0
-dirty,property,0,dirty,0,null,0
-demonic,social,0,dirty,0,null,0
-dark,color,0,dirty,0,null,0
-
-important,quality,0,heavy or sharp,0,null,0
-difficult,ability,0,heavy or sharp,0,null,0
-heavy or sharp,property,0,heavy or sharp,0,null,0
-defined,color,0,heavy or sharp,0,null,0
-
-frivolous,quality,0,light or soft,0,null,0
-easy,ability,0,light or soft,0,null,0
-light or soft,property,0,light or soft,0,null,0
-fuzzy or shadowed,color,0,light or soft,0,null,0
-
-beneficial,quality,0,healthy,0,null,0
-alive,ability,0,healthy,0,null,0
-healthy,property,0,healthy,0,null,0
-kind or magnanimous,social,0,healthy,0,null,0
-blue,color,0,healthy,0,null,0
-
-harmful,quality,0,unhealthy,0,null,0
-dead,ability,0,unhealthy,0,null,0
-unhealthy or ill,property,0,unhealthy,0,null,0
-cruel,social,0,unhealthy,0,null,0
-yellow,color,0,unhealthy,0,null,0
 
 
 
+Right,quality,0,good,0,null,0
+Good,property,0,good,0,null,0
+Recent,age,0,good,0,null,0
+Likely,social,0,good,0,adverb,0
+Green,color,0,good,0,null,0
 
+Wrong,quality,0,bad,0,null,0
+Bad,property,0,bad,0,null,0
+Outdated,age,0,bad,0,null,0
+Unlikely,social,0,bad,0,adverb,0
+Red,color,0,bad,0,null,0
+
+Willing,quality,0,willing,0,null,0
+Aware,ability,0,willing,0,null,0
+Soft or malleable,property,0,willing,0,null,0
+Near or nearly,age,0,willing,0,null,0
+Blessed or favored,social,0,willing,0,null,0
+Beautiful,color,0,willing,0,null,0
+
+Unwilling or resentful,quality,0,unwilling,0,null,0
+Unconscious or unaware,ability,0,unwilling,0,null,0
+Hard,property,0,unwilling,0,null,0
+Far or hardly,age,0,unwilling,0,null,0
+Cursed,social,0,unwilling,0,null,0
+Ugly,color,0,unwilling,0,null,0
+
+Complete,quality,0,full,0,null,0
+Wide,dimension,0,full,0,null,0
+Full,property,0,full,0,null,0
+Inside,age,0,full,0,null,0
+Content or pleased,social,0,full,0,null,0
+White,color,0,full,0,null,0
+
+Incomplete,quality,0,empty,0,null,0
+Narrow,dimension,0,empty,0,null,0
+Empty,property,0,empty,0,null,0
+Outside,age,0,empty,0,null,0
+Isolated or deprived,social,0,empty,0,null,0
+Black,color,0,empty,0,null,0
+
+Obvious,quality,0,clear,0,null,0
+Deliberate,ability,0,clear,0,null,0
+Tiny,dimension,0,clear,0,null,0
+Clear or transparent,property,0,clear,0,null,0
+Aforementioned or already,age,0,clear,0,null,0
+Known,social,0,clear,0,null,0
+Same or identical,color,0,clear,0,null,0
+
+Unclear or inferred,quality,0,unclear,0,null,0
+Accidental,ability,0,unclear,0,null,0
+Vast,dimension,0,unclear,0,null,0
+Opaque or hidden,property,0,unclear,0,null,0
+Subsequent,age,0,unclear,0,null,0
+Unknown,social,0,unclear,0,null,0
+Different,color,0,unclear,0,null,0
+
+Strong or great,quality,0,big,0,null,0
+Big,dimension,0,big,0,null,0
+Smooth,property,0,big,0,null,0
+Former or previous or prior or early,age,0,big,0,null,0
+Royal or divine,social,0,big,0,null,0
+
+Weak or mean,quality,0,small,0,null,0
+Small or little,dimension,0,small,0,null,0
+Rough,property,0,small,0,null,0
+Later or following or future or late,age,0,small,0,null,0
+Common or physical,social,0,small,0,null,0
+
+True,quality,0,long or tall,0,null,0
+Long or tall,dimension,0,long or tall,0,null,0
+Natural or raw,property,0,long or tall,0,null,0
+Old,age,0,long or tall,0,null,0
+Real,social,0,long or tall,0,null,0
+
+False,quality,0,short,0,null,0
+Short,dimension,0,short,0,null,0
+Artificial or processed,property,0,short,0,null,0
+Young,age,0,short,0,null,0
+Fake,social,0,short,0,null,0
+
+Safe,quality,0,thickDeep,0,null,0
+Allowed,ability,0,thickDeep,0,null,0
+Thick or deep,dimension,0,thickDeep,0,null,0
+Gradual,age,0,thickDeep,0,null,0
+
+Dangerous,quality,0,thin,0,null,0
+Forced,ability,0,thin,0,null,0
+Thin,dimension,0,thin,0,null,0
+Sudden,age,0,thin,0,null,0
+
+
+Useful,quality,0,open,0,null,0
+Free,ability,0,open,0,null,0
+Open,property,0,open,0,null,0
+New or fresh,age,0,open,0,null,0
+Unfamiliar,social,0,open,0,null,0
+
+Harmful,quality,0,closed,0,null,0
+Bound,ability,0,closed,0,null,0
+Closed,property,0,closed,0,null,0
+Used or worn,age,0,closed,0,null,0
+Loyal,social,0,closed,0,null,0
+
+
+Hot,property,0,hot,0,null,0
+Fast or quick,age,0,hot,0,null,0
+Angry,social,0,hot,0,null,0
+Bright,color,0,hot,0,null,0
+
+Cold,property,0,cold,0,null,0
+Slow,age,0,cold,0,null,0
+Sad,social,0,cold,0,null,0
+Dull,color,0,cold,0,null,0
+
+
+Pure,quality,0,clean,0,null,0
+Clean,property,0,clean,0,null,0
+Mortal or human,social,0,clean,0,null,0
+Light,color,0,clean,0,null,0
+
+
+Corrupt or tainted or mixed,quality,0,dirty,0,null,0
+Dirty,property,0,dirty,0,null,0
+Demonic,social,0,dirty,0,null,0
+Dark,color,0,dirty,0,null,0
+
+
+Important,quality,0,heavy or sharp,0,null,0
+Difficult,ability,0,heavy or sharp,0,null,0
+Angular,dimension,0,heavy or sharp,0,null,0
+Heavy or sharp,property,0,heavy or sharp,0,null,0
+Established,age,0,heavy or sharp,0,null,0
+Defined,color,0,heavy or sharp,0,null,0
+
+
+Frivolous,quality,0,light or soft,0,null,0
+Easy,ability,0,light or soft,0,null,0
+Curved,dimension,0,light or soft,0,null,0
+Light or soft,property,0,light or soft,0,null,0
+Novel or unproven,age,0,light or soft,0,null,0
+Fuzzy or shadowed,color,0,light or soft,0,null,0
+
+
+Beneficial,quality,0,healthy,0,null,0
+Alive,ability,0,healthy,0,null,0
+Symmetrical,dimension,0,healthy,0,null,0
+Healthy,property,0,healthy,0,null,0
+Kind or magnanimous,social,0,healthy,0,null,0
+Blue,color,0,healthy,0,null,0
+
+
+Harmful,quality,0,unhealthy,0,null,0
+Dead,ability,0,unhealthy,0,null,0
+Asymmetrical or irregular,dimension,0,unhealthy,0,null,0
+Unhealthy or ill,property,0,unhealthy,0,null,0
+Cruel or selfish,social,0,unhealthy,0,null,0
+Yellow,color,0,unhealthy,0,null,0
 
 

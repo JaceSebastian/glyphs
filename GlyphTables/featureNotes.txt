@@ -255,13 +255,11 @@ Class Twelve: Nouns
     - definite sg
     - definite Plural
     - unknown number (unmarked TODO)
-    -mass: unmarked?
+    - Each: is used to create the "Per Noun" prepostional phrase.
+    ? mass: unmarked????
 
-    ??No separate demonstrative pronouns - Demonstratives feature is implicit
-        -The (unmarked)
-        -This/These
-        -That/those
-        -a/some
+    No separate demonstrative pronouns - Demonstratives feature is implicit, and no deixis marking near/far for it.
+
 - Semantic Fields
     -Places/domains/ HERE AND THERE
     -times

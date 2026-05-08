@@ -135,8 +135,8 @@ class NumeralGlyph(glyph):
 if __name__ == "__main__":
     test_obj = NumeralGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands, 8)
+    commands = list(test_obj.glyph_list.keys())[:24]
+    test_obj.demoprint(commands, cols=4)
 
 
 

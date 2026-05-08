@@ -26,7 +26,7 @@ Is, IS, 0
 Isn't, ISNT, 0
 With, Positive Constraint,0
 Without, Negative Constraint,0
-Not, UN,0
+Not, NO,0
 Un, UN, 0
 And, AND, 0
 Or, OR, 0
@@ -45,7 +45,7 @@ Wasn't, ISNT,0
 
 
 
-No, NO, 0
+No, UN, 0
 Does Not, NO,0
 Dosn't, NO,0
 Do Not, NO,0

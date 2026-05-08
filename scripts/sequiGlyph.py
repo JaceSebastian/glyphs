@@ -59,6 +59,37 @@ class sequiGlyph(glyph):
         else:
             idx = right_candidates[np.argmin(y_vals[right_candidates])]  # lower-right
         return (float(x_vals[idx]), float(y_vals[idx]-30))
+    
+
+
+    def _getSampleCommands(self, group: str | None = None) -> list[str]:
+        """
+        Returns a list of all renderable specs.
+        If group is specified, only features belonging to that group are included.
+        - individual features (direct encoding keys, skipping null/sentinel)
+        - combined glyphs from glyph_list
+        """
+        commands = []
+
+        # individual features — filtered by group if specified
+        with open(self.text_file, newline="") as f:
+            reader = csv.DictReader(
+                (line for line in f if line.strip() and not line.lstrip().startswith("#")),
+                skipinitialspace=True
+            )
+            for row in reader:
+                if row["feature"] == "Glyphs":  # sentinel keyword
+                    break
+                feature = row["feature"].strip()
+                if group is None or row["group"].strip() == group:
+                    commands.append(feature)
+
+        # combined glyphs from glyph_list — no group concept, always included
+        if group == "glyphs":
+            for word in list(self.glyph_list)[:40]:
+                commands.append(word)
+
+        return commands
 
 
 if __name__ == "__main__":
@@ -68,8 +99,9 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
-    test_obj.demoprint(commands, Flip=False)
+    #commands = list(test_obj.glyph_list.keys())
+    commands = test_obj._getSampleCommands("glyphs")
+    test_obj.demoprint(commands, cols=5, cell_size=1)
 
 
 
