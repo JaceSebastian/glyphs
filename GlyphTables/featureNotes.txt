@@ -247,7 +247,7 @@ Class Twelve: Nouns
 
 - Case
     -same as pronouns
-    -Ablative todo add.
+    -And with an adj "case" that converts noun to the quality-of roughly magic-magical
 - Count: Number/mass/Partitive
     - def sg
     - indef sg 

@@ -188,11 +188,13 @@ Used or worn,age,0,closed,0,null,0
 Loyal,social,0,closed,0,null,0
 
 
+Active, quality,0, hot, 0, null,0
 Hot,property,0,hot,0,null,0
 Fast or quick,age,0,hot,0,null,0
 Angry,social,0,hot,0,null,0
 Bright,color,0,hot,0,null,0
 
+Inactive, quality,0, cold,0,null,0
 Cold,property,0,cold,0,null,0
 Slow,age,0,cold,0,null,0
 Sad,social,0,cold,0,null,0

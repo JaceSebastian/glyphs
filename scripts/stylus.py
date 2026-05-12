@@ -54,7 +54,7 @@ def parse_feature_token(token: str) -> tuple[str, int]:
 
 def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
     """
-    Parse a single typewriter spec string into (lookup, class_index).
+    Parse a single spec string into (lookup, class_index).
 
     Keyword:  'PA:11'            → ('PA', 11)
     Features: '[p, long a]:11'   → ([('p',0), ('long a',0)], 11)

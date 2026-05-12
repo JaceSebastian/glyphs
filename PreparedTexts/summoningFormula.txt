@@ -1,5 +1,11 @@
 #This summoner invokes the demon X by name and commits up to XX percent of the summoner’s stored vitality 
 #to compel the demon to transit himself hence from the otherworld such that the demon ought be held by the circle.
+
+#This summoner invokes the demon XXXXXXXX by True Name 
+# and simultaneously commits up to XX percent of the summoner’s stored vitality 
+#In order to compel the demon to transit itself hence
+#such that the demon ought be held by the circle until it accepts this contract as written 
+#or until the summoner’s committed vitality is consumed by the circle and simultaneously the demon must transit itself to the otherworld
 Summoner.Nom:5
 Invoke.Pres:10
 Demon.Acc:5
@@ -13,17 +19,36 @@ LEQ:NaN.Percent:8
 Established:9
 Vitality.Acc:5
 Summoner.Gen:5
-In Order To:6
+In Order:6
 Compel.Inf:10
 Demon.Nom:5
 Transit.Inf:10
 Reflexive:7
 #Hence: to this place to the circle Not the sequi hence???
-The:Circle.Loc:12
+The:Summoning Circle.Loc:12
 That (Archaic):6
 Demon.Nom:5
 Ought:3
-Hold.Passive Perfect:10
-The:Circle.Inst:12
-Period:1
+Hold.Passive:10
+The:Summoning Circle.Inst:12
+Until:6
+Demon.Nom:5
+Accept.Pres:10
+The:Contract.Acc:12
+As:6
+IS:4
+Write.Past Participle:10
+OR:4
+Until:6
+The:Summoning Circle.Nom:12
+Consume.Pres:10
+Commit.Past Participle:10
+Vitality.Acc:5
+And Simultaineously:6
+Demon.Nom:5
+Must:3
+Transit:10
+Itself:7
+Otherworld.Loc:5
+
 

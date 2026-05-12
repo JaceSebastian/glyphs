@@ -174,7 +174,7 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = test_obj._getSampleCommands("count")
+    commands = test_obj._getSampleCommands("case")
     test_obj.demoprint(commands,cell_size=1)
 
 

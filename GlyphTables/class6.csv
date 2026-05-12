@@ -43,7 +43,7 @@ Also,null, 0, comparison, 0, null, 0
 At,prior, 0, comparison,2, null, 0
 And Simultaineously,posterior, 0, comparison,0, null, 0
 As,simultaineous, 0, comparison,2, null, 0
-As If,hypothetical, 0, comparison, 2, null, 0
+As Far As,hypothetical, 0, comparison, 2, null, 0
 
 For, null,0, null, 0, purpose, 0
 In Order, prior, 0, null, 0, purpose, 0
@@ -69,3 +69,4 @@ Yet,null, 0, exception, 0, null, 0
 Hence,posterior, 0, null, 0, result, 0
 As Soon As,hypothetical, 0, null, 0, result, 0
 Cause, prior, 3, null, 0, cause, 3
+Whilst,simultaineous, 0, condition,0, null, 0

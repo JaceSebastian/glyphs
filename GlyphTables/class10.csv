@@ -38,6 +38,11 @@ reverse, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,
 send away, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0],[1,1,1,0,1,0,0,0,0,0],[0,0,0,1,1,0,0,0,0,0]]"
 step over, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,1,0],[0,1,0,0,0,0,0,1,0,0],[0,1,0,0,0,0,1,0,0,0]]"
 yield, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,1,0,0],[1,0,0,1,1,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0]]"
+see, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,1,1,0,0,1,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1,1]]"
+protect,root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,1,1,1,1]]"
+act, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,0,0,0,0,1,1],[0,0,1,0,1,1,0,1,0,0],[0,0,0,0,0,0,0,0,0,0]]"
+eat, root,  "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,0,0,0,0,0,0],[1,1,1,0,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,0]]"
+imprint, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,1,1,0,0,0]]"
 #unfilled roots:
 
 
@@ -46,26 +51,36 @@ Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 #command, conjugation, 0, semantic group, 0, root(last 3 features), 0
 
+Act, null,0, movement,0, act,0
+
 Declare, null,0, speech, 0, call,0
 Invoke, null,0, spellcasting, 0, call, 0,
 Swear, null,0, oath, 0, call,0
+
+Die, null,0, action,0,die,0
+
+Consume, null,0, vitality, 0, eat,0
 
 Commit, null,0, oath, 0, hold,0, 
 Hold, null,0, movement, 0, hold, 0, 
 Know, null,0,knowledge,0, hold,0
 Use, null,0, action,0, hold,0
 Store, null,0, vitality,0, hold,0
+Maintain, null,0, service,0, hold,0
 
 Transit,null,0, existance,0, step over,0,
 Cross, null,0, movement,0, step over,0
 
 Follow, null,0, action, 0, follow,0
 Obey, null,0, oath,0, follow,0
+Infer, null,0, knowledge, 0,follow,0
 
 Banish, null,0, spellcasting,0, send away,0
 
 Accumulate, null,0, vitality,0, carry over,0
 Translate, null,0, speech,0, carry over, 0
+
+Write, null,0, speech,0, imprint,0
 
 Gift, null,0,service,0, yield, 0
 Heed, null,0, speech, 0, yield,0
@@ -76,6 +91,11 @@ Command, null,0, oath, 0, force,0
 Compel, null,0, spellcasting,0, force,0,
 
 Contradict, null,0, speech,0, reverse,0
+
+Perceive, null,0, knowledge, 0, see,0
+
+Protect, null,0, service,0, protect,0
+Accept, null,0, oath,0, protect,0
 
 
 
