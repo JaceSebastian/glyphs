@@ -9,24 +9,24 @@ Answer:10
 ThePL:Question.Acc:12
 Summoner.Gen:5
 True.Adverb:9
-AND:4
+And:4
 Relevant.Adverb:9
-AND:4
+And:4
 Information:12 + toAdv:7
-AND:4
+And:4
 Understand.Adverb:10 + ABLE:7
-AND
-Clear.adverb:9
+And:4
+Clear.Adverb:9
 Period:1
 
 Demon.Nom:5
 Swear.Pres:10
-NOT:4
+Never:9
 speak.Inf:10
-AND:4
-NOT:4
+Or:4
 Write.Inf:10
-AND:4
-NOT:4
+Or:4
 Gesture.Inf:10
-unknownnumber.Lie
+NoNumber:Lie.Acc:12
+Summoner.Loc:5
+Period:1

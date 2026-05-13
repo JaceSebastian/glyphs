@@ -1,18 +1,18 @@
 feature, call, encoding
-Null, Null, "[0,0,0]"
-Obligatory, Ob, "[0,1,1]"
-Permissable, P, "[0,0,1]"
-Forbidden, F, "[1,1,1]"
-Omissible, Om, "[0,0,0]"
+null, _, "[0,0,0]"
+obligatory, Ob, "[0,1,1]"
+permissable, P, "[0,0,1]"
+forbidden, F, "[1,1,1]"
+omissible, Om, "[0,0,0]"
 Glyphs
 command, feature1, rotation1
-Must, Obligatory, 0
-Must Not, Forbidden, 0
-Ought, Omissible, 0
-May, Permissable, 0
+Must, obligatory, 0
+Must Not, forbidden, 0
+Ought, omissible, 0
+May, permissable, 0
 
-Can't, Forbidden, 0
-Can Only, Obligatory, 0
-Should, Omissible, 0
-Might, Permissable,0
+Can't, forbidden, 0
+Can Only, obligatory, 0
+Should, omissible, 0
+Might, permissable,0
 

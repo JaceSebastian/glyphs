@@ -7,9 +7,9 @@ toVerb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,1,0,0,1]]"
 toAdj, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
 noChange, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
 #free morpheme is null.
-FreeMorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-#BoundMorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
-Applicative, target, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,1,1,1,1,1,1]]"
+freemorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+#boundmorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
+applicative, target, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,1,1,1,1,1,1]]"
 
 
 #############k=2 (case/conjugation)
@@ -39,6 +39,7 @@ Passive,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
 Comitative,case,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
 Passive Perfect,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
 
+#can be used for someting in future
 Undefined, _, "[[0,0,0,0,0,0,0],[1,0,0,1,0,1,0],[0,0,0,0,0,0,0]]"
 Undefined2, _, "[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
 
@@ -59,7 +60,7 @@ Gerundive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
 
 #####   k=1
 #Appositions stack on nouns, so need to be separate from case
-Reflexive,apposition,"[[1,0,1,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+reflexive,apposition,"[[1,0,1,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #Causative,apposition,
 #Benefactive,apposition,
 #Malefactive,apposition,
@@ -88,7 +89,7 @@ toNoun, null,0, null,0, toNoun,0
 toVerb, null,0, null,0, toVerb,0
 toAdj, null,0, null,0, toAdj,0
 noChange, null,0, null,0, noChange,0
-FreeMorpheme, null,0, null,0, FreeMorpheme,0
+FreeMorpheme, null,0, null,0, freemorpheme,0
 #BoundMorpheme, null,0, null,0, BoundMorpheme,0
 Nom/Pres, null,0, Nom, 0, null,0
 Acc/Past, null,0, Acc, 0, null,0
@@ -99,13 +100,13 @@ Ablatiave/Past Perfect, null,0, Ablative, 0, null,0
 Instr/Passive, null,0, Inst, 0, null,0
 Comitative/Passive Perfect, null,0, Comitative, 0, null,0
 Infinitive/Plural, null,0, Infinitive, 0, null,0
-Reflexive, Reflexive,0,null,0, Applicative, 0
+Reflexive, reflexive,0,null,0, Applicative, 0
 ActOf, -ment, 0, Nom, 0, toNoun,0
 
 
 #none of these should be printed in __main__
 
-Itself,Reflexive,0,null,0, Applicative, 0
+Itself,reflexive,0,null,0, applicative, 0
 
 
 

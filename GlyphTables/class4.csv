@@ -1,55 +1,55 @@
 feature, group, encoding
-NULL, Unary, "[[0,0,0,0],[0,0,0,0]]"
-IS, Binary, "[[1,0,1,0],[0,0,0,0]]"
-ISNT, Binary, "[[1,0,1,0],[0,1,0,0]]"
+null, Unary, "[[0,0,0,0],[0,0,0,0]]"
+is, Unary, "[[1,0,1,0],[0,0,0,0]]"
+isnt, Unary, "[[1,0,1,0],[0,1,0,0]]"
 
-Positive Constraint, Unary,"[[1,1,1,1],[0,0,0,0]]"
-Negative Constraint, Unary,"[[1,1,1,1],[1,0,0,0]]"
+positive constraint, Unary,"[[1,1,1,1],[0,0,0,0]]"
+negative constraint, Unary,"[[1,1,1,1],[1,0,0,0]]"
 
-NO, Unary,"[[0,0,1,1],[0,0,1,0]]"
-UN,Unary,  "[[0,0,0,0],[1,1,0,0]]"
+no, Unary,"[[0,0,1,1],[0,0,1,0]]"
+un,Unary,  "[[0,0,0,0],[1,1,0,0]]"
 
-AND, Binary,"[[1,1,0,1],[0,0,0,0]]"
-OR, Binary,"[[1,0,0,0],[1,1,0,0]]"
+and, Binary,"[[1,1,0,1],[0,0,0,0]]"
+or, Binary,"[[1,0,0,0],[1,1,0,0]]"
 
-Any, Unary, "[[0,0,1,0],[0,1,0,0]]"
-Only, Unary,"[[1,0,1,0],[1,1,0,0]]"
+any, Unary, "[[0,0,1,0],[0,1,0,0]]"
+only, Unary,"[[1,0,1,0],[1,1,0,0]]"
 
-None, Unary,"[[0,0,0,0],[0,0,0,0]]"
-All, Unary,"[[1,1,1,1],[1,1,0,0]]"
+none, Binary,"[[0,0,0,0],[0,0,0,0]]"
+all, Binary,"[[1,1,1,1],[1,1,0,0]]"
 
 
 
 Glyphs
 command, feature1, rotation1
-Is, IS, 0
-Isn't, ISNT, 0
-With, Positive Constraint,0
-Without, Negative Constraint,0
-Not, NO,0
-Un, UN, 0
-And, AND, 0
-Or, OR, 0
-Any, Any,0
-Only, Only,0
-None, None,0
-All, All,0
+Is, is, 0
+Isn't, isnt, 0
+With, positive constraint,0
+Without, negative constraint,0
+Not, no,0
+Un, un, 0
+And, and, 0
+Or, or, 0
+Any, any,0
+Only, only,0
+None, none,0
+All, all,0
 
-Are, IS, 0
-Was, IS,0
-Were, IS,0
+Are, is, 0
+Was, is,0
+Were, is,0
 
-Aren't, ISNT,0
-Weren't, ISNT,0
-Wasn't, ISNT,0
+Aren't, isnt,0
+Weren't, isnt,0
+Wasn't, isnt,0
 
 
 
-No, UN, 0
-Does Not, NO,0
-Dosn't, NO,0
-Do Not, NO,0
-Don't, NO,0
+No, un, 0
+Does Not, no,0
+Dosn't, no,0
+Do Not, no,0
+Don't, no,0
 
 
 

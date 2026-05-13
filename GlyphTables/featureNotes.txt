@@ -192,6 +192,8 @@ TODO: Make inf unmarked, gerundive marked!
         - follow+oath is following clauses in bargain, not physically following, which helps with demon's trying to misinterpret
 
 Class Eleven: Syllabary
+Note that this should be remade so that consonants are the root word, so it goes structure:consonant.vowel:11 where consonants and vowels are glyphs that can be combined.
+later will add syllable glyphs if rotation matters.
 - Syllable Structure (5)
     - CV (unmarked)
     - C (coda of previous syllable)

@@ -102,23 +102,36 @@ class glyph():
                 binary_encoding[i] = np.roll(binary_encoding[i], rotation)
         return binary_encoding
     
+    def _readFeatureList(self,word):
+        # Parse dot-separated feature string: fone4.ftwo1.fthree
+        features = []
+        for part in word.split('.'):
+            if not part:
+                continue
+            #todo, figure out why regex isn't working here
+            i = len(part)
+            while i > 1 and part[i-1].isdigit():
+                i -= 1
+            feature_name = part[:i]
+            rotation = int(part[i:]) if part[i:] else 0
+            features.append((feature_name, rotation))
+        return features if features else None
+
+
     def _getBinaryArray(self, word):
         self.glossing = word
-        if(word not in self.glyph_list):
-            # direct encoding hit — bare feature name, no parsing needed
-            if word in self.encodings:
-                fencoding = np.array(self.encodings[word]).reshape(self.attr_num, self.num)
-                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
-                self.glossing = word
-                return self.binary_array
-            #raise KeyError("Not a Valid Glyph: ", word)
-            print(f"Warning: '{word}' not found in glyph_list or encodings, skipping.")
-            return self.binary_array
-        for feature_name, rotation in self.glyph_list[word]:
-                fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
-                fencoding = self.rotateGlyph(fencoding, rotation) 
-                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+        if(word in self.glyph_list):
+            feats = self.glyph_list[word]
+        else:
+            feats = self._readFeatureList(word)
+        for feature_name, rotation in feats:
+            if(feature_name not in self.encodings):
+                  print(f"Warning: '{feature_name}' not found encodings for class {self.num}, skipping.")
+            fencoding = np.array(self.encodings[feature_name.lower()]).reshape(self.attr_num, self.num)
+            fencoding = self.rotateGlyph(fencoding, rotation) 
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
         return self.binary_array
+        
     
     def _makeGlossing(self, det=None, root="", case=None):
         """This should always be overwritten for glyph class"""
@@ -127,6 +140,7 @@ class glyph():
     def left_anchor(self, parity=0) -> tuple[float, float]:
         """Point where an incoming glyph connects to me."""
         x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+        raise NotImplementedError
         if len(x_vals) == 0:
             raise ValueError(
                 f"{self.__class__.__name__}.right_anchor(): base_fn returned empty arrays"
@@ -138,6 +152,7 @@ class glyph():
     def right_anchor(self, parity=0) -> tuple[float, float]:
         """Point where I connect to an outgoing glyph."""
         x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+        raise NotImplementedError
     
         if len(x_vals) == 0:
             raise ValueError(

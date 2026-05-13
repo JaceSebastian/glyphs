@@ -145,7 +145,6 @@ class nounGlyph(glyph):
         - combined glyphs from glyph_list
         """
         commands = []
-
         # individual features — filtered by group if specified
         with open(self.text_file, newline="") as f:
             reader = csv.DictReader(

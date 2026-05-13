@@ -34,10 +34,10 @@ unclear, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1,0],[0,0,0,0,0,0,0,0,0],[0,0
 big, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,1,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0]]"
 small, root,"[[0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,0,1,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
-long or tall, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
+tall_long, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,0,1,0,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
 short, root,"[[0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,1,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
-thickDeep, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
+thick_deep, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 thin, root,"[[0,0,0,0,0,0,0,0,0],[1,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
 open, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,0,1,0,1,1,0,0,1],[0,0,0,0,0,0,0,0,0]]"
@@ -49,8 +49,8 @@ cold, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,
 clean, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[1,1,0,1,1,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
 dirty, root,"[[0,0,0,0,0,0,0,0,0],[1,0,1,1,0,1,1,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
-heavy or sharp, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,1,1,0,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
-light or soft, root,"[[0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
+sharp_heavy, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,1,1,0,0,1,1,0],[0,0,0,0,0,0,0,0,0]]"
+soft_light, root,"[[0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
 
 healthy, root,"[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,1,0,1,0,1,0,0,1],[0,0,0,0,0,0,0,0,0]]"
 unhealthy, root,"[[0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,1,0,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]"
@@ -59,21 +59,17 @@ unhealthy, root,"[[0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,1,0,1],[0,0,0,0,0,0,0,0,0],[0
 Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 # 1:domain 2-3:root 4:category
-
-
-entire, quantity,0, full,0, null,0
-none (of), quantity,0, empty,0, null,0
-always, quantity,0, full,0, adverb,0
-never,quantity,0, empty,0, adverb,0
-usually,quantity,0, big,0, adverb,0
-sometimes, quantity,0, unclear,0,adverb,0
-rarely,quantity,0,small,0,adverb,0
-most,quantity,0,big,0, null,0
-many,quantity,0,unclear,0,null,0
-few, quantity,0,small,0,null,0
-
-
-#BREAK This is where preview/demo cuts off, roughly.
+Entire, quantity,0, full,0, null,0
+Entirely, quantity,0,full,0, alverb,0
+None (of), quantity,0, empty,0, null,0
+Always, quantity,0, full,0, adverb,0
+Never,quantity,0, empty,0, adverb,0
+Usually,quantity,0, big,0, adverb,0
+Sometimes, quantity,0, unclear,0,adverb,0
+Rarely,quantity,0,small,0,adverb,0
+Most,quantity,0,big,0, null,0
+Many,quantity,0,unclear,0,null,0
+Few, quantity,0,small,0,null,0
 
 quickly, age, 0, hot, 0, adverb, 0
 superlative, null, 0, null,0, superlative,0
@@ -152,11 +148,11 @@ Rough,property,0,small,0,null,0
 Later or following or future or late,age,0,small,0,null,0
 Common or physical,social,0,small,0,null,0
 
-True,quality,0,long or tall,0,null,0
-Long or tall,dimension,0,long or tall,0,null,0
-Natural or raw,property,0,long or tall,0,null,0
-Old,age,0,long or tall,0,null,0
-Real,social,0,long or tall,0,null,0
+True,quality,0,tall_long,0,null,0
+Long or tall,dimension,0,tall_long,0,null,0
+Natural or raw,property,0,tall_long,0,null,0
+Old,age,0,tall_long,0,null,0
+Real,social,0,tall_long,0,null,0
 
 False,quality,0,short,0,null,0
 Short,dimension,0,short,0,null,0
@@ -164,10 +160,10 @@ Artificial or processed,property,0,short,0,null,0
 Young,age,0,short,0,null,0
 Fake,social,0,short,0,null,0
 
-Safe,quality,0,thickDeep,0,null,0
-Allowed,ability,0,thickDeep,0,null,0
-Thick or deep,dimension,0,thickDeep,0,null,0
-Gradual,age,0,thickDeep,0,null,0
+Safe,quality,0,thick_deep,0,null,0
+Allowed,ability,0,thick_deep,0,null,0
+Thick or deep,dimension,0,thick_deep,0,null,0
+Gradual,age,0,thick_deep,0,null,0
 
 Dangerous,quality,0,thin,0,null,0
 Forced,ability,0,thin,0,null,0
@@ -213,20 +209,20 @@ Demonic,social,0,dirty,0,null,0
 Dark,color,0,dirty,0,null,0
 
 
-Important,quality,0,heavy or sharp,0,null,0
-Difficult,ability,0,heavy or sharp,0,null,0
-Angular,dimension,0,heavy or sharp,0,null,0
-Heavy or sharp,property,0,heavy or sharp,0,null,0
-Established,age,0,heavy or sharp,0,null,0
-Defined,color,0,heavy or sharp,0,null,0
+Important,quality,0,sharp_heavy,0,null,0
+Difficult,ability,0,sharp_heavy,0,null,0
+Angular,dimension,0,sharp_heavy,0,null,0
+Heavy or sharp,property,0,sharp_heavy,0,null,0
+Established,age,0,sharp_heavy,0,null,0
+Defined,color,0,sharp_heavy,0,null,0
 
 
-Frivolous,quality,0,light or soft,0,null,0
-Easy,ability,0,light or soft,0,null,0
-Curved,dimension,0,light or soft,0,null,0
-Light or soft,property,0,light or soft,0,null,0
-Novel or unproven,age,0,light or soft,0,null,0
-Fuzzy or shadowed,color,0,light or soft,0,null,0
+Frivolous,quality,0,soft_light,0,null,0
+Easy,ability,0,soft_light,0,null,0
+Curved,dimension,0,soft_light,0,null,0
+Light or soft,property,0,soft_light,0,null,0
+Novel or unproven,age,0,soft_light,0,null,0
+Fuzzy or shadowed,color,0,soft_light,0,null,0
 
 
 Beneficial,quality,0,healthy,0,null,0

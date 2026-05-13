@@ -10,6 +10,7 @@ Summoner.Nom:5
 Invoke.Pres:10
 Demon.Acc:5
 (ie:2
+p.a:11
 #Name:11
 ):2
 True Name.Inst:12
@@ -23,7 +24,7 @@ In Order:6
 Compel.Inf:10
 Demon.Nom:5
 Transit.Inf:10
-Reflexive:7
+Itself:7
 #Hence: to this place to the circle Not the sequi hence???
 The:Summoning Circle.Loc:12
 That (Archaic):6
@@ -36,9 +37,9 @@ Demon.Nom:5
 Accept.Pres:10
 The:Contract.Acc:12
 As:6
-IS:4
+Is:4
 Write.Past Participle:10
-OR:4
+Or:4
 Until:6
 The:Summoning Circle.Nom:12
 Consume.Pres:10
@@ -50,5 +51,6 @@ Must:3
 Transit:10
 Itself:7
 Otherworld.Loc:5
+Period:1
 
 
