@@ -36,17 +36,18 @@ Isn't, isnt, 0
 With, positive constraint,0
 Without, negative constraint,0
 Not, no_verb,0
-Not_init, no_verb_init,0
+Not[, no_verb_init,0
 Un, no_noun, 0
-Un_init, no_noun_init,0
+No, no_noun, 0
+No[, no_noun_init,0
 And, and, 0
-And_init, and_init,0
+And[, and_init,0
 None, none,0
 All, all,0
 Or, or, 0
-Or_init, or_init,0
+Or[, or_init,0
 Xor, xor,0
-Xor_init, xor_init,0
+Xor[, xor_init,0
 
 
 Are, is, 0
@@ -54,18 +55,16 @@ Was, is,0
 Were, is,0
 
 Aren't, isnt,0
+Are Not, isnt, 0
 Weren't, isnt,0
 Wasn't, isnt,0
 Is Not, isnt,0
 Was Not, isnt,0
 
-
-
-No, un, 0
-Does Not, no,0
-Dosn't, no,0
-Do Not, no,0
-Don't, no,0
+Does Not, no_verb,0
+Dosn't, no_verb,0
+Do Not, no_verb,0
+Don't, no_verb,0
 
 
 

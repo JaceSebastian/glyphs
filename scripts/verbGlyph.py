@@ -101,10 +101,8 @@ class verbGlyph(glyph):
         elif (conj == "Passive"):
             self.glossing += "be "
         elif(conj == "Gerundive"):
-             self.glossing += "The "
-        elif(conj == "Pres Perfect"):
-            self.glossing += "has "
-        elif(conj in ["Continuous"]):
+             self.glossing += "(the) "
+        elif(conj in ["Continuous", "Present Perfect"]):
             self.glossing += "is "
         elif(conj == "Passive Perfect"):
             self.glossing += "had been "
@@ -117,10 +115,8 @@ class verbGlyph(glyph):
             self.glossing += "s"
         elif(conj in ["Gerundive", "Participle", "Continuous"]):
             self.glossing += "ing "
-        elif(conj in ["Past", "Passive","Passive Perfect", "Past Perfect"]):
-            self.glossing += "ed "
-        elif (conj == "Past Participle"):
-            self.glossing += "en "
+        elif(conj in ["Past","Past Participle", "Passive","Passive Perfect", "Past Perfect", "Present Perfect"]):
+            self.glossing += "ed " if (root[-1] != 'e') else "d "
         
     
         return self.glossing

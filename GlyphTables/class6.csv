@@ -39,7 +39,7 @@ Despite,posterior, 0, exception,0, null, 0
 Until,simultaineous, 0, exception,0, null, 0
 Even If,hypothetical, 0, exception, 0, null, 0
 
-Also,null, 0, comparison, 0, null, 0
+Like,null, 0, comparison, 0, null, 0
 At,prior, 0, comparison,2, null, 0
 And Simultaineously,posterior, 0, comparison,0, null, 0
 As,simultaineous, 0, comparison,2, null, 0

@@ -55,6 +55,8 @@ Multiply,null, 0, null, 0, null, 0, Multiply, 0
 Divide,null, 0, null, 0, Denominator, 0, Multiply, 0
 Power, null, 0, null, 0, Ordinal, 0, Multiply, 0
 
+
+
 #todo, modify _main_ to shortened version of glyph_list
 1, null, 0, One, 0, null, 0, null, 0
 2, null, 0, Two, 0, null, 0, null, 0

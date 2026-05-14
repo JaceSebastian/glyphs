@@ -5,7 +5,7 @@ Demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
 Bondservice, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
 Otherworld, "Otherworld", "[[0,0,0,0,0],[0,0,0,1,0]]"
 Vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
-Bindings or vows, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
+Bindings, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
 
 Nom,"","[[0,0,0,0,0],[0,0,0,0,0]]"
 Acc,"","[[0,1,0,0,0],[0,0,0,0,0]]"
@@ -32,7 +32,7 @@ To the Otherworld, Otherworld, 0, Loc,0
 By the Vitality, Vitality, 0, Inst,0
 
 #none of these should be printed in __main__
-Bindings, Bindings or vows,0,Nom,0
+Bindings, Bindings,0,Nom,0
 
 
 

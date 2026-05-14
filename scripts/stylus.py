@@ -57,39 +57,19 @@ def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
     """
     Parse a single spec string into (lookup, class_index).
 
-    Keyword:  'PA:11'            → ('PA', 11)
-    Features: '[p, long a]:11'   → ([('p',0), ('long a',0)], 11)
-    Mixed:    '[p:1, long a]:11' → ([('p',1), ('long a',0)], 11)
+    Keyword:  'PA:11'        → ('PA', 11)
+    Feature:  'p.long a:11' → ('p.long a', 11)
     """
     spec = spec.strip()
 
-    # Split off the class index — always the last ':INT' not inside brackets
-    # Find the last colon that's outside brackets
-    depth = 0
-    split_pos = None
-    for i, ch in enumerate(spec):
-        if ch == "[":
-            depth += 1
-        elif ch == "]":
-            depth -= 1
-        elif ch == ":" and depth == 0:
-            split_pos = i  # keep updating — we want the LAST one
+    colon = spec.rfind(":")
+    if colon == -1:
+        raise ValueError(f"No class index found in spec '{spec}'. Expected format: 'LABEL:INT'")
 
-    if split_pos is None:
-        raise ValueError(f"No class index found in spec '{spec}'. Expected format: 'LABEL:INT' or '[feat]:INT'")
+    body = spec[:colon].strip()
+    class_index = int(spec[colon + 1:].strip())
 
-    body = spec[:split_pos].strip()
-    class_index = int(spec[split_pos + 1:].strip())
-
-    if body.startswith("[") and body.endswith("]"):
-        # Feature list
-        inner = body[1:-1]  # strip brackets
-        tokens = [t.strip() for t in inner.split(",")]
-        features = [parse_feature_token(t) for t in tokens if t]
-        return features, class_index
-    else:
-        # Keyword
-        return body, class_index
+    return body, class_index
     
 def parse_ligature(spec: str) -> list[str]:
     """Split a ligature spec on '+' outside brackets."""

@@ -26,10 +26,7 @@ undefined_two, _, "[[1,1,1,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #case ignorable for plural
 plural, demonstrative, "[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 infinitive,conj,"[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-#This,demonstrative,
-#That,demonstrative,
-#These,demonstrative,
-#Those,demonstrative,
+
 
 
 
@@ -55,8 +52,7 @@ reflexive,apposition,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
 #Benefactive,apposition,
 #Malefactive,apposition,
 #Adposition Marker,
-#Demonstrative Marker,
-#Copula Marker, #defunct
+
 
 
 ###################
@@ -77,20 +73,23 @@ Ablatiave/Past Perfect, null,0, abl_pstperf, 0, null,0
 Instr/Passive, null,0, inst_passive, 0, null,0
 Comitative/Passive Perfect, null,0, com_passiveperf, 0, null,0
 Infinitive/Plural, null,0, infinitive, 0, null,0
+
 Reflexive, reflexive,0,null,0, applicative, 0
+Itself,reflexive,0,null,0, applicative, 0
+
+#this is probably wrong.
+In, diminutive, 0, null,0, applicative,0
 
 
-
-
-
+-al, state_of,0, null,0, to_adjective,0
 -ment, means_of, 0, null, 0, to_noun,0
 -able, doer, 0, null,0, to_adjective,0
 -ly, quality_of,0, null,0, to_adverb,0
-Itself,reflexive,0,null,0, applicative, 0
+
 
 #-ful,
 #-less,
--al, state_of,0, null,0, to_adjective,0
+
 #-able,
 #be-, friend ->befriend,
 #aug is very for adj, big for nouns, and intensifier run -> dash for verbs

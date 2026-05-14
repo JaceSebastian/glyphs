@@ -1,0 +1,25 @@
+#While in bondservice the demon is entitled to consume
+# X eighths of the summoner’s bodily replenished vitality per day, 
+#and none of the summoner’s accumulated vitality or externally stored vitality.
+
+Whilst:6
+Bondservice.Nom:5
+Is:4
+Active:9
+Then:6
+Demon.Nom:5
+Entitle.Present Perfect:10
+Consume.Inf:10
+LEQ:NaN.Numerator:8 + LEQ:NaN.Denominator:8
+#see about Day.toAdverb for daily instead?
+Per:Day.Acc:12 
+(Bodily) Replenish.Continuous:10 + Vitality.Acc:5
+Summoner.Gen:5
+And:4
+No[:4
+Accumulate.Past Participle:10
+Or:4
+Beyond:7 + Store.Past Participle:10
+]:1
+Vitality.Acc:5
+Summoner.Gen:5

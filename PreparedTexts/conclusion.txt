@@ -1,0 +1,38 @@
+#Both Demon and Summoner swear that no new orders or rights to vitality 
+#beyond those outlined in this contract may be added or changed 
+#without the informed and willing agreement of both parties. 
+
+Demon.Nom:5
+And:4
+Summoner.Nom:5
+Swear.Pres:10
+That:6
+No[:4
+New:9
+Bindings.Nom:5
+Like:6
+PL:Order.Nom:12
+#to close this as a sequi OR
+Or:4
+Like:6
+#if not a ligature gets read wrong.
+Entitle:10 + -ment:7 + Vitality.Loc:5
+]:1
+#the not instead of not[ means this is un-currently
+That:6
+Currently:9
+Are Not:4
+In:7
+The:Contract:12
+May:3
+Write.Passive:10
+Or:4
+Change.Passive:10
+Without:4
+#this is example of how verb is a adjP here
+Inform.Past Participle:10
+And:4
+Willing:9
+Agree:10 + -ment:7
+Each:Party.Gen:12
+Period:1

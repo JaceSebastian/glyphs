@@ -1,9 +1,12 @@
 feature,group,encoding
 null, _,"[[0]]"
-dot, linear, "[[1]]"
+dot, _, "[[1]]"
+close_scope, _, "[[0]]"
+
 Glyphs
 command, feature1, rotation1
 Null, null, 0
 Period, dot, 0
-Comma, dot,0
+], close_scope,0 ,#for logical operators
+#Comma, dot,0
 #todo, set up filled and empty circles 

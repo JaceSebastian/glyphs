@@ -83,6 +83,9 @@ best, quality, 0, good, 0, superlative, 0
 Right,quality,0,good,0,null,0
 Good,property,0,good,0,null,0
 Recent,age,0,good,0,null,0
+Current, age, 0, good,0, null,0
+Now, age, 0, good,0, adverb,0
+Currently, age, 0, good,0, adverb,0
 Likely,social,0,good,0,adverb,0
 Green,color,0,good,0,null,0
 
@@ -174,13 +177,15 @@ Sudden,age,0,thin,0,null,0
 Useful,quality,0,open,0,null,0
 Free,ability,0,open,0,null,0
 Open,property,0,open,0,null,0
-New or fresh,age,0,open,0,null,0
+New,age,0,open,0,null,0
+Fresh,age,0,open,0,null,0
 Unfamiliar,social,0,open,0,null,0
 
 Harmful,quality,0,closed,0,null,0
 Bound,ability,0,closed,0,null,0
 Closed,property,0,closed,0,null,0
-Used or worn,age,0,closed,0,null,0
+Used,age,0,closed,0,null,0
+Worn,age,0,closed,0,null,0
 Loyal,social,0,closed,0,null,0
 
 
