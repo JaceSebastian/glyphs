@@ -22,7 +22,7 @@ class logicalGlyph(glyph):
         self.text_file = self.text_file_base +"class4.csv"
 
         with open(self.text_file, newline="") as f:
-            featurereader = csv.DictReader(f, skipinitialspace=True)
+            featurereader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
@@ -45,7 +45,7 @@ class logicalGlyph(glyph):
 
 if __name__ == "__main__":
     test_obj = logicalGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
-    commands = list(test_obj.glyph_list.keys())[:12]
+    commands = list(test_obj.glyph_list.keys())[:16]
     test_obj.demoprint(commands)
 
 

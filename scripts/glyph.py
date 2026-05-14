@@ -1,9 +1,10 @@
-import matplotlib.pyplot as plt #There's almost certainly a better way than matplotlib but oh well
+import matplotlib.pyplot as plt  # There's almost certainly a better way than matplotlib but oh well
 import numpy as np
 import matplotlib.patheffects as pe
 from collections.abc import Callable
 from necklaces import default_generation
-#from svg2tikz import convert_svg
+
+# from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
@@ -13,46 +14,50 @@ import ast
 import math
 
 
-class glyph():
-    """The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented
-    """
-    
-    def __init__(self,base_fn:Callable=bases.polygon,
-                 line_fn:Callable = line_shapes.straight,
-                 txt_file_base:str = r"./attribute_ordering/",
-                 override_dict = {},
-                 base_kwargs = [],
-                 line_kwargs = [],
-                 ignore_atts = False):
+class glyph:
+    """The base class should never be used, instead the subclasses, with innate none and feature counts, will be implemented"""
+
+    def __init__(self,base_fn: Callable = bases.polygon,line_fn: Callable = line_shapes.straight,txt_file_base: str = r"./attribute_ordering/",override_dict={},base_kwargs=[],line_kwargs=[],ignore_atts=False,
+    ):
         self.atts = []
         self.base_fn = base_fn
         self.base_kwargs = base_kwargs
         self.line_fn = line_fn
         self.line_kwargs = line_kwargs
-        
+
         self.num = 0
         self.attr_num = 0
-        self.text_file_base:str = r"./GlyphTables/"
+        self.text_file_base: str = r"./GlyphTables/"
         """This is where the information for each line is held."""
-        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
-        self.attributes = []#Not sure if this is ever used
-        self.glyph_list= {}
-        self.feature_list={}
+        self.binary_array = np.zeros((self.attr_num, self.num), dtype=int)
+        self.attributes = []  # Not sure if this is ever used
+        self.glyph_list = {}
+        self.feature_list = {}
         self.encodings = {}
         self.glossing = "Gloss Default"
 
-    def demoprint(self, printList, cols=None, Flip=False, cell_size=1.5, save=False, 
-              savename="demoprint.png", draw_kwargs={}):
+    def demoprint(
+        self,
+        printList,
+        cols=None,
+        Flip=False,
+        cell_size=1.5,
+        save=False,
+        savename="demoprint.png",
+        draw_kwargs={},
+    ):
         commands = printList
-        
+
         n = len(commands)
-        if (cols == None):
+        if cols is None:
             cols = math.ceil(math.sqrt(n))
         else:
             cols = min(cols, n)
         rows = math.ceil(n / cols)
 
-        fig, axes = plt.subplots(rows, cols, figsize=(cols * cell_size, rows * cell_size))
+        fig, axes = plt.subplots(
+            rows, cols, figsize=(cols * cell_size, rows * cell_size)
+        )
         axes = np.array(axes).flatten() if n > 1 else [axes]
 
         for i, word in enumerate(commands):
@@ -65,16 +70,23 @@ class glyph():
             else:
                 idx = i
 
-            self.draw(savename=None, show_all_paths=True, annotate=True,show_name=False, axs=axes[idx], **draw_kwargs)
-            #self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[i], **draw_kwargs)
-            
+            self.draw(
+                savename=None,
+                show_all_paths=True,
+                annotate=True,
+                show_name=False,
+                axs=axes[idx],
+                **draw_kwargs,
+            )
+            # self.draw(savename=None, show_all_paths=True, annotate=False,show_name=False, axs=axes[i], **draw_kwargs)
+
             fig_width_inches = fig.get_size_inches()[0]
             ax_width_inches = axes[i].get_position().width * fig_width_inches
             fontsize = ax_width_inches * 10
             fontsize = max(fontsize, 8)  # minimum font size of 8
             axes[i].set_title(word, pad=-6, y=-0.1, fontsize=fontsize)
             pos = axes[i].get_position()
-            # fig.text(pos.x0 + pos.width/2, pos.y0 - 0.02, 
+            # fig.text(pos.x0 + pos.width/2, pos.y0 - 0.02,
             #      word.capitalize(),
             #      ha='center', va='top',
             #      fontsize=cell_size * 4)
@@ -84,59 +96,91 @@ class glyph():
             axes[j].set_visible(False)
 
         plt.tight_layout(rect=[0, 0.05, 1, 1])
-        
+
         if save:
-            plt.savefig(savename, dpi=200, bbox_inches='tight', transparent=True)
+            plt.savefig(savename, dpi=200, bbox_inches="tight", transparent=True)
         else:
             plt.show()
-    
+
     def _clear_binary(self):
         self.glossing = ""
-        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
-    
+        self.binary_array = np.zeros((self.attr_num, self.num), dtype=int)
+
     def rotateGlyph(self, binary_encoding, rotation):
-        if rotation == 0: return binary_encoding
-        #encoding is a list of lists
+        if rotation == 0:
+            return binary_encoding
+        # encoding is a list of lists
         for i in range(len(binary_encoding)):
             if np.any(binary_encoding[i]):
                 binary_encoding[i] = np.roll(binary_encoding[i], rotation)
         return binary_encoding
-    
-    def _readFeatureList(self,word):
+
+    def _readFeatureList(self, word):
         # Parse dot-separated feature string: fone4.ftwo1.fthree
         features = []
-        for part in word.split('.'):
+        for part in word.split("."):
             if not part:
                 continue
-            #todo, figure out why regex isn't working here
+            # todo, figure out why regex isn't working here
             i = len(part)
-            while i > 1 and part[i-1].isdigit():
+            while i > 1 and part[i - 1].isdigit():
                 i -= 1
             feature_name = part[:i]
             rotation = int(part[i:]) if part[i:] else 0
             features.append((feature_name, rotation))
-        return features if features else None
-
+        return features
 
     def _getBinaryArray(self, word):
         self.glossing = word
-        if(word in self.glyph_list):
+        if word in self.glyph_list:
             feats = self.glyph_list[word]
         else:
             feats = self._readFeatureList(word)
         for feature_name, rotation in feats:
-            if(feature_name not in self.encodings):
-                  print(f"Warning: '{feature_name}' not found encodings for class {self.num}, skipping.")
-            fencoding = np.array(self.encodings[feature_name.lower()]).reshape(self.attr_num, self.num)
-            fencoding = self.rotateGlyph(fencoding, rotation) 
+            if feature_name not in self.encodings:
+                print(
+                    f"Warning: '{feature_name}' not found encodings for class {self.num} word {word}, skipping."
+                )
+            fencoding = np.array(self.encodings[feature_name.lower()]).reshape(
+                self.attr_num, self.num
+            )
+            fencoding = self.rotateGlyph(fencoding, rotation)
             self.binary_array = np.bitwise_or(self.binary_array, fencoding)
         return self.binary_array
-        
-    
+
     def _makeGlossing(self, det=None, root="", case=None):
         """This should always be overwritten for glyph class"""
         self.glossing = root
-    
+
+    def _getSampleCommands(self, group: str | None = None) -> list[str]:
+        """
+        Returns a list of all renderable specs.
+        If group is specified, only features belonging to that group are included.
+        - individual features (direct encoding keys, skipping null/sentinel)
+        - combined glyphs from glyph_list
+        """
+        commands = []
+
+        # individual features — filtered by group if specified
+        with open(self.text_file, newline="") as f:
+            reader = csv.DictReader(
+                (line for line in f if line.strip() and not line.lstrip().startswith("#")),
+                skipinitialspace=True
+            )
+            for row in reader:
+                if row["feature"] == "Glyphs":  # sentinel keyword
+                    break
+                feature = row["feature"].strip()
+                if group is None or row["group"].strip() == group:
+                    commands.append(feature)
+
+        # combined glyphs from glyph_list — no group concept, always included
+        if group == "glyphs":
+            for word in list(self.glyph_list)[:40]:
+                commands.append(word)
+
+        return commands
+
     def left_anchor(self, parity=0) -> tuple[float, float]:
         """Point where an incoming glyph connects to me."""
         x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
@@ -145,7 +189,7 @@ class glyph():
             raise ValueError(
                 f"{self.__class__.__name__}.right_anchor(): base_fn returned empty arrays"
             )
-        
+
         idx = np.argmin(x_vals)
         return (float(x_vals[idx]), float(y_vals[idx]))
 
@@ -153,12 +197,12 @@ class glyph():
         """Point where I connect to an outgoing glyph."""
         x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
         raise NotImplementedError
-    
+
         if len(x_vals) == 0:
             raise ValueError(
                 f"{self.__class__.__name__}.right_anchor(): base_fn returned empty arrays"
             )
-        
+
         idx = np.argmax(x_vals)
         return (float(x_vals[idx]), float(y_vals[idx]))
 
@@ -168,130 +212,173 @@ class glyph():
 
         raise NotImplementedError
 
-    def cmapToList(num_attr:int, cmapname:str='gist_heat'):
+    def cmapToList(num_attr: int, cmapname: str = "gist_heat"):
         raise NotImplementedError
-      
-    
-    def draw(self,annotate = False,
-                show_all_paths = False,
-                savename = "output.png",
-                output_dpi = 200,
-                axs = None,
-                dot_color = 'maroon',
-                cmap = 'gist_heat', #summer for glowing green
-                line_color = 'maroon',
-                dot_size = 30,
-                legend_fontsize = 8,
-                legend_anchor = (1,0.75),
-                show_name = False):
-            #print(f"Attribute num {self.attr_num} shape {self.binary_array.shape[0]}")
-            assert self.num == self.binary_array.shape[1]
-            assert self.attr_num== self.binary_array.shape[0]
-            cmap = plt.get_cmap(cmap)
-            if self.num:
-                dot_size = max(dot_size/(self.num/6), 6)
-            x_vals,y_vals = self.base_fn(self.num,*self.base_kwargs)
 
-            if axs is None:
-                fig,axs = plt.subplots(1,1)
-            else:
-                fig = plt.gcf()
-            axs.set_aspect('equal')
-            axs.margins(0.1)
-            
-            #draw the points
+    def draw_offset(self, axs, x_offset=0.0, y_offset=0.0, rotation=0, **draw_kwargs):
+        original_base_fn = self.base_fn
+
+        def offset_base_fn(n, *args):
+            x_vals, y_vals = original_base_fn(n, *args)
+            return [x + x_offset for x in x_vals], [y + y_offset for y in y_vals]
+
+        self.base_fn = offset_base_fn
+        self.draw(axs=axs, **draw_kwargs)
+        self.base_fn = original_base_fn
+
+    def draw(self,annotate=False,show_all_paths=False,savename="output.png",output_dpi=200,axs=None,dot_color="maroon",cmap="gist_heat",line_color="maroon",dot_size=30,legend_fontsize=8,legend_anchor=(1, 0.75),show_name=False):
+          # cmap = "summer" for glowing green
+        # print(f"Attribute num {self.attr_num} shape {self.binary_array.shape[0]}")
+        assert self.num == self.binary_array.shape[1]
+        assert self.attr_num == self.binary_array.shape[0]
+        cmap = plt.get_cmap(cmap)
+        if self.num:
+            dot_size = max(dot_size / (self.num / 6), 6)
+        x_vals, y_vals = self.base_fn(self.num, *self.base_kwargs)
+
+        if axs is None:
+            fig, axs = plt.subplots(1, 1)
+        else:
+            fig = plt.gcf()
+        axs.set_aspect("equal")
+        axs.margins(0.1)
+
+        # draw the points
+        if annotate:
+            dot_color = cmap(0.3)
+
+            halos = [(dot_size + 3, 0.05), (dot_size + 2, 0.12), (dot_size + 1, 0.25)]
+
+            for w, a in halos:
+                axs.scatter(x_vals,y_vals,s=w,color=dot_color,alpha=a,edgecolors="none", zorder=2)
+
+        # draw main dots
+        axs.scatter(x_vals, y_vals, s=dot_size, color=dot_color, zorder=2)
+
+        if show_all_paths:
+            self.draw_all_paths(x_vals, y_vals, axs)
+
+        for i in range(self.attr_num):
+            k = i + 1
             if annotate:
-                dot_color = cmap(.3)
-                
-                halos = [
-                    (dot_size+3, 0.05),
-                    (dot_size+2, 0.12),
-                    (dot_size+1, 0.25)
-                ]
-                for w, a in halos:
-                    axs.scatter(
-                        x_vals,
-                        y_vals,
-                        s=w,
-                        color=dot_color,
-                        alpha=a,
-                        edgecolors='none',
-                        zorder=2
-                    )
+                color = cmap(0.5 * i / (self.attr_num) + 0.1)
+                # linewidth = 4- 3*i/self.attr_num
+                linewidth = 3  # TODO dont HARDCODE widths here?
 
-            # draw main dots
-            axs.scatter(
-                x_vals,
-                y_vals,
-                s=dot_size,
-                color=dot_color,
-                zorder=2
-            )
+            else:
+                color = line_color
+                linewidth = 2
+            labelled = False
+            for j, elem in enumerate(self.binary_array[i]):
+                if elem == 1:
+                    # if element is 1
+                    P = [x_vals[j], y_vals[j]]
+                    Q = [x_vals[(j + k) % self.num], y_vals[(j + k) % self.num]]
+                    line_x, line_y = self.line_fn(P, Q, *self.line_kwargs)
 
-            if show_all_paths:
-                self.draw_all_paths(x_vals,y_vals,axs)
-
-            for i in range(self.attr_num):
-                k = i+1
-                if annotate:
-                    color = cmap(.5*i/(self.attr_num) +.1)
-                    #linewidth = 4- 3*i/self.attr_num
-                    linewidth =  3#TODO dont HARDCODE widths here?
-                    
-                else:
-                    color = line_color
-                    linewidth = 2
-                labelled = False
-                for j,elem in enumerate(self.binary_array[i]):
-                    if elem == 1:
-                        #if element is 1
-                        P = [x_vals[j],y_vals[j]]
-                        Q = [x_vals[(j+k)%self.num],y_vals[(j+k)%self.num]]
-                        line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
-                        
-                        if annotate:
-                
+                    if annotate:
                         # layered halo
-                            halos = [
-                                (linewidth + 5, 0.05),  # widest, faintest
-                                (linewidth + 2, 0.1),
-                                (linewidth + .5, 0.3)
-                            ]
+                        halos = [
+                            (linewidth + 5, 0.05),  # widest, faintest
+                            (linewidth + 2, 0.1),
+                            (linewidth + 0.5, 0.3),
+                        ]
 
-                            line, = axs.plot(line_x, line_y, lw=linewidth, color=color, zorder=1)
+                        (line,) = axs.plot(
+                            line_x, line_y, lw=linewidth, color=color, zorder=1
+                        )
 
-                            line.set_path_effects([
+                        line.set_path_effects(
+                            [
                                 pe.Stroke(linewidth=w, foreground=color, alpha=a)
                                 for w, a in halos
-                            ] + [pe.Normal()])
-                        else:
-                            axs.plot(
-                            line_x, line_y,
+                            ]
+                            + [pe.Normal()]
+                        )
+                    else:
+                        axs.plot(
+                            line_x,
+                            line_y,
                             ls="-",
                             lw=linewidth,
                             color=color,
-                            label=self.att_strs[i] if (labelled is False) and annotate else None,
-                            zorder=0
-                            )
-                        labelled = True
-            #save_figure
-            axs.set_axis_off()
-            if show_name:
-                axs.set_title(self.__name__)
-            if savename is not None:
-                plt.savefig(savename,dpi = output_dpi,bbox_inches = 'tight', pad_inches=0.5, transparent=True)
-            elif axs is None:
-                plt.show(transparent=True, pad_inches=0.5,)
-    
-    def draw_all_paths(self,x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
-        #loop for all k
-        for k in range(1,self.attr_num+1):
+                            label=self.att_strs[i]
+                            if (labelled is False) and annotate
+                            else None,
+                            zorder=0,
+                        )
+                    labelled = True
+        # save_figure
+        axs.set_axis_off()
+        if show_name:
+            axs.set_title(self.__name__)
+        if savename is not None:
+            plt.savefig(
+                savename,
+                dpi=output_dpi,
+                bbox_inches="tight",
+                pad_inches=0.5,
+                transparent=True,
+            )
+        elif axs is None:
+            plt.show(transparent=True, pad_inches=0.5)
+
+    def draw_all_paths(
+        self, x_vals, y_vals, axs, all_ls="--", all_c="k", all_alpha=0.7, all_lw=0.5
+    ):
+        # loop for all k
+        for k in range(1, self.attr_num + 1):
             for i in range(self.num):
-                P = [x_vals[i],y_vals[i]]
-                Q = [x_vals[(i+k)%self.num],y_vals[(i+k)%self.num]]
-                line_x,line_y = self.line_fn(P,Q,*self.line_kwargs)
-                axs.plot(line_x,line_y,
-                        ls = all_ls,
-                        color = all_c,
-                        alpha = all_alpha,
-                        lw = all_lw, zorder=4)
+                P = [x_vals[i], y_vals[i]]
+                Q = [x_vals[(i + k) % self.num], y_vals[(i + k) % self.num]]
+                line_x, line_y = self.line_fn(P, Q, *self.line_kwargs)
+                axs.plot(
+                    line_x,
+                    line_y,
+                    ls=all_ls,
+                    color=all_c,
+                    alpha=all_alpha,
+                    lw=all_lw,
+                    zorder=4,
+                )
+
+
+#####################################################################################################################33
+
+
+class ligatureGlyph:
+    """This handles compound words and derivations."""
+
+    def __init__(self, specs: list[tuple], class_map: dict, cell_size: int = 1):
+        self.specs = specs
+        self.class_map = class_map
+        self.components = []
+        self.glossing = ""
+
+    def build(self):
+        self.components = []
+        for lookup, class_index in self.specs:
+            obj = self.class_map[class_index]()
+            obj._getBinaryArray(lookup)
+            self.components.append(obj)
+        self.glossing = " ".join(obj.glossing for obj in self.components)
+
+    def draw(self, axs, **draw_kwargs):
+        x_cursor = 0.0
+        for obj in self.components:
+            x_vals, _ = obj.base_fn(obj.num, *obj.base_kwargs)
+            x_min = float(np.min(x_vals))
+            x_max = float(np.max(x_vals))
+
+            x_offset = x_cursor - x_min
+            obj.draw_offset(axs=axs, x_offset=x_offset, **draw_kwargs)
+            x_cursor = x_max + x_offset
+
+    def _clear_binary(self):
+        for obj in self.components:
+            obj._clear_binary()
+        self.glossing = ""
+
+    def _makeGlossing(self):
+        return self.glossing
+        # raise NotImplementedError(f"Ligature glossing not implemented in glyph.py.")

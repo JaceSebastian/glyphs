@@ -1,55 +1,31 @@
 feature, group, encoding
 null,_, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
-##################k=3
-toNoun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,1,1,0]]"
-toVerb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,1,0,0,1]]"
-toAdj, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
-noChange, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
-#free morpheme is null.
-freemorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-#boundmorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
+###k=3
+to_noun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,1,1,0]]"
+to_verb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,1,0,0,1]]"
+to_adjective, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
+to_adverb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
+noun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,0,0,1]]"
 applicative, target, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,1,1,1,1,1,1]]"
+##########boundmorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
 
 
-#############k=2 (case/conjugation)
-
-#same as Null,
-Nom, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-Pres, conj,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-
-Acc,case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
-Past,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
-
-Gen,case,"[[0,0,0,0,0,0,0],[1,1,1,1,0,0,0],[0,0,0,0,0,0,0]]"
-Participle,conj,"[[0,0,0,0,0,0,0],[1,1,1,1,0,0,0],[0,0,0,0,0,0,0]]"
-
-Dat,case,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
-Past Participle,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
-
-Loc,case,"[[0,0,0,0,0,0,0],[1,0,0,1,1,0,1],[0,0,0,0,0,0,0]]"
-Present Perfect,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,1,0,1],[0,0,0,0,0,0,0]]"
-
-Ablative,case,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
-Past Perfect,conj,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
-
-Inst,case,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
-Passive,conj,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
-
-Comitative,case,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
-Passive Perfect,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
-
+#k=1 (case/conjugation)
+nom_pres, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+acc_past,case,"[[0,0,1,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+gen_participle,case,"[[0,1,1,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+dat_pastparticiple,case,"[[1,0,0,0,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+loc_presperf,case,"[[1,1,0,1,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+abl_pstperf,case,"[[0,0,0,0,0,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+inst_passive,case,"[[1,0,0,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+com_passiveperf,case,"[[1,1,0,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #can be used for someting in future
-Undefined, _, "[[0,0,0,0,0,0,0],[1,0,0,1,0,1,0],[0,0,0,0,0,0,0]]"
-Undefined2, _, "[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
-
-
+undefined, _, "[[1,0,0,1,0,1,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+undefined_two, _, "[[1,1,1,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #case ignorable for plural
-Plural, demonstrative, "[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
-Infinitive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
-#I think this can be done with to verb, adposition marker, and case?
-Gerundive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
-
+plural, demonstrative, "[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+infinitive,conj,"[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #This,demonstrative,
 #That,demonstrative,
 #These,demonstrative,
@@ -58,9 +34,23 @@ Gerundive,conj,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
 
 
 
-#####   k=1
-#Appositions stack on nouns, so need to be separate from case
-reflexive,apposition,"[[1,0,1,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+##k=2
+
+act_of,affix,"[[0,0,0,0,0,0,0],[1,1,1,1,0,0,0],[0,0,0,0,0,0,0]]"
+condition_of,affix,"[[0,0,0,0,0,0,0],[1,0,0,1,0,0,0],[0,0,0,0,0,0,0]]"
+doer,affix,"[[0,0,0,0,0,0,0],[0,1,1,0,1,1,1],[0,0,0,0,0,0,0]]"
+means_of,affix,"[[0,0,0,0,0,0,0],[1,1,1,1,1,0,1],[0,0,0,0,0,0,0]]"
+place_of,affix,"[[0,0,0,0,0,0,0],[1,0,0,1,1,1,1],[0,0,0,0,0,0,0]]"
+practice_of,affix,"[[0,0,0,0,0,0,0],[1,0,0,1,0,1,0],[0,0,0,0,0,0,0]]"
+process_of,affix,"[[0,0,0,0,0,0,0],[0,1,1,0,0,1,0],[0,0,0,0,0,0,0]]"
+quality_of,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
+resemblance_of,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
+state_of, affix, "[[0,0,0,0,0,0,0],[0,1,1,0,1,0,1],[0,0,0,0,0,0,0]]"
+augmentative,affix,"[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
+diminutive,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
+
+#Appositions stack on nouns so need to be separate from case
+reflexive,apposition,"[[0,0,0,0,0,0,0],[0,1,1,0,0,0,0],[0,0,0,0,0,0,0]]"
 #Causative,apposition,
 #Benefactive,apposition,
 #Malefactive,apposition,
@@ -68,45 +58,43 @@ reflexive,apposition,"[[1,0,1,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 #Demonstrative Marker,
 #Copula Marker, #defunct
 
-#-ful,
-#-less,
-#-al,
-#-able,
-#be-, friend ->befriend,
--ment, place->placement,"[[0,1,0,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-#aug is very for adj, big for nouns, and intensifier run -> dash for verbs
-#AUG,
 
-
-
-
-
-
+###################
 
 Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
-toNoun, null,0, null,0, toNoun,0
-toVerb, null,0, null,0, toVerb,0
-toAdj, null,0, null,0, toAdj,0
-noChange, null,0, null,0, noChange,0
-FreeMorpheme, null,0, null,0, freemorpheme,0
-#BoundMorpheme, null,0, null,0, BoundMorpheme,0
-Nom/Pres, null,0, Nom, 0, null,0
-Acc/Past, null,0, Acc, 0, null,0
-Gen/Participle, null,0, Gen, 0, null,0
-Dat/Past Participle, null,0, Dat, 0, null,0
-Loc/Perfect, null,0, Loc, 0, null,0
-Ablatiave/Past Perfect, null,0, Ablative, 0, null,0
-Instr/Passive, null,0, Inst, 0, null,0
-Comitative/Passive Perfect, null,0, Comitative, 0, null,0
-Infinitive/Plural, null,0, Infinitive, 0, null,0
-Reflexive, reflexive,0,null,0, Applicative, 0
-ActOf, -ment, 0, Nom, 0, toNoun,0
+toNoun, null,0, null,0, to_noun,0
+toVerb, null,0, null,0, to_verb,0
+toAdj, null,0, null,0, to_adjective,0
+toAdverb, null,0,null,0, to_adverb,0
+Pres, null,0, nom_pres, 0, null,0
+Nom, null,0, nom_pres, 0, null,0
+Acc/Past, null,0, acc_past, 0, null,0
+Gen/Participle, null,0, gen_participle, 0, null,0
+Dat/Past Participle, null,0, dat_pastparticiple, 0, null,0
+Loc/Perfect, null,0, loc_presperf, 0, null,0
+Ablatiave/Past Perfect, null,0, abl_pstperf, 0, null,0
+Instr/Passive, null,0, inst_passive, 0, null,0
+Comitative/Passive Perfect, null,0, com_passiveperf, 0, null,0
+Infinitive/Plural, null,0, infinitive, 0, null,0
+Reflexive, reflexive,0,null,0, applicative, 0
 
 
-#none of these should be printed in __main__
 
+
+
+-ment, means_of, 0, null, 0, to_noun,0
+-able, doer, 0, null,0, to_adjective,0
+-ly, quality_of,0, null,0, to_adverb,0
 Itself,reflexive,0,null,0, applicative, 0
+
+#-ful,
+#-less,
+-al, state_of,0, null,0, to_adjective,0
+#-able,
+#be-, friend ->befriend,
+#aug is very for adj, big for nouns, and intensifier run -> dash for verbs
+
 
 
 

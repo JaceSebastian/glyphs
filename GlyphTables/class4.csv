@@ -1,22 +1,31 @@
 feature, group, encoding
-null, Unary, "[[0,0,0,0],[0,0,0,0]]"
-is, Unary, "[[1,0,1,0],[0,0,0,0]]"
+is, Unary, "[[0,0,1,0],[0,1,0,0]]"
 isnt, Unary, "[[1,0,1,0],[0,1,0,0]]"
 
 positive constraint, Unary,"[[1,1,1,1],[0,0,0,0]]"
 negative constraint, Unary,"[[1,1,1,1],[1,0,0,0]]"
 
-no, Unary,"[[0,0,1,1],[0,0,1,0]]"
-un,Unary,  "[[0,0,0,0],[1,1,0,0]]"
+no_verb, Unary,"[[0,0,0,0],[0,0,1,0]]"
+no_verb_init, Binary,"[[0,0,1,1],[0,0,1,0]]"
+
+no_noun,Unary,  "[[0,0,0,0],[1,1,0,0]]"
+no_noun_init, Binary, "[[0,0,1,1],[1,1,0,0]]"
 
 and, Binary,"[[1,1,0,1],[0,0,0,0]]"
-or, Binary,"[[1,0,0,0],[1,1,0,0]]"
+and_init, Binary, "[[1,1,0,1],[0,0,1,0]]"
 
-any, Unary, "[[0,0,1,0],[0,1,0,0]]"
-only, Unary,"[[1,0,1,0],[1,1,0,0]]"
+or_init, Binary,"[[0,0,1,0],[1,1,0,0]]"
+or, Binary,"[[1,0,1,0],[1,1,0,0]]"
+
+xor_init, Binary,"[[1,1,0,1],[1,1,0,0]]"
+xor, Binary,"[[1,1,0,0],[0,0,0,0]]"
 
 none, Binary,"[[0,0,0,0],[0,0,0,0]]"
 all, Binary,"[[1,1,1,1],[1,1,0,0]]"
+
+null, Unary, "[[0,0,0,0],[0,0,0,0]]"
+
+
 
 
 
@@ -26,14 +35,19 @@ Is, is, 0
 Isn't, isnt, 0
 With, positive constraint,0
 Without, negative constraint,0
-Not, no,0
-Un, un, 0
+Not, no_verb,0
+Not_init, no_verb_init,0
+Un, no_noun, 0
+Un_init, no_noun_init,0
 And, and, 0
-Or, or, 0
-Any, any,0
-Only, only,0
+And_init, and_init,0
 None, none,0
 All, all,0
+Or, or, 0
+Or_init, or_init,0
+Xor, xor,0
+Xor_init, xor_init,0
+
 
 Are, is, 0
 Was, is,0
@@ -42,6 +56,8 @@ Were, is,0
 Aren't, isnt,0
 Weren't, isnt,0
 Wasn't, isnt,0
+Is Not, isnt,0
+Was Not, isnt,0
 
 
 

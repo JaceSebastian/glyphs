@@ -117,9 +117,11 @@ class nounGlyph(glyph):
         if case == "Gen":
             return_value += "of "
         elif case == "Loc":
-            return_value += "to/from "
+            return_value += "to "
         elif case == "Dat":
             return_value += "to "
+        elif case == "Ablative":
+            return_value += "from "
         elif case == "Inst":
             return_value += "by "
         else: #case == "Nom" or case == "Acc":
@@ -130,8 +132,8 @@ class nounGlyph(glyph):
                 root = self.inflector.plural(root)
             if det == "ThePL":
                 return_value += "The "
-            elif det != "PL":
-                return_value += det + " "
+            # elif det not in ["PL", "Mass"]:
+            #     return_value += det + " "
         
         return_value += root.title()
         self.glossing = return_value

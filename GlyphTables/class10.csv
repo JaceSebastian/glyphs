@@ -43,6 +43,7 @@ protect,root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,1,1,0,0,0,0
 act, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,0,0,0,0,1,1],[0,0,1,0,1,1,0,1,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 eat, root,  "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,1,0,0,0,0,0,0,0,0],[1,1,1,0,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,0]]"
 imprint, root, "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,1,1,0,0,0]]"
+give, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,1,1,1,1,0,0,0],[0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,1,1,0,0,0]]"
 #unfilled roots:
 
 
@@ -51,7 +52,10 @@ Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 #command, conjugation, 0, semantic group, 0, root(last 3 features), 0
 
+Speak, null,0, speech,0, null,0
+
 Act, null,0, movement,0, act,0
+
 
 Declare, null,0, speech, 0, call,0
 Invoke, null,0, spellcasting, 0, call, 0,
@@ -60,6 +64,11 @@ Swear, null,0, oath, 0, call,0
 Die, null,0, action,0,die,0
 
 Consume, null,0, vitality, 0, eat,0
+Understand, null,0, knowledge,0, eat,0
+#same as above
+Comprehend, null,0, knowledge,0, eat,0
+
+Answer, null, 0, speech,0, give,0
 
 Commit, null,0, oath, 0, hold,0, 
 Hold, null,0, movement, 0, hold, 0, 
@@ -93,6 +102,7 @@ Compel, null,0, spellcasting,0, force,0,
 Contradict, null,0, speech,0, reverse,0
 
 Perceive, null,0, knowledge, 0, see,0
+Gesture, null,0, movement,0, see,0
 
 Protect, null,0, service,0, protect,0
 Accept, null,0, oath,0, protect,0

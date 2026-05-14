@@ -50,7 +50,7 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = list(test_obj.glyph_list.keys())
+    commands = test_obj._getSampleCommands()
     test_obj.demoprint(commands)
 
 

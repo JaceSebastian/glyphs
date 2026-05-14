@@ -14,6 +14,7 @@ from verbGlyph import verbGlyph
 from syllabaryGlyph import syllableGlyph
 from nounGlyph import nounGlyph
 from morphemeGlyph import morphemeGlyph
+from glyph import ligatureGlyph
 
 
 
@@ -125,44 +126,21 @@ def parse_file(filepath: str) -> list[str]:
 
 #def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict, gap: float = 0.2):
 def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
-    parts = parse_ligature(spec_str)
-    label_parts = []
-    prev_obj = None
-    x_offset = 0.0
-
-    for i, part in enumerate(parts):
-        lookup, class_index = parse_spec(part)
+    if '+' in spec_str:
+        sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
+        obj = ligatureGlyph(sub_specs, CLASS_MAP)
+        obj.build()
+    else:
+        lookup, class_index = parse_spec(spec_str)
         if class_index not in CLASS_MAP:
             raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
-
         obj = CLASS_MAP[class_index]()
-
-        if (prev_obj is None) or type(obj) != type(prev_obj):
-            # first glyph: draw at origin
-            x_offset = 0.0
-            y_offset = 0.0
-        else:
-            # align: shift obj so its left_anchor meets prev's right_anchor
-            rx, ry = prev_obj.right_anchor(parity=(i-1)%2)  # where prev glyph exits
-            lx, ly = obj.left_anchor(parity=i % 2)        # where this glyph expects to enter
-            x_offset = rx - lx               # exact geometric join, no arbitrary gap
-
-
-        # inject x_offset into base_fn as before
-        original_base_fn = obj.base_fn
-        obj.base_fn = lambda n, *args, _fn=original_base_fn, _x=x_offset, _y=y_offset: (
-            _fn(n, *args)[0] + _x,
-            _fn(n, *args)[1] + _y
-        )
-
         obj._getBinaryArray(lookup)
-        obj.draw(axs=ax, **draw_kwargs)
-        label_parts.append(obj.glossing)
-        obj._clear_binary()
 
-        prev_obj = obj  # keep reference so next iteration can call right_anchor()
-
-    return ' '.join(label_parts)
+    obj.draw(axs=ax, **draw_kwargs)
+    glossing = obj.glossing
+    obj._clear_binary()
+    return glossing
 
 
 def plot_glyphs(spec_strings: list[str], n: int | None = None,
@@ -184,7 +162,7 @@ def plot_glyphs(spec_strings: list[str], n: int | None = None,
             ax_width_inches = axes[i].get_position().width * fig_width_inches
             fontsize = ax_width_inches * 10
             fontsize = max(fontsize, 8)  # minimum font size of 8
-            axes[i].set_title(label.title(), pad=-6, y=-0.1, fontsize=fontsize)
+            axes[i].set_title(label, pad=-6, y=-0.1, fontsize=fontsize)
         except (ValueError, KeyError) as e:
             print(f"Skipping '{spec_str}': {e} because of {spec_str}.")
             axes[i].set_visible(False)

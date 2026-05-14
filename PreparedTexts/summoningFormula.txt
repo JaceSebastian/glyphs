@@ -11,14 +11,17 @@ Invoke.Pres:10
 Demon.Acc:5
 (ie:2
 p.a:11
+vc.p.a:11
 #Name:11
 ):2
 True Name.Inst:12
 And Simultaineously:6
 Commit.Pres:10
 LEQ:NaN.Percent:8
+Vitality.Gen:5
+
 Established:9
-Vitality.Acc:5
+
 Summoner.Gen:5
 In Order:6
 Compel.Inf:10

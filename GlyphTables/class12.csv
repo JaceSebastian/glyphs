@@ -73,6 +73,11 @@ Moment, time,0, point,0
 Attack,time,0, injury, 0
 Contract, place,0, rule, 0
 
+Body, body,0, person, 0
+Mind, body, 0, power,0
+##I don't like this meaning of mind.
+
+
 Question, method ,0,command,0
 Information, source,0, rule,0
 Lie, method,0, rule,0

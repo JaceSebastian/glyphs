@@ -118,10 +118,16 @@ class NumeralGlyph(glyph):
         return_value = ""
         match(boundary):
             case "LEQ":
-                return_value += "<="
+                return_value += "⩽"
+            case "LT":
+                return_value += "<"
+            case "GT":
+                return_value += ">"
+            case "GEQ": 
+                return_value += "⩽"
      
 
-        return_value += num.title()
+        return_value += num.title() if (num.lower() != "nan") else num
 
         match(type):
             case "Percent":

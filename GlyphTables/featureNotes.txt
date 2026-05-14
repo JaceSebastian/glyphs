@@ -18,10 +18,12 @@ Class 4:
 -Logical operators, copula, with/without (as logical property)
 -Want to revise to Have: is/isn't, with/without, and, or, not (DP), un (VP)
 
+Important, there are init versions of some operators, that count as open scoping
+instead of the base or final operators that only apply to the immediately following element.
 
 Class 5: Pronouns:
 - Case
-    - Add Locative Case TODO
+    -as usual
 
 - References (short list for ease of writing)
     - Summoner entering bargain
@@ -289,34 +291,13 @@ Class Twelve: Nouns
 - Durations
 - Distances
 
-----------------------------------------------------------------
-Adj Table
+Suffixes
+Noun-forming
+-ment, -ness, -tion/-sion, -ity/-ty, -age, -ance/-ence, -er/-or/-ar, -ist, -ian, -ism, -hood, -ship, -dom, -ry/-ery, -ure, -al, -al (nominalizer), -cy, -th, -ing (gerund)
+Verb-forming
+-ize/-ise, -ify/-fy, -ate, -en, -esce
+Adjective-forming
+-ful, -less, -able/-ible, -ous/-ious/-eous, -al/-ial, -ic/-ical, -ive/-ative/-itive, -ish, -like, -ly (adj.), -ward, -some, -ary/-ory/-ory, -ent/-ant, -ed (participial adj.), -en (material adj.)
+Adverb-forming
+-ly (adv.), -ward(s), -wise, -fold, -long, -ways
 
-	Value	Ability	dimension	property	age/distance	social/cultural	color	Quantity
-_								all
-good, 	good/right			good/quality	recent		green	some
-bad,	bad/wrong			poor/bad	outdated/dilapidated		red	most
-willing,	willling	aware	smooth	soft/malleable,	near	blessed/favored	beautiful	half
-unwilling	unwilling or resentful,	unconcious, unaware	rough	hard,	far	cursed	ugly	a few
-full or complete, 	complete			full	inside	content/pleased	white	none
-empty, 	incomplete			empty	outside	isolated/deprived	black	always
-true, 	real	true, 		natural/raw/untreated		same		never
-false,	fake	false,		artificial/prepared/crafted		different		sometimes
-clear obvious,	obvious,	deliberate,	tiny,	clear/transparent		known		frequently
-vast unclear,	unclear/inferred,	accidental,	vast,	opaque/hidden	ancient	unknown		
-big,	great		big,	strong,	old	royal, divine		
-small,	low/small		small,	weak,	young	common, physical		
-long or tall,		likely	long or tall,		established,former			
-short,		unlikely	short,		novel, unproven			
-thick or deep,	safe,	allowed	thick or deep,		gradual,			
-thin,	dangerous,	forced	thin,		sudden,			
-open,	useful,	free,		open,	new, fresh	unfamiliar?		
-closed,	harmful,	bound,		closed	used/aged	loyal,		
-hot,				hot	fast,	angry	bright	
-cold,				cold	slow,	sad	dull	
-clean,	pure			clean		mortal/human	light	
-dirty,	corrupt/tainted/mixed			dirty		demonic	dark	
-heavy or sharp,	important,	difficult,		heavy or sharp,			defined	
-light or soft,	frivolous	easy,		light or soft,			fuzzy, shadowed	
-healthy,	beneficial	alive		healthy		kind/magnanimous,	blue	
-ill/unhealthy	harmful	dead		unhealthy/ill		cruel,	yellow	

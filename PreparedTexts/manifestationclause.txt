@@ -7,7 +7,7 @@ Swear.Pres:10
 Maintain.Inf:10
 A:Manifestation.Acc:12
 With:4
-Capability:12
+The:Capability:12
 Of:12
 Perceive.Gerundive:10
 ThePL:Order.Acc:12
@@ -17,19 +17,19 @@ All:4
 Some:Moment.Nom:12
 Whilst:6
 Bondservice:5
-IS:4
+Is:4
 Active:9
 Period:1
 
 In the Instance:6
 Demon.Nom:5
 Perceive.Pres:10
-OR:4
+Or:4
 Infer.Pres:10
 
-Body.QualityOf:12
-OR:4
-Mind.QualityOf:12
+Body:12 + -al:7
+Or:4
+Mind:12 + -al:7
 
 PL:Attack.Acc:12
 Summoner.Dat:5
@@ -38,11 +38,10 @@ Demon.Nom:5
 Ought:3
 Protect.Inf:10
 Summoner.Acc:5
-Demon.Gen:5
 As Far As:6
 Demon.Nom:5
 May:3
-Act.Gerundive:10
+Act.Inf:10
 Without:4
 Die.Gerundive:10
 Period:1
