@@ -7,37 +7,38 @@
 Demon.Nom:5
 Swear.Pres:10
 Obey.Inf:10
-Order.Nom:12
+Any:Order.Nom:12
 That:6
-Don't:4
-Contradict.Gerundive:10
+Not:4
+Contradict.Pres:10
 Early.Comparative:9
-Mass:Order.Acc:12
+NoNumber:Order.Acc:12
 Unless:6
 Summoner.Nom:5
+clear.adverb:9
 Declare.Pres:10
 That:2
-new:9
+New:9
 The:Order.Nom:12
-#AUG:7 + 
-Command.Pres:10
-Prior.Reference:9
+Must:3
+#overrule, override
+Over-:7 + Rule.Pres:10
+Previous:9
+NoNumber:Order.Acc:12
 Period:1
 
 If:6
 Demon.Nom:5
-Un:4
-Able.Pres:10
-Heed:Inf:10
-A:Order.Acc:10
+Un:4 + Able.Passive:10
+Heed.Inf:10
+A:Order.Acc:12
 Then:6
 Demon.Nom:5
-Swear.Pres:10
 Ought:3
-Inform.Inf:10
-Summoner.Acc:5
-Why.Ablative:12
+Declare.Inf:10
+Summoner.Dat:5
+The:Reason.Acc:12
 At:6
-1.Ordinal:8
-Opportunity.Loc:12
+One.Ordinal:8
+Opportunity.Acc:12
 

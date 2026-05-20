@@ -132,6 +132,18 @@ class NumeralGlyph(glyph):
         match(type):
             case "Percent":
                 return_value +="%"
+            case "Ordinal":
+                if(num == "One"  or num == "1"):
+                    return_value = "First"
+                elif(num == "2"):
+                    return_value = "Second"
+                else:
+                    return_value += "th"
+            case "Denominator":
+                return_value +="^-1"
+
+
+
 
         self.glossing = return_value
         return return_value

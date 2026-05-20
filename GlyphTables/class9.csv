@@ -71,14 +71,18 @@ Most,quantity,0,big,0, null,0
 Many,quantity,0,unclear,0,null,0
 Few, quantity,0,small,0,null,0
 
-quickly, age, 0, hot, 0, adverb, 0
-superlative, null, 0, null,0, superlative,0
-bigger, dimension, 0, big, 0, comparative,0
+Quickly, age, 0, hot, 0, adverb, 0
+Superlative, null, 0, null,0, superlative,0
+Bigger, dimension, 0, big, 0, comparative,0
 Noble, social, 0, big,0, reference,0
-quantity,quantity, 0, null,0,null,0
+Quicklyuantity,quantity, 0, null,0,null,0
 
-good or right,quality,0,good,0,null,0
-best, quality, 0, good, 0, superlative, 0
+Worst, quality, 0, bad,0,superlative,0
+Best, quality, 0, good, 0, superlative, 0
+
+Early, age, 0, big,0, adverb,0
+Late, age, 0, small,0, adverb,0
+
 
 Right,quality,0,good,0,null,0
 Good,property,0,good,0,null,0
@@ -126,7 +130,7 @@ Black,color,0,empty,0,null,0
 Obvious,quality,0,clear,0,null,0
 Deliberate,ability,0,clear,0,null,0
 Tiny,dimension,0,clear,0,null,0
-Clear or transparent,property,0,clear,0,null,0
+Clear,property,0,clear,0,null,0
 Aforementioned or already,age,0,clear,0,null,0
 Known,social,0,clear,0,null,0
 Same or identical,color,0,clear,0,null,0
@@ -139,10 +143,13 @@ Subsequent,age,0,unclear,0,null,0
 Unknown,social,0,unclear,0,null,0
 Different,color,0,unclear,0,null,0
 
-Strong or great,quality,0,big,0,null,0
+Strong,quality,0,big,0,null,0
+Great,quality,0,big,0,null,0
 Big,dimension,0,big,0,null,0
 Smooth,property,0,big,0,null,0
-Former or previous or prior or early,age,0,big,0,null,0
+Former,age,0,big,0,null,0
+Prior,age,0,big,0,null,0
+Previous,age,0,big,0,null,0
 Royal or divine,social,0,big,0,null,0
 
 Weak or mean,quality,0,small,0,null,0

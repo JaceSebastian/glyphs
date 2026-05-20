@@ -79,7 +79,7 @@ class nounGlyph(glyph):
             features.append((det.strip() if det.strip() else "Def.SG",0))
         else:
             det = None
-            features.append(("Mass",0))
+            features.append(("NoNumber",0))
         if '.' in word:
             word, case = word.split('.', 1)
             case_feature = (case.strip() if case.strip() else "Nom",0)
@@ -126,11 +126,11 @@ class nounGlyph(glyph):
             case = None
 
         if det:
-            if det in ["PL","ThePL", "Some", "All"]: #hardcoded BAD
+            if det in ["PL","ThePL", "Some", "All", "NoNumber"]: #hardcoded BAD
                 root = self.inflector.plural(root)
-            if det == "ThePL":
+            if det in ["ThePL"]:
                 return_value += "The "
-            elif det not in ["PL", "Mass"]: #this is how A, The, Some are added to gloss
+            elif det not in ["PL", "NoNumber"]: #this is how A, The, Some are added to gloss
                 return_value += det + " "
         
         return_value += root.title()

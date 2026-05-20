@@ -8,7 +8,7 @@ to_adjective, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,0,1,0,0,0,0]]"
 to_adverb, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,1,0,0,0,0,0]]"
 noun, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,0,0,1]]"
 applicative, target, "[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[1,1,1,1,1,1,1]]"
-##########boundmorpheme, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
+affix, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
 
 
 #k=1 (case/conjugation)
@@ -43,7 +43,7 @@ process_of,affix,"[[0,0,0,0,0,0,0],[0,1,1,0,0,1,0],[0,0,0,0,0,0,0]]"
 quality_of,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,1,1,1],[0,0,0,0,0,0,0]]"
 resemblance_of,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,1,0,1],[0,0,0,0,0,0,0]]"
 state_of, affix, "[[0,0,0,0,0,0,0],[0,1,1,0,1,0,1],[0,0,0,0,0,0,0]]"
-augmentative,affix,"[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
+aug,affix,"[[0,0,0,0,0,0,0],[1,1,1,1,1,1,1],[0,0,0,0,0,0,0]]"
 diminutive,affix,"[[0,0,0,0,0,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,0]]"
 
 #Appositions stack on nouns so need to be separate from case
@@ -85,6 +85,7 @@ In, diminutive, 0, null,0, applicative,0
 -ment, means_of, 0, null, 0, to_noun,0
 -able, doer, 0, null,0, to_adjective,0
 -ly, quality_of,0, null,0, to_adverb,0
+Over-, aug,0, null,0, affix,0
 
 
 #-ful,

@@ -19,13 +19,13 @@ movement, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,1,0,0,0,0],[0,0,0,0,
 service, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 spellcasting, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,1,0,0,1,0,1,0,0,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 vitality, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,1,1,0,0,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
-speech, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,1,0,1,0,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
+speech, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[1,0,1,0,1,0,1,1,1,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 knowledge, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,0,1,1,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 existance, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 oath, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 #harm, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 action, semantic group,"[[0,0,0,0,0,0,0,0,0,0],[0,1,1,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
-change, semantic group, "[[0,0,0,0,0,0,0,0,0,0],[1,1,0,1,1,1,0,1,0,1],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
+change, semantic group, "[[0,0,0,0,0,0,0,0,0,0],[1,0,1,1,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]]"
 
 #k=3,4,5
 call, root,"[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,1]]"
@@ -72,6 +72,10 @@ Consume, null,0, vitality, 0, eat,0
 Understand, null,0, knowledge,0, eat,0
 #same as above
 Comprehend, null,0, knowledge,0, eat,0
+#like overrule, command, impose, anything where the order ought not be be refused.
+Rule, null,0, existance,0, eat, 0
+#same as above
+Command, null,0, existance,0, eat, 0
 
 Answer, null, 0, speech,0, give,0
 Entitle, null,0, vitality,0, give,0
@@ -90,6 +94,7 @@ Follow, null,0, action, 0, follow,0
 Obey, null,0, oath,0, follow,0
 Infer, null,0, knowledge, 0,follow,0
 
+
 Banish, null,0, spellcasting,0, send away,0
 Inform, null,0, speech,0, send away,0
 
@@ -99,7 +104,7 @@ Translate, null,0, speech,0, carry over, 0
 Write, null,0, speech,0, imprint,0
 
 Gift, null,0,service,0, yield, 0
-Heed, null,0, speech, 0, yield,0
+Heed, null,0, oath, 0, yield,0
 
 Able, null,0, existance, 0, force,0
 Cause, null,0,action,0, force,0 
