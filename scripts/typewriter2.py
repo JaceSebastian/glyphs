@@ -2,18 +2,19 @@ import argparse
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from scripts.Classes.punctuationGlyph import punctuationGlyph
-from scripts.Classes.appositionGlyph import appositionGlyph
-from scripts.Classes.logicalGlyph import logicalGlyph
-from scripts.Classes.deonticGlyph import deonticGlyph
-from scripts.Classes.pronounGlyph import PronounGlyph
-from scripts.Classes.sequiGlyph import sequiGlyph
-from scripts.Classes.morphemeGlyph import morphemeGlyph
-from scripts.Classes.NumeralGlyph import NumeralGlyph
-from scripts.Classes.adjGlyph import adjGlyph
-from scripts.Classes.verbGlyph import verbGlyph
-from scripts.Classes.syllabaryGlyph import syllableGlyph
-from scripts.Classes.nounGlyph import nounGlyph
+from Classes.punctuationGlyph import punctuationGlyph
+from Classes.appositionGlyph import appositionGlyph
+from Classes.logicalGlyph import logicalGlyph
+from Classes.deonticGlyph import deonticGlyph
+from Classes.pronounGlyph import PronounGlyph
+from Classes.sequiGlyph import sequiGlyph
+from Classes.morphemeGlyph import morphemeGlyph
+from Classes.NumeralGlyph import NumeralGlyph
+from Classes.adjGlyph import adjGlyph
+from Classes.verbGlyph import verbGlyph
+from Classes.syllabaryGlyph import syllableGlyph
+from Classes.nounGlyph import nounGlyph
+from ligatureGlyph import ligatureGlyph
 
 # ── Class index ────────────────────────────────────────────────────────────────
 CLASS_MAP = {
@@ -43,14 +44,9 @@ def parse_feature_token(token: str) -> tuple[str, int]:
 
 def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
     spec = spec.strip()
-    depth = 0
     split_pos = None
     for i, ch in enumerate(spec):
-        if ch == "[":
-            depth += 1
-        elif ch == "]":
-            depth -= 1
-        elif ch == ":" and depth == 0:
+        if ch == ":":
             split_pos = i
     if split_pos is None:
         raise ValueError(f"No class index found in spec '{spec}'.")
@@ -174,51 +170,51 @@ class GlyphToken:
 
 # ── Layout ─────────────────────────────────────────────────────────────────────
 
+
+def resolve_glyph(spec_str: str):
+    """Build and return a ready-to-draw glyph object from a spec string."""
+    if '+' in spec_str:
+        sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
+        obj = ligatureGlyph(sub_specs, CLASS_MAP)
+        obj.build()
+    else:
+        lookup, class_index = parse_spec(spec_str)
+        if class_index not in CLASS_MAP:
+            raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+        obj = CLASS_MAP[class_index]()
+        obj._getBinaryArray(lookup)
+    return obj
+
+
 def build_tokens(spec_strings: list[str],
                  word_gap: float = 0.5,
                  scale:    float = 1.0) -> list[GlyphToken]:
     tokens:    list[GlyphToken] = []
     prev_tok   = None
-    prev_class = None
 
     for spec_str in spec_strings:
-        parts = parse_ligature(spec_str)
+        try:
+            obj = resolve_glyph(spec_str)
+        except (ValueError, KeyError) as e:
+            print(f"Skipping '{spec_str}': {e}")
+            continue
 
-        for i, part in enumerate(parts):
-            lookup, class_index = parse_spec(part)
-            if class_index not in CLASS_MAP:
-                raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+        gloss = obj.glossing
 
-            obj = CLASS_MAP[class_index]()
-            obj._getBinaryArray(lookup)
-            gloss = obj.glossing
+        if prev_tok is None:
+            x_off, y_off = 0.0, 0.0
+        else:
+            rx, _ = _right_anchor_world(prev_tok.obj, prev_tok.x_off, prev_tok.y_off, scale)
+            lx, _ = _left_anchor_local(obj, scale)
+            x_off = rx + word_gap - lx
+            y_off = 0.0
 
-            is_lig = (i > 0) and (class_index == prev_class)
-
-            if prev_tok is None:
-                x_off, y_off = 0.0, 0.0
-
-            elif is_lig:
-                rx, ry = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off,
-                                             scale)
-                lx, ly = _left_anchor_local(obj, scale)
-                x_off  = rx - lx
-                y_off  = ry - ly
-
-            else:
-                rx, _  = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off,
-                                             scale)
-                lx, _  = _left_anchor_local(obj, scale)
-                x_off  = rx + word_gap - lx
-                y_off  = 0.0
-
-            tokens.append(GlyphToken(obj, gloss, x_off, y_off, class_index))
-            prev_tok   = tokens[-1]
-            prev_class = class_index
+        tokens.append(GlyphToken(obj, gloss, x_off, y_off, 0))
+        prev_tok = tokens[-1]
 
     return tokens
+
+
 
 
 # ── Renderer ───────────────────────────────────────────────────────────────────

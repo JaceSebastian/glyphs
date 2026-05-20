@@ -2,20 +2,21 @@ import argparse
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from scripts.Classes.punctuationGlyph import punctuationGlyph
-from scripts.Classes.appositionGlyph import appositionGlyph
-from scripts.Classes.logicalGlyph import logicalGlyph
-from scripts.Classes.deonticGlyph import deonticGlyph
-from scripts.Classes.pronounGlyph import PronounGlyph
-from scripts.Classes.sequiGlyph import sequiGlyph
-from scripts.Classes.adjGlyph import adjGlyph
-from scripts.Classes.NumeralGlyph import NumeralGlyph
-from scripts.Classes.adjGlyph import adjGlyph
-from scripts.Classes.verbGlyph import verbGlyph
-from scripts.Classes.syllabaryGlyph import syllableGlyph
-from scripts.Classes.nounGlyph import nounGlyph
 
-# ── Class index ────────────────────────────────────────────────────────────────
+from Classes.punctuationGlyph import punctuationGlyph
+from Classes.appositionGlyph import appositionGlyph
+from Classes.logicalGlyph import logicalGlyph
+from Classes.deonticGlyph import deonticGlyph
+from Classes.pronounGlyph import PronounGlyph
+from Classes.sequiGlyph import sequiGlyph
+from Classes.morphemeGlyph import morphemeGlyph
+from Classes.NumeralGlyph import NumeralGlyph
+from Classes.adjGlyph import adjGlyph
+from Classes.verbGlyph import verbGlyph
+from Classes.syllabaryGlyph import syllableGlyph
+from Classes.nounGlyph import nounGlyph
+from ligatureGlyph import ligatureGlyph
+
 CLASS_MAP = {
     1: punctuationGlyph,
     2: appositionGlyph,
@@ -23,7 +24,7 @@ CLASS_MAP = {
     4: logicalGlyph,
     5: PronounGlyph,
     6: sequiGlyph,
-    7: adjGlyph,
+    7: morphemeGlyph,
     8: NumeralGlyph,
     9: adjGlyph,
     10: verbGlyph,
@@ -31,7 +32,7 @@ CLASS_MAP = {
     12: nounGlyph,
 }
 
-# ── Parsing (unchanged) ────────────────────────────────────────────────────────
+# ── Parsing ────────────────────────────────────────────────────────────────────
 
 def parse_feature_token(token: str) -> tuple[str, int]:
     token = token.strip()
@@ -41,38 +42,22 @@ def parse_feature_token(token: str) -> tuple[str, int]:
     return token, 0
 
 
-def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
+def parse_spec(spec: str) -> tuple:
     spec = spec.strip()
-    depth = 0
-    split_pos = None
-    for i, ch in enumerate(spec):
-        if ch == "[":
-            depth += 1
-        elif ch == "]":
-            depth -= 1
-        elif ch == ":" and depth == 0:
-            split_pos = i
-    if split_pos is None:
-        raise ValueError(f"No class index found in spec '{spec}'.")
+    split_pos = max(i for i, ch in enumerate(spec) if ch == ":")
     body = spec[:split_pos].strip()
     class_index = int(spec[split_pos + 1:].strip())
     if body.startswith("[") and body.endswith("]"):
-        inner = body[1:-1]
-        tokens = [t.strip() for t in inner.split(",")]
-        features = [parse_feature_token(t) for t in tokens if t]
-        return features, class_index
+        tokens = [t.strip() for t in body[1:-1].split(",")]
+        return [parse_feature_token(t) for t in tokens if t], class_index
     return body, class_index
 
 
 def parse_ligature(spec: str) -> list[str]:
-    parts = []
-    depth = 0
-    current = []
+    parts, current, depth = [], [], 0
     for ch in spec:
-        if ch == '[':
-            depth += 1
-        elif ch == ']':
-            depth -= 1
+        if ch == '[':   depth += 1
+        elif ch == ']': depth -= 1
         elif ch == '+' and depth == 0:
             parts.append(''.join(current).strip())
             current = []
@@ -83,202 +68,108 @@ def parse_ligature(spec: str) -> list[str]:
 
 
 def parse_file(filepath: str) -> list[str]:
-    specs = []
     with open("PreparedTexts/" + filepath) as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            specs.append(line)
-    return specs
+        return [l.strip() for l in f if l.strip() and not l.lstrip().startswith("#")]
 
 
-# ── Geometry helpers ───────────────────────────────────────────────────────────
-
-def _get_world_points(obj, x_off: float, y_off: float):
-    """Local polygon points translated into world space."""
-    x_vals, y_vals = obj.base_fn(obj.num, *obj.base_kwargs)
-    return x_vals + x_off, y_vals + y_off
-
-
-def _right_anchor_world(obj, x_off: float, y_off: float) -> tuple[float, float]:
-    """Rightmost polygon point in world space."""
-    x_vals, y_vals = _get_world_points(obj, x_off, y_off)
-    idx = np.argmax(x_vals)
-    return float(x_vals[idx]), float(y_vals[idx])
-
-
-def _left_anchor_local(obj) -> tuple[float, float]:
-    """Leftmost polygon point in local space (glyph not yet placed)."""
-    x_vals, y_vals = obj.base_fn(obj.num, *obj.base_kwargs)
-    idx = np.argmin(x_vals)
-    return float(x_vals[idx]), float(y_vals[idx])
+def resolve_glyph(spec_str: str):
+    """Build and return a ready-to-draw glyph or ligatureGlyph from a spec string."""
+    if '+' in spec_str:
+        sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
+        obj = ligatureGlyph(sub_specs, CLASS_MAP)
+        obj.build()
+    else:
+        lookup, class_index = parse_spec(spec_str)
+        if class_index not in CLASS_MAP:
+            raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+        obj = CLASS_MAP[class_index]()
+        obj._getBinaryArray(lookup)
+    return obj
 
 
-# ── Drawing ────────────────────────────────────────────────────────────────────
-
-def _draw_glyph(obj, ax, x_off: float, y_off: float,
-                line_color: str = 'maroon',
-                dot_color:  str = 'maroon',
-                dot_size:   float = 30,
-                linewidth:  float = 2):
-    """Render one glyph's points and chords directly onto ax."""
-    x_vals, y_vals = _get_world_points(obj, x_off, y_off)
-
-    # polygon points
-    ax.scatter(x_vals, y_vals,
-               s=dot_size, color=dot_color, zorder=2)
-
-    # chords encoded in binary array
-    for i in range(obj.attr_num):
-        k = i + 1
-        for j, elem in enumerate(obj.binary_array[i]):
-            if elem == 1:
-                P = [x_vals[j],               y_vals[j]]
-                Q = [x_vals[(j + k) % obj.num], y_vals[(j + k) % obj.num]]
-                line_x, line_y = obj.line_fn(P, Q, *obj.line_kwargs)
-                ax.plot(line_x, line_y,
-                        ls='-', lw=linewidth,
-                        color=line_color, zorder=0)
-                
-    draw_all_paths(obj,x_vals, y_vals,ax)
-    
-
-def draw_all_paths(obj, x_vals,y_vals,axs,all_ls = "--",all_c = 'k',all_alpha = 0.7,all_lw = 0.5):
-        #loop for all k
-        for k in range(1,obj.attr_num+1):
-            for i in range(obj.num):
-                P = [x_vals[i],y_vals[i]]
-                Q = [x_vals[(i+k)%obj.num],y_vals[(i+k)%obj.num]]
-                line_x,line_y =obj.line_fn(P,Q,*obj.line_kwargs)
-                axs.plot(line_x,line_y,
-                        ls = all_ls,
-                        color = all_c,
-                        alpha = all_alpha,
-                        lw = all_lw, zorder=4)
-
-# ── Token ──────────────────────────────────────────────────────────────────────
-
-class GlyphToken:
-    __slots__ = ('obj', 'gloss', 'x_off', 'y_off', 'class_index')
-
-    def __init__(self, obj, gloss: str,
-                 x_off: float, y_off: float, class_index: int):
-        self.obj         = obj
-        self.gloss       = gloss
-        self.x_off       = x_off
-        self.y_off       = y_off
-        self.class_index = class_index
-
-
-# ── Layout ─────────────────────────────────────────────────────────────────────
-
-def build_tokens(spec_strings: list[str],
-                 word_gap: float = 0.5) -> list[GlyphToken]:
-    tokens:    list[GlyphToken] = []
-    prev_tok   = None
-    prev_class = None
-
-    for spec_str in spec_strings:
-        parts = parse_ligature(spec_str)
-
-        for i, part in enumerate(parts):
-            lookup, class_index = parse_spec(part)
-            if class_index not in CLASS_MAP:
-                raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
-
-            obj = CLASS_MAP[class_index]()
-            obj._getBinaryArray(lookup)
-            gloss = obj.glossing
-
-            is_lig = (i > 0) and (class_index == prev_class)
-
-            if prev_tok is None:
-                x_off, y_off = 0.0, 0.0
-
-            elif is_lig:
-                rx, ry = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off)
-                lx, ly = _left_anchor_local(obj)
-                x_off  = rx - lx
-                y_off  = ry - ly
-
-            else:
-                rx, _  = _right_anchor_world(prev_tok.obj,
-                                             prev_tok.x_off, prev_tok.y_off)
-                lx, _  = _left_anchor_local(obj)
-                x_off  = rx + word_gap - lx
-                y_off  = 0.0
-
-            tokens.append(GlyphToken(obj, gloss, x_off, y_off, class_index))
-            prev_tok   = tokens[-1]
-            prev_class = class_index
-
-    return tokens
-
-
-# ── Renderer ───────────────────────────────────────────────────────────────────
+# ── Rendering ──────────────────────────────────────────────────────────────────
 
 def render_typewriter(
     spec_strings : list[str],
-    max_width    : float = 40.0,
+    max_width    : float = 22.0,
     word_gap     : float = 0.5,
     line_height  : float = 3.5,
     gloss_offset : float = 1.8,
-    gloss_size   : float = 7,
-    line_color   : str   = 'maroon',
-    dot_color    : str   = 'maroon',
-    dot_size     : float = 20,
-    linewidth    : float = 2,
+    gloss_size   : float = 6.0,
+    scale        : float = 0.5,
+    draw_kwargs  : dict  = {},
 ):
-    tokens = build_tokens(spec_strings, word_gap=word_gap)
+    # ── Build glyph objects ───────────────────────────────────────────────────
+    glyphs = []
+    for spec_str in spec_strings:
+        try:
+            obj = resolve_glyph(spec_str)
+            glyphs.append((obj, obj.glossing))
+        except (ValueError, KeyError) as e:
+            print(f"Skipping '{spec_str}': {e}")
+
+    # ── Compute x offsets using anchors ───────────────────────────────────────
+    positions = []   # (x_off, y_off) per glyph
+    x_cursor  = 0.0
+
+    for obj, _ in glyphs:
+        lx, _ = obj.left_anchor()
+        x_off  = x_cursor - lx * scale
+        rx, _  = obj.right_anchor()
+        x_cursor = x_off + rx * scale + word_gap
+        positions.append((x_off, 0.0))
 
     # ── Line-break pass ───────────────────────────────────────────────────────
-    lines        : list[list[GlyphToken]] = []
-    current_line : list[GlyphToken]       = []
-    line_x_origin = 0.0
+    lines         = []   # list of list of (obj, gloss, x_off, y_off)
+    current_line  = []
+    line_x_origin = positions[0][0] if positions else 0.0
 
-    for tok in tokens:
-        rx, _ = _right_anchor_world(tok.obj, tok.x_off, tok.y_off)
-        extent = rx - line_x_origin
+    for (obj, gloss), (x_off, y_off) in zip(glyphs, positions):
+        rx, _ = obj.right_anchor()
+        extent = x_off + rx * scale - line_x_origin
 
         if current_line and extent > max_width:
             lines.append(current_line)
-            line_x_origin = tok.x_off
-            current_line  = [tok]
+            shift         = x_off
+            line_x_origin = x_off
+            current_line  = [(obj, gloss, x_off, y_off)]
         else:
             if not current_line:
-                line_x_origin = tok.x_off
-            current_line.append(tok)
+                line_x_origin = x_off
+            current_line.append((obj, gloss, x_off, y_off))
 
     if current_line:
         lines.append(current_line)
 
     # ── Draw ──────────────────────────────────────────────────────────────────
-    fig, ax = plt.subplots(1, 1, figsize=(max_width, line_height * len(lines)))
+    fig, ax = plt.subplots(
+        1, 1,
+        figsize=(max_width, line_height * scale * len(lines))
+    )
     ax.set_aspect('equal')
     ax.set_axis_off()
 
     for line_idx, line_tokens in enumerate(lines):
-        y_shift = -line_idx * line_height
-        x_shift = -line_tokens[0].x_off
+        y_shift = -line_idx * line_height * scale
+        x_shift = -line_tokens[0][2]   # normalise line to start at x=0
 
-        for tok in line_tokens:
-            x_world = tok.x_off + x_shift
-            y_world = tok.y_off + y_shift
+        for obj, gloss, x_off, y_off in line_tokens:
+            x_world = (x_off + x_shift)
+            y_world = y_off + y_shift
 
-            _draw_glyph(tok.obj, ax, x_world, y_world,
-                        line_color=line_color,
-                        dot_color=dot_color,
-                        dot_size=dot_size,
-                        linewidth=linewidth)
+            obj.draw_offset(axs=ax,
+                     x_offset=x_world, y_offset=y_world,
+                     **draw_kwargs)
 
-            x_vals, _ = _get_world_points(tok.obj, x_world, y_world)
-            cx = (float(x_vals.min()) + float(x_vals.max())) / 2.0
+            lx, _ = obj.left_anchor()
+            rx, _ = obj.right_anchor()
+            cx = x_world + (lx + rx) / 2 * scale
 
-            ax.text(cx, y_world - gloss_offset, tok.gloss,
+            ax.text(cx, y_world - gloss_offset * scale, gloss,
                     ha='center', va='top',
                     fontsize=gloss_size, clip_on=False)
+
+            obj._clear_binary()
 
     plt.tight_layout()
     plt.show()
@@ -288,27 +179,22 @@ def render_typewriter(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Typewriter: render conlang glyphs as flowing text with ligatures."
+        description="Typewriter: render conlang glyphs as flowing text with glosses."
     )
     source = parser.add_mutually_exclusive_group(required=True)
-    source.add_argument(
-        "--words", nargs="+", metavar="SPEC",
-        help="One or more specs, e.g.  PA:11  '[p, long a]:11'  'PA:11+PB:11'"
-    )
-    source.add_argument(
-        "--file", metavar="PATH",
-        help="Path to a .txt file with one spec per line"
-    )
+    source.add_argument("--words", nargs="+", metavar="SPEC")
+    source.add_argument("--file",  metavar="PATH")
+
     parser.add_argument("--n",            type=int,   default=None)
-    parser.add_argument("--max-width",    type=float, default=24.0)
-    parser.add_argument("--word-gap",     type=float, default=0.55)
+    parser.add_argument("--max-width",    type=float, default=15.0)
+    parser.add_argument("--word-gap",     type=float, default=0.5)
     parser.add_argument("--line-height",  type=float, default=3.5)
     parser.add_argument("--gloss-offset", type=float, default=1.8)
-    parser.add_argument("--gloss-size",   type=float, default=8.0)
-    parser.add_argument("--line-color",   type=str,   default='maroon')
-    parser.add_argument("--dot-color",    type=str,   default='maroon')
-    parser.add_argument("--dot-size",     type=float, default=20.0)
-    parser.add_argument("--linewidth",    type=float, default=2.0)
+    parser.add_argument("--gloss-size",   type=float, default=6.0)
+    parser.add_argument("--scale",        type=float, default=1.1)
+    parser.add_argument("--glow",         action="store_true", default=False)
+    parser.add_argument("--show-all-paths", action="store_true", default=True)
+    parser.add_argument("--color",        type=str,   default="maroon")
     parser.add_argument("--savename",     type=str,   default=None)
 
     args = parser.parse_args()
@@ -317,6 +203,13 @@ def main():
     if args.n:
         specs = specs[:args.n]
 
+    draw_kwargs = {
+        "glow":           args.glow,
+        "show_all_paths": args.show_all_paths,
+        "line_color":     args.color,
+        "savename":       None,
+    }
+
     render_typewriter(
         specs,
         max_width    = args.max_width,
@@ -324,10 +217,8 @@ def main():
         line_height  = args.line_height,
         gloss_offset = args.gloss_offset,
         gloss_size   = args.gloss_size,
-        line_color   = args.line_color,
-        dot_color    = args.dot_color,
-        dot_size     = args.dot_size,
-        linewidth    = args.linewidth,
+        scale        = args.scale,
+        draw_kwargs  = draw_kwargs,
     )
 
 

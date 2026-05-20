@@ -9,6 +9,7 @@ from drawer import GlyphDrawer
 import os
 import bases
 import line_shapes
+import ligatureGlyph
 
 import csv
 import ast
@@ -76,7 +77,7 @@ class glyph:
             self.draw(
                 savename=None,
                 show_all_paths=True,
-                annotate=True,
+                glow=True,
                 show_name=False,
                 axs=axes[idx],
                 vertex_num = self.num,
@@ -152,6 +153,21 @@ class glyph:
         """This should always be overwritten for glyph class"""
         self.glossing = root
 
+    def _base_points(self):
+        """Return x/y coordinates from the base function."""
+        #print(self.base_fn(self.num, *self.base_kwargs))
+        return self.base_fn(self.num, *self.base_kwargs)
+    
+    def left_anchor(self):
+        x_vals, y_vals = self._base_points()
+        idx = np.argmin(x_vals)
+        return x_vals[idx], y_vals[idx]
+
+    def right_anchor(self):
+        x_vals, y_vals = self._base_points()
+        idx = np.argmax(x_vals)
+        return x_vals[idx], y_vals[idx]
+
     def _getSampleCommands(self, group: str | None = None) -> list[str]:
         """
         Returns a list of all renderable specs.
@@ -204,39 +220,4 @@ class glyph:
 #####################################################################################################################33
 
 
-class ligatureGlyph:
-    """This handles compound words and derivations."""
 
-    def __init__(self, specs: list[tuple], class_map: dict, cell_size: int = 1):
-        self.specs = specs
-        self.class_map = class_map
-        self.components = []
-        self.glossing = ""
-
-    def build(self):
-        self.components = []
-        for lookup, class_index in self.specs:
-            obj = self.class_map[class_index]()
-            obj._getBinaryArray(lookup)
-            self.components.append(obj)
-        self.glossing = " ".join(obj.glossing for obj in self.components)
-
-    def draw(self, axs, **draw_kwargs):
-        x_cursor = 0.0
-        for obj in self.components:
-            x_vals, _ = obj.base_fn(obj.num, *obj.base_kwargs)
-            x_min = float(np.min(x_vals))
-            x_max = float(np.max(x_vals))
-
-            x_offset = x_cursor - x_min
-            obj.draw_offset(axs=axs, x_offset=x_offset, **draw_kwargs)
-            x_cursor = x_max + x_offset
-
-    def _clear_binary(self):
-        for obj in self.components:
-            obj._clear_binary()
-        self.glossing = ""
-
-    def _makeGlossing(self):
-        return self.glossing
-        # raise NotImplementedError(f"Ligature glossing not implemented in glyph.py.")

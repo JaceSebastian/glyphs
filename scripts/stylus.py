@@ -2,19 +2,19 @@ import argparse
 import math
 import ast
 import matplotlib.pyplot as plt
-from scripts.Classes.punctuationGlyph import punctuationGlyph
-from scripts.Classes.appositionGlyph import appositionGlyph
-from scripts.Classes.logicalGlyph import logicalGlyph
-from scripts.Classes.deonticGlyph import deonticGlyph
-from scripts.Classes.pronounGlyph import PronounGlyph
-from scripts.Classes.sequiGlyph import sequiGlyph
-from scripts.Classes.NumeralGlyph import NumeralGlyph
-from scripts.Classes.adjGlyph import adjGlyph
-from scripts.Classes.verbGlyph import verbGlyph
-from scripts.Classes.syllabaryGlyph import syllableGlyph
-from scripts.Classes.nounGlyph import nounGlyph
-from scripts.Classes.morphemeGlyph import morphemeGlyph
-from glyph import ligatureGlyph
+from Classes.punctuationGlyph import punctuationGlyph
+from Classes.appositionGlyph import appositionGlyph
+from Classes.logicalGlyph import logicalGlyph
+from Classes.deonticGlyph import deonticGlyph
+from Classes.pronounGlyph import PronounGlyph
+from Classes.sequiGlyph import sequiGlyph
+from Classes.NumeralGlyph import NumeralGlyph
+from Classes.adjGlyph import adjGlyph
+from Classes.verbGlyph import verbGlyph
+from Classes.syllabaryGlyph import syllableGlyph
+from Classes.nounGlyph import nounGlyph
+from Classes.morphemeGlyph import morphemeGlyph
+from ligatureGlyph import ligatureGlyph
 
 
 
@@ -56,19 +56,13 @@ def parse_feature_token(token: str) -> tuple[str, int]:
 def parse_spec(spec: str) -> tuple[str | list[tuple[str, int]], int]:
     """
     Parse a single spec string into (lookup, class_index).
-
-    Keyword:  'PA:11'        → ('PA', 11)
-    Feature:  'p.long a:11' → ('p.long a', 11)
     """
     spec = spec.strip()
-
     colon = spec.rfind(":")
     if colon == -1:
         raise ValueError(f"No class index found in spec '{spec}'. Expected format: 'LABEL:INT'")
-
     body = spec[:colon].strip()
     class_index = int(spec[colon + 1:].strip())
-
     return body, class_index
     
 def parse_ligature(spec: str) -> list[str]:
@@ -174,7 +168,7 @@ def main():
     )
 
         # draw() passthrough args
-    parser.add_argument("--annotate",       action="store_true", default=False)
+    parser.add_argument("--glow",       action="store_true", default=False)
     parser.add_argument("--show-all-paths", action="store_true", default=True)
     parser.add_argument("--show-name",      action="store_true", default=False)
     parser.add_argument("--savename",       type=str,            default=None)
@@ -185,7 +179,7 @@ def main():
     args = parser.parse_args()
 
     draw_kwargs = {
-        "annotate":       args.annotate,
+        "glow":       args.glow,
         "show_all_paths": args.show_all_paths,
         "show_name":      args.show_name,
         "savename":       args.savename,

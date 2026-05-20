@@ -23,12 +23,13 @@ _SCHEMES = {
     "mono":    ("gradient", (0.15, 0.15, 0.15, 1.0), (0.85,0.85, 0.85, 1.0)),  # dark → light grey
 }
  
-def get_palette(annotate, n: int, scheme: str = "maroon") -> list[tuple]:
+def get_palette(glow, n: int, scheme: str = "maroon") -> list[tuple]:
     """Return n RGBA tuples evenly sampled from a named scheme.
     'maroon' returns n copies of the same color (flat default, no gradient).
     Pass scheme name to get_palette; use list_schemes() to see all options."""
     if n <= 0: return []
-    if not annotate: return [_MAROON] * n
+    if not glow: return [_MAROON] * n
+    if scheme == "maroon": scheme = "summer"
     if scheme not in _SCHEMES:
         raise ValueError(f"Unknown scheme '{scheme}'. Available: {list_schemes()}")
     kind, *spec = _SCHEMES[scheme]
@@ -53,7 +54,7 @@ class GlyphDrawer:
 
     def draw(
         self,
-        annotate=False,
+        glow=False,
         show_all_paths=False,
         savename="output.png",
         output_dpi=200,
@@ -70,7 +71,7 @@ class GlyphDrawer:
         assert g.num == g.binary_array.shape[1]
         assert g.attr_num == g.binary_array.shape[0]
 
-        colors = get_palette(annotate, vertex_num, line_color)
+        colors = get_palette(glow, vertex_num, line_color)
 
         #cmap = plt.get_cmap(cmap)
         if g.num:
@@ -88,7 +89,7 @@ class GlyphDrawer:
         axs.margins(0.1)
 
         # draw the points
-        if annotate:
+        if glow:
             dot_color = colors[0] #cmap(0.3)
             halos = [(dot_size + 3, 0.05), (dot_size + 2, 0.12), (dot_size + 1, 0.25)]
             for w, a in halos:
@@ -101,11 +102,11 @@ class GlyphDrawer:
 
         for i in range(g.attr_num):
             k = i + 1
-            if annotate:
+            if glow:
                 color = colors[i] #cmap(0.5 * i / g.attr_num + 0.1)
                 linewidth = 3
             else:
-                color = line_color
+                color = colors[0]
                 linewidth = 2
 
             labelled = False
@@ -115,7 +116,7 @@ class GlyphDrawer:
                     Q = [x_vals[(j + k) % g.num], y_vals[(j + k) % g.num]]
                     line_x, line_y = g.line_fn(P, Q, *g.line_kwargs)
 
-                    if annotate:
+                    if glow:
                         halos = [
                             (linewidth + 5, 0.05),
                             (linewidth + 2, 0.1),
@@ -133,7 +134,7 @@ class GlyphDrawer:
                             ls="-",
                             lw=linewidth,
                             color=color,
-                            label=g.att_strs[i] if (labelled is False) and annotate else None,
+                            label=g.att_strs[i] if (labelled is False) and glow else None,
                             zorder=0,
                         )
                     labelled = True
