@@ -52,7 +52,7 @@ class PronounGlyph(glyph):
             self.features = []
             if ':' in word:
                 det, word = word.split(':', 1)
-                self.features.append((det.strip() if det.strip() else "Def.SG",0))
+                #self.features.append((det.strip() if det.strip() else "",0))
             else:
                 det = "The "
             if '.' in word:
@@ -97,7 +97,8 @@ class PronounGlyph(glyph):
 if __name__ == "__main__":
     test_obj = PronounGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
     printList = list(test_obj.glyph_list.keys())[:12] #to avoid redundancies
-    test_obj.demoprint(printList, 4)
+    commands = test_obj._getSampleCommands()
+    test_obj.demoprint(commands, 4)
 
 
 

@@ -8,13 +8,13 @@ Swear.Pres:10
 Answer.Inf:10
 ThePL:Question.Acc:12
 Summoner.Gen:5
-true2.adverb:9
-And:4
+true.adverb:9
+And[:4
 Relevant.adverb:9
-And:4
-Information:12 + toAdv:7
-And:4
-Understand.adverb:10 + -able:7
+And[:4
+Information:12 + -al:7 + -ly:7
+And[:4
+Understand:10 + -able:7
 And:4
 clear.adverb:9
 Period:1
@@ -23,7 +23,7 @@ Demon.Nom:5
 Swear.Pres:10
 Never:9
 Speak.Inf:10
-Or:4
+Or[:4
 Write.Inf:10
 Or:4
 Gesture.Inf:10

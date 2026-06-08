@@ -27,6 +27,8 @@ def line(n, vertical=True, x_offset=0.0):
         x = np.arange(0, n)+x_offset
         y = np.zeros((1, n))
         return (x, y[0])
+    
+
 
 def quadratic(n,a = 1,b=0,c=0):
     #Creates x,y data for a quadratic equation beginning at 0 and bouncing between positive and negative values

@@ -3,18 +3,18 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-from Classes.punctuationGlyph import punctuationGlyph
-from Classes.appositionGlyph import appositionGlyph
-from Classes.logicalGlyph import logicalGlyph
-from Classes.deonticGlyph import deonticGlyph
-from Classes.pronounGlyph import PronounGlyph
-from Classes.sequiGlyph import sequiGlyph
-from Classes.morphemeGlyph import morphemeGlyph
-from Classes.NumeralGlyph import NumeralGlyph
-from Classes.adjGlyph import adjGlyph
-from Classes.verbGlyph import verbGlyph
-from Classes.syllabaryGlyph import syllableGlyph
-from Classes.nounGlyph import nounGlyph
+from scripts.punctuationGlyph import punctuationGlyph
+from scripts.appositionGlyph import appositionGlyph
+from scripts.logicalGlyph import logicalGlyph
+from scripts.deonticGlyph import deonticGlyph
+from scripts.pronounGlyph import PronounGlyph
+from scripts.sequiGlyph import sequiGlyph
+from scripts.morphemeGlyph import morphemeGlyph
+from scripts.NumeralGlyph import NumeralGlyph
+from scripts.adjGlyph import adjGlyph
+from scripts.verbGlyph import verbGlyph
+from scripts.syllabaryGlyph import syllableGlyph
+from scripts.nounGlyph import nounGlyph
 from ligatureGlyph import ligatureGlyph
 
 CLASS_MAP = {
@@ -154,6 +154,7 @@ def render_typewriter(
         x_shift = -line_tokens[0][2]   # normalise line to start at x=0
 
         for obj, gloss, x_off, y_off in line_tokens:
+            #the line is not properly offsetting by number of glyphs in ligature
             x_world = (x_off + x_shift)
             y_world = y_off + y_shift
 

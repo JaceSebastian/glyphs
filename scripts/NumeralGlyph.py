@@ -81,7 +81,7 @@ class NumeralGlyph(glyph):
             numtype = None
 
         # num slot
-        root = word.strip()
+        root = word.strip().lower()
         if not root:
             raise ValueError(f"No numeral found in '{word}'")
         
@@ -106,6 +106,7 @@ class NumeralGlyph(glyph):
         for feature_name, rotation in features:
             if feature_name not in self.encodings:
                 print(f"Warning: '{feature_name}' not found in encodings, skipping.")
+                print(f"Encodings: '{self.encodings}'.")
                 continue
             fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
             fencoding = self.rotateGlyph(fencoding, rotation)
@@ -130,16 +131,16 @@ class NumeralGlyph(glyph):
         return_value += num.title() if (num.lower() != "nan") else num
 
         match(type):
-            case "Percent":
+            case "percent":
                 return_value +="%"
-            case "Ordinal":
-                if(num == "One"  or num == "1"):
+            case "ordinal":
+                if(num == "one"  or num == "1"):
                     return_value = "First"
                 elif(num == "2"):
                     return_value = "Second"
                 else:
                     return_value += "th"
-            case "Denominator":
+            case "denominator":
                 return_value +="^-1"
 
 

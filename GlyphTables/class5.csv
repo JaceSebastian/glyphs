@@ -3,18 +3,19 @@ Null,"", "[[0,0,0,0,0],[0,0,0,0,0]]"
 Summoner, "Summoner","[[0,0,0,0,0],[0,0,1,1,1]]"
 Demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
 Bondservice, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
-Otherworld, "Otherworld", "[[0,0,0,0,0],[0,0,0,1,0]]"
+Place, "Place", "[[0,0,0,0,0],[1,1,1,0,1]]"
 Vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
-Bindings, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
+Thing, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
+Person, "Who/One", "[[0,0,0,0,0],[0,0,0,1,0]]"
 
 Nom,"","[[0,0,0,0,0],[0,0,0,0,0]]"
-Acc,"","[[0,1,0,0,0],[0,0,0,0,0]]"
+Dat,"","[[0,1,0,0,0],[0,0,0,0,0]]"
 Gen,"Of","[[1,0,1,0,0],[0,0,0,0,0]]"            
-Dat,"For","[[0,0,0,1,1],[0,0,0,0,0]]"
+Acc,"For","[[0,0,0,1,1],[0,0,0,0,0]]"
 Loc,"To", "[[1,1,1,1,1],[0,0,0,0,0]]"
-Ablative,"From ", "[[1,1,1,1,0],[0,0,0,0,0]]"
+Ablative,"From ", "[[1,0,1,1,1],[0,0,0,0,0]]"
 Inst,"By", "[[1,1,1,0,0],[0,0,0,0,0]]"
-Comitative, "With ","[[0,1,1,0,1],[0,0,0,0,0]]"
+Comitative, "With ","[[0,1,0,1,1],[0,0,0,0,0]]"
 
 Glyphs
 command, feature1, rotation1, feature2, rotation2
@@ -24,15 +25,9 @@ Genitive, Null, 0, Gen,0
 Dative, Null, 0, Dat, 0
 Locative, Null, 0, Loc, 0
 Instrumental, Null, 0, Inst, 0
-The Summoner, Summoner, 0, Nom, 0
-The Demon, Demon, 0, Acc, 0
-Of the Bondservice, Bondservice, 0, Gen,0
-For the Bindings, Bindings or vows, 0, Dat, 0
-To the Otherworld, Otherworld, 0, Loc,0
-By the Vitality, Vitality, 0, Inst,0
 
-#none of these should be printed in __main__
-Bindings, Bindings,0,Nom,0
+
+
 
 
 

@@ -5,10 +5,19 @@ import numpy as np
 # ---------------------------------------------------------------------------
 # Palette
 # ---------------------------------------------------------------------------
- 
-_MAROON = (0.502, 0.0, 0.0, 1.0)
+_CHORDS  = (
+    (0.38, 0.0,  0.09, 1.0),   # burgundy      — deep wine red
+    (0.08, 0.22, 0.38, 1.0),   # prussian blue  — classic cartography ink
+    (0.55, 0.38, 0.04, 1.0),   # dark gold      — old manuscript gilding
+    (0.35, 0.0,  0.18, 1.0),   # damson        — dark mulberry/plum
+    (0.0,  0.27, 0.18, 1.0),   # bottle green  — dark Victorian ink green
+    (0.18, 0.13, 0.35, 1.0),   # inkwell violet — deep quill-dipped purple
+    (0.45, 0.22, 0.07, 1.0),   # sepia brown   — aged parchment ink
+    (0.25, 0.10, 0.02, 1.0),   # burnt umber   — old leather binding
+)
  
 _SCHEMES = {
+    "maroon":  ("gradient", (0.502, 0.0, 0.0, 1.0),(0.502, 0.0, 0.0, 1.0)), #no change in color
     "ember":   ("cmap", "gist_heat"),
     "summer":  ("cmap", "summer"),
     "viridis": ("cmap", "viridis"),
@@ -28,8 +37,8 @@ def get_palette(glow, n: int, scheme: str = "maroon") -> list[tuple]:
     'maroon' returns n copies of the same color (flat default, no gradient).
     Pass scheme name to get_palette; use list_schemes() to see all options."""
     if n <= 0: return []
-    if not glow: return [_MAROON] * n
-    if scheme == "maroon": scheme = "summer"
+    if scheme == "chords":
+        return [_CHORDS[i % len(_CHORDS)] for i in range(n)]
     if scheme not in _SCHEMES:
         raise ValueError(f"Unknown scheme '{scheme}'. Available: {list_schemes()}")
     kind, *spec = _SCHEMES[scheme]
@@ -41,7 +50,7 @@ def get_palette(glow, n: int, scheme: str = "maroon") -> list[tuple]:
     return [tuple((1 - t) * start + t * end) for t in positions]
  
 def list_schemes() -> list[str]:
-    return ["maroon"] + sorted(_SCHEMES.keys())
+    return ["chords"] + sorted(_SCHEMES.keys())
  
  
 
@@ -60,7 +69,7 @@ class GlyphDrawer:
         output_dpi=200,
         axs=None,
         dot_color="maroon",
-        line_color="maroon",
+        line_color="chords",
         dot_size=30,
         legend_fontsize=8,
         legend_anchor=(1, 0.75),
@@ -73,7 +82,6 @@ class GlyphDrawer:
 
         colors = get_palette(glow, vertex_num, line_color)
 
-        #cmap = plt.get_cmap(cmap)
         if g.num:
             dot_size = max(dot_size / (g.num / 6), 6)
             dot_size = min(dot_size, 40)
@@ -102,11 +110,10 @@ class GlyphDrawer:
 
         for i in range(g.attr_num):
             k = i + 1
+            color = colors[i]
             if glow:
-                color = colors[i] #cmap(0.5 * i / g.attr_num + 0.1)
                 linewidth = 3
             else:
-                color = colors[0]
                 linewidth = 2
 
             labelled = False

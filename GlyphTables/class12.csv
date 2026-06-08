@@ -87,6 +87,7 @@ Day, sun,0, span,0
 
 Harm, injury, 0, body,0 
 Attack, injury, 0,time,0
+Danger, injury,0, place,0
 
 Boundary, line, 0, place,0
 Opportunity, luck,0,place,0

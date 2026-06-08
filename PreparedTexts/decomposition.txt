@@ -1,0 +1,35 @@
+#Examples of how a word is composed of several ecoding chords
+
+#p'a:
+
+
+#
+
+#Loyal-est
+superlative:9
+social:9
+closed:9
+Loyal.superlative:9
+
+# Less than 6 percent
+LEQ:8
+six:8
+percent:8
+LEQ:six.percent:8
+
+#of X-ment
+toNoun:7
+Gen/Participle:7
+means_of:7
+-ment.Gen:7
+
+#At Sequi
+prior:6
+comparison:6
+close-open:6
+At.close-open:6
+
+#To the Summoner
+Summoner:5
+Locative:5
+Summoner.Loc:5

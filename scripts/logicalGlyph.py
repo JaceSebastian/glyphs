@@ -9,22 +9,20 @@ import os
 import bases
 import line_shapes
 import csv
-import ast
 import math
+import ast
 
-
-class deonticGlyph(glyph):
+class logicalGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # subclass-specific initialization
-        self.num = 3
-        self.attr_num = 1
-        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
-        self.text_file = self.text_file_base +"class3.csv"
+  # subclass-specific initialization
+        self.num = 4
+        self.attr_num = 2   
+        self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)
+        self.text_file = self.text_file_base +"class4.csv"
 
         with open(self.text_file, newline="") as f:
-            featurereader = csv.DictReader(f, skipinitialspace=True)
+            featurereader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
@@ -33,11 +31,11 @@ class deonticGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader(f, skipinitialspace=True)
+            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
-                for j in range(1, self.attr_num + 1):
+                for j in range(1, self.attr_num ): #NOT +1 since only 1dimension used.
                     feature = row[f'feature{j}'].strip()
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
@@ -46,16 +44,12 @@ class deonticGlyph(glyph):
 
 
 if __name__ == "__main__":
-    test_obj = deonticGlyph(
-                     bases.polygon,
-                     base_kwargs=[],
-                     line_fn=line_shapes.straight,
-                     line_kwargs=[])
-
-    commands = list(test_obj.glyph_list.keys())[:4]
+    test_obj = logicalGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
+    commands = test_obj._getSampleCommands()
     test_obj.demoprint(commands)
 
 
+ 
 
 
 

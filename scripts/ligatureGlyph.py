@@ -43,15 +43,15 @@ class ligatureGlyph:
             x_cursor = x_max + x_offset
 
     def draw_offset(self, axs, x_offset=0.0, y_offset=0.0, rotation=0, **draw_kwargs):
-        x_cursor =  0
+        x_cursor = 0
+        y_cursor = 0
         for obj in self.components:
-            x_vals, _ = obj.base_fn(obj.num, *obj.base_kwargs)
-            x_min = float(np.min(x_vals))
-            x_max = float(np.max(x_vals))
+            obj.draw_offset(axs=axs, x_offset=x_offset + x_cursor, y_offset = y_offset+y_cursor, **draw_kwargs)
+            incrementx, incrementy = obj.right_anchor()
+            x_cursor += incrementx
+            y_cursor += incrementy
 
-            x_offset = x_cursor - x_min
-            obj.draw_offset(axs=axs, x_offset=x_offset + x_cursor, y_offset = y_offset, **draw_kwargs)
-            x_cursor = x_max + x_offset
+
 
 
 

@@ -1,0 +1,26 @@
+# In the case that credible information about a new danger to the summoner 
+#is received, it must transit itself back.
+
+In The Case:6
+Creditable:9
+Information:12
+About:6
+(:2
+A:Danger.Nom:12
+Or:4
+A:Duration:12
+Opportunity.Gen:12
+That:6
+Is:4
+Narrow:9
+):2
+Summoner.Loc:5
+Receive.Passive:10
+Then:6
+It:5
+Must:3
+Transit:10
+Itself:7
+Summoner.Loc:5
+Immediately:9
+Period:1

@@ -1,0 +1,18 @@
+Precedence Order:
+First Logical Operators
+Not
+And
+Or
+Xor
+
+
+
+
+Last
+
+
+
+
+Open Versus Closed Classes:
+
+

@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.patheffects as pe
 from collections.abc import Callable
 from necklaces import default_generation
+#from svg2tikz import convert_svg
 import os
 import bases
 import line_shapes
@@ -11,18 +12,20 @@ import csv
 import ast
 import math
 
-class morphemeGlyph(glyph):
+
+class appositionGlyph(glyph):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # subclass-specific initialization
-        self.num = 7
-        self.attr_num = 3
+        self.num = 2
+        self.attr_num = 1
+        self.base_fn = bases.line
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
-        self.text_file = self.text_file_base +"class7.csv"
+        self.text_file = self.text_file_base +"class2.csv"
 
         with open(self.text_file, newline="") as f:
-            featurereader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
+            featurereader = csv.DictReader(f, skipinitialspace=True)
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
@@ -31,7 +34,7 @@ class morphemeGlyph(glyph):
                 encoding = ast.literal_eval(row["encoding"].strip())
                 self.attributes.append(word)
                 self.encodings[word] = encoding
-            glyphreader = csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
+            glyphreader = csv.DictReader(f, skipinitialspace=True)
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
@@ -40,18 +43,18 @@ class morphemeGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
- 
 
 
 if __name__ == "__main__":
-    test_obj = morphemeGlyph(
-                     bases.polygon,
+    test_obj = appositionGlyph(
+                     bases.line,
                      base_kwargs=[],
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = test_obj._getSampleCommands()
-    test_obj.demoprint(commands)
+    commands = list(test_obj.glyph_list.keys())
+    test_obj.demoprint(commands, 2,2)
+
 
 
 

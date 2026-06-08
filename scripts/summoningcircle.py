@@ -4,18 +4,18 @@ import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 import numpy as np
 
-from scripts.Classes.punctuationGlyph import punctuationGlyph
-from scripts.Classes.appositionGlyph import appositionGlyph
-from scripts.Classes.logicalGlyph import logicalGlyph
-from scripts.Classes.deonticGlyph import deonticGlyph
-from scripts.Classes.pronounGlyph import PronounGlyph
-from scripts.Classes.sequiGlyph import sequiGlyph
-from scripts.Classes.NumeralGlyph import NumeralGlyph
-from scripts.Classes.adjGlyph import adjGlyph
-from scripts.Classes.verbGlyph import verbGlyph
-from scripts.Classes.syllabaryGlyph import syllableGlyph
-from scripts.Classes.nounGlyph import nounGlyph
-from scripts.Classes.morphemeGlyph import morphemeGlyph
+from scripts.punctuationGlyph import punctuationGlyph
+from scripts.appositionGlyph import appositionGlyph
+from scripts.logicalGlyph import logicalGlyph
+from scripts.deonticGlyph import deonticGlyph
+from scripts.pronounGlyph import PronounGlyph
+from scripts.sequiGlyph import sequiGlyph
+from scripts.NumeralGlyph import NumeralGlyph
+from scripts.adjGlyph import adjGlyph
+from scripts.verbGlyph import verbGlyph
+from scripts.syllableGlyph import syllableGlyph
+from scripts.nounGlyph import nounGlyph
+from scripts.morphemeGlyph import morphemeGlyph
 
 
 # ── Hardcoded class index ──────────────────────────────────────────────────────

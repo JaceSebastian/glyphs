@@ -4,13 +4,19 @@ prior, sequencing,"[[0,1,0,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
 posterior, sequencing,"[[0,1,0,0,1,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
 simultaineous, sequencing,"[[1,1,1,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
 hypothetical, sequencing,"[[1,0,1,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+
 condition, sequent,"[[0,0,0,0,0,0],[1,1,0,1,1,0],[0,0,0,0,0,0]]"
 concession, sequent,"[[0,0,0,0,0,0],[0,1,0,1,0,1],[0,0,0,0,0,0]]"
 exception, sequent,"[[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]"
 comparison, sequent,"[[0,0,0,0,0,0],[1,0,0,1,0,0],[0,0,0,0,0,0]]"
-purpose, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
-cause, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,0,0,0,0,0]]"
-result, consequence,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,1,0,0,0,]]"
+purpose, consequence,"[[0,0,0,0,0,0],[0,1,0,1,0,0],[0,0,0,0,0,0]]"
+cause, consequence,"[[0,0,0,0,0,0],[0,0,0,1,1,0],[0,0,0,0,0,0]]"
+result, consequence,"[[0,0,0,0,0,0],[1,1,1,1,1,1],[0,0,0,0,0,0]]"
+
+open, brackets,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+UNUSED, brackets, "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,1,0,0,0]]"
+close-open,brackets, "[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,0,0,0,0,0]]"
+close-close-open, brackets,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
 
 
 Glyphs
@@ -25,7 +31,7 @@ If, null, 0, condition, 0, null, 0
 Upon, prior, 0, condition,0, null, 0
 Then,posterior, 0, condition,0, null, 0
 While,simultaineous, 0, condition,0, null, 0
-Supposing, hypothetical, 0, condition, 0, null, 0
+In The Case, hypothetical, 0, condition, 0, null, 0
 
 But,null, 0, concession, 0, null, 0
 Although,prior, 0, concession,0, null, 0
@@ -60,7 +66,7 @@ In the Instance,hypothetical, 0, null, 0, cause, 1
 Such That,null,0, null, 0, result, 0
 Once, prior, 0, null, 0,result, 0
 Therefore,posterior, 0, null, 0, result, 0
-Given,simultaineous, 0, null, 0, result, 0
+About,simultaineous, 0, null, 0, result, 0
 Immediately,hypothetical, 0, null, 0, result, 0
 
 

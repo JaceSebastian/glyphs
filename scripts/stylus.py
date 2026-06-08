@@ -2,18 +2,18 @@ import argparse
 import math
 import ast
 import matplotlib.pyplot as plt
-from Classes.punctuationGlyph import punctuationGlyph
-from Classes.appositionGlyph import appositionGlyph
-from Classes.logicalGlyph import logicalGlyph
-from Classes.deonticGlyph import deonticGlyph
-from Classes.pronounGlyph import PronounGlyph
-from Classes.sequiGlyph import sequiGlyph
-from Classes.NumeralGlyph import NumeralGlyph
-from Classes.adjGlyph import adjGlyph
-from Classes.verbGlyph import verbGlyph
-from Classes.syllabaryGlyph import syllableGlyph
-from Classes.nounGlyph import nounGlyph
-from Classes.morphemeGlyph import morphemeGlyph
+from punctuationGlyph import punctuationGlyph
+from appositionGlyph import appositionGlyph
+from logicalGlyph import logicalGlyph
+from deonticGlyph import deonticGlyph
+from pronounGlyph import PronounGlyph
+from sequiGlyph import sequiGlyph
+from NumeralGlyph import NumeralGlyph
+from adjGlyph import adjGlyph
+from verbGlyph import verbGlyph
+from syllabaryGlyph import syllableGlyph
+from nounGlyph import nounGlyph
+from morphemeGlyph import morphemeGlyph
 from ligatureGlyph import ligatureGlyph
 
 
@@ -174,7 +174,7 @@ def main():
     parser.add_argument("--savename",       type=str,            default=None)
     parser.add_argument("--cell-size",      type=float,          default=1.25)
     parser.add_argument("--cols",           type=int,            default=7)
-    parser.add_argument("--color", type=str, default="maroon")
+    parser.add_argument("--color", type=str, default="chords")
 
     args = parser.parse_args()
 

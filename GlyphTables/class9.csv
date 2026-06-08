@@ -60,7 +60,7 @@ Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3
 # 1:domain 2-3:root 4:category
 Entire, quantity,0, full,0, null,0
-Entirely, quantity,0,full,0, alverb,0
+Entirely, quantity,0,full,0, adverb,0
 None (of), quantity,0, empty,0, null,0
 Always, quantity,0, full,0, adverb,0
 Never,quantity,0, empty,0, adverb,0
@@ -70,6 +70,8 @@ Rarely,quantity,0,small,0,adverb,0
 Most,quantity,0,big,0, null,0
 Many,quantity,0,unclear,0,null,0
 Few, quantity,0,small,0,null,0
+
+Creditable, quantity, 0, true, 0, reference, 0
 
 Quickly, age, 0, hot, 0, adverb, 0
 Superlative, null, 0, null,0, superlative,0
@@ -102,7 +104,9 @@ Red,color,0,bad,0,null,0
 Willing,quality,0,willing,0,null,0
 Aware,ability,0,willing,0,null,0
 Soft or malleable,property,0,willing,0,null,0
-Near or nearly,age,0,willing,0,null,0
+Near,age,0,willing,0,null,0
+Relevant,age,0,willing,0,null,0
+Immediately, age,0, willing,0, adverb,0
 Blessed or favored,social,0,willing,0,null,0
 Beautiful,color,0,willing,0,null,0
 

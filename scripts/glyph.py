@@ -153,18 +153,18 @@ class glyph:
         """This should always be overwritten for glyph class"""
         self.glossing = root
 
-    def _base_points(self):
+    def base_points(self):
         """Return x/y coordinates from the base function."""
         #print(self.base_fn(self.num, *self.base_kwargs))
         return self.base_fn(self.num, *self.base_kwargs)
     
     def left_anchor(self):
-        x_vals, y_vals = self._base_points()
+        x_vals, y_vals = self.base_points()
         idx = np.argmin(x_vals)
         return x_vals[idx], y_vals[idx]
 
     def right_anchor(self):
-        x_vals, y_vals = self._base_points()
+        x_vals, y_vals = self.base_points()
         idx = np.argmax(x_vals)
         return x_vals[idx], y_vals[idx]
 

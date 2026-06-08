@@ -10,10 +10,10 @@ Then:6
 Demon.Nom:5
 Entitle.Present Perfect:10
 Consume.Inf:10
-LEQ:NaN.Numerator:8 + LEQ:NaN.Denominator:8
+LEQ:NaN.Numerator:8 + LEQ:NaN.percent:8
 #see about Day.toAdverb for daily instead?
 Per:Day.Acc:12 
-(Bodily) Replenish.Continuous:10 + Vitality.Acc:5
+(Bodily) Replenish.Participle:10 + Vitality.Acc:5
 Summoner.Gen:5
 And:4
 No[:4
