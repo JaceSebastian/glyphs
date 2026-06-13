@@ -35,7 +35,7 @@ class logicalGlyph(glyph):
             for row in glyphreader:
                 word = row['command'].strip()
                 features = []
-                for j in range(1, self.attr_num ): #NOT +1 since only 1dimension used.
+                for j in range(1, self.attr_num): #NOT +1 since only 1dimension used.
                     feature = row[f'feature{j}'].strip()
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
@@ -46,7 +46,7 @@ class logicalGlyph(glyph):
 if __name__ == "__main__":
     test_obj = logicalGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
     commands = test_obj._getSampleCommands()
-    test_obj.demoprint(commands)
+    test_obj.demoprint(commands, 6)
 
 
  

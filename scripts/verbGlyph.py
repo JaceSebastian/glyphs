@@ -95,36 +95,10 @@ class verbGlyph(glyph):
     def _makeGlossing(self, root, conj):
         '''Note that this is a temp fix until I find a conjugation package I like that keeps the archaic feel
         LemmInflect seems good for past participles and irregulars'''
-        self.glossing = ""
-        if (conj == "Inf"):
-            self.glossing += "to "
-        elif (conj == "Passive"):
-            self.glossing += "be "
-        elif(conj == "Gerundive"):
-             self.glossing += "(the) "
-        elif(conj in ["Continuous", "Present Perfect"]):
-            self.glossing += "is "
-        elif(conj == "Passive Perfect"):
-            self.glossing += "had been "
-        elif(conj =="Past Perfect"):
-            self.glossing += "was "
-
-        self.glossing += root
-
-        if(conj =="Pres"):
-            self.glossing += "s"
-        elif(conj in ["Gerundive", "Participle", "Continuous"]):
-            self.glossing += "ing "
-        elif(conj in ["Past","Past Participle", "Passive","Passive Perfect", "Past Perfect", "Present Perfect"]):
-            self.glossing += "ed " if (root[-1] != 'e') else "d "
-        
-    
+        self.glossing = self.getInflection(conj, root)
         return self.glossing
+
     
-
-
-
-
 if __name__ == "__main__":
     test_obj = verbGlyph(
                      bases.polygon,

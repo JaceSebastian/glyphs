@@ -1,12 +1,12 @@
 feature, gloss, encoding
-Null,"", "[[0,0,0,0,0],[0,0,0,0,0]]"
-Summoner, "Summoner","[[0,0,0,0,0],[0,0,1,1,1]]"
-Demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
-Bondservice, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
-Place, "Place", "[[0,0,0,0,0],[1,1,1,0,1]]"
-Vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
-Thing, "Bindings", "[[0,0,0,0,0],[1,1,0,0,0]]"
-Person, "Who/One", "[[0,0,0,0,0],[0,0,0,1,0]]"
+null,"", "[[0,0,0,0,0],[0,0,0,0,0]]"
+summoner, "Summoner","[[0,0,0,0,0],[0,0,1,1,1]]"
+demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
+contract, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
+place, "Place", "[[0,0,0,0,0],[1,1,1,0,1]]"
+vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
+thing, "", "[[0,0,0,0,0],[1,1,0,0,0]]"
+person, "Who/One", "[[0,0,0,0,0],[0,0,0,1,0]]"
 
 Nom,"","[[0,0,0,0,0],[0,0,0,0,0]]"
 Dat,"","[[0,1,0,0,0],[0,0,0,0,0]]"
@@ -15,16 +15,25 @@ Acc,"For","[[0,0,0,1,1],[0,0,0,0,0]]"
 Loc,"To", "[[1,1,1,1,1],[0,0,0,0,0]]"
 Ablative,"From ", "[[1,0,1,1,1],[0,0,0,0,0]]"
 Inst,"By", "[[1,1,1,0,0],[0,0,0,0,0]]"
-Comitative, "With ","[[0,1,0,1,1],[0,0,0,0,0]]"
+Prop, "With ","[[0,1,0,1,1],[0,0,0,0,0]]"
 
 Glyphs
 command, feature1, rotation1, feature2, rotation2
-Nominative, Null, 0, Nom, 0
-Accusative, Null, 0, Acc, 0
-Genitive, Null, 0, Gen,0
-Dative, Null, 0, Dat, 0
-Locative, Null, 0, Loc, 0
-Instrumental, Null, 0, Inst, 0
+Nominative, null, 0, Nom, 0
+Accusative, null, 0, Acc, 0
+Genitive, null, 0, Gen,0
+Dative, null, 0, Dat, 0
+Locative, null, 0, Loc, 0
+Instrumental, null, 0, Inst, 0
+
+Summoner, summoner, 0, null, 0
+Demon, demon, 0, null,0
+Bindings, contract, 0, null, 0
+Contract, contract, 0, null,0
+Vitality, vitality, 0, null,0
+Person, person, 0, null, 0
+Place, place, 0, null,0
+Thing, thing, 0, null,0
 
 
 

@@ -1,70 +1,69 @@
 feature, group, encoding
-is, Unary, "[[0,0,1,0],[0,1,0,0]]"
-isnt, Unary, "[[1,0,1,0],[0,1,0,0]]"
+in, Quantifer, "[[0,0,0,0],[0,0,0,0]]"
+not_in,Quantifer, "[[1,0,0,0],[0,0,0,0]]"
+none,Quantifer, "[[1,0,1,0],[0,0,0,0]]"
+unique,Quantifer, "[[1,1,1,0],[0,0,0,0]]"
+some,Quantifer, "[[1,0,0,1],[0,0,0,0]]"
+all,Quantifer, "[[1,1,1,1],[0,0,0,0]]"
 
-was,Unary,  "[[0,0,0,0],[1,1,0,0]]"
-wasnt, Binary, "[[0,0,1,1],[1,1,0,0]]"
+xor_init, Binary, "[[0,0,0,0],[0,1,0,0]]"
+xor, Binary, "[[1,0,0,0],[0,1,0,0]]"
+and_init, Binary, "[[1,0,1,0],[0,1,0,0]]"
+and, Binary, "[[1,1,1,0],[0,1,0,0]]"
+or_init, Binary, "[[1,0,0,1],[0,1,0,0]]"
+or, Binary, "[[1,1,1,1],[0,1,0,0]]"
 
-positive constraint, Unary,"[[1,1,1,1],[0,0,0,0]]"
-negative constraint, Unary,"[[1,1,1,1],[1,0,0,0]]"
-
-no, Unary,"[[0,0,0,0],[0,0,1,0]]"
-no_init, Binary,"[[0,0,1,1],[0,0,1,0]]"
-
-and, Binary,"[[1,1,0,1],[0,0,0,0]]"
-and_init, Binary, "[[1,1,0,1],[0,0,1,0]]"
-
-or_init, Binary,"[[0,0,1,0],[1,1,0,0]]"
-or, Binary,"[[1,0,1,0],[1,1,0,0]]"
-
-xor_init, Binary,"[[1,1,0,1],[1,1,0,0]]"
-xor, Binary,"[[1,1,0,0],[0,0,0,0]]"
-
-all, Binary,"[[1,1,1,1],[1,1,0,0]]"
-none, Binary,"[[0,0,0,0],[0,0,0,0]]"
-null, Unary, "[[0,0,0,0],[0,0,0,0]]"
-
-
-
-
+not_init, State, "[[0,0,0,0],[0,0,1,1]]"
+not, State, "[[1,0,0,0],[0,0,1,1]]"
+is, State, "[[1,0,1,0],[0,0,1,1]]"
+isnt, State, "[[1,1,1,0],[0,0,1,1]]"
+become, State, "[[1,0,0,1],[0,0,1,1]]"
+ceased, State, "[[1,1,1,1],[0,0,1,1]]"
 
 Glyphs
 command, feature1, rotation1
 Is, is, 0
 Isn't, isnt, 0
-With, positive constraint,0
-Without, negative constraint,0
-Not, no,0
-Not[, no_init,0
-Un, no, 0
-No, no, 0
-No[, no_init,0
-And, and, 0
-And[, and_init,0
-None, none,0
-All, all,0
-Or, or, 0
-Or[, or_init,0
-Xor, xor,0
-Xor[, xor_init,0
-
-
-Are, is, 0
-Was, was,0
-Were, was,0
-
+Are, is, 0  
 Aren't, isnt,0
+Has Become, become, 0
+Has Ceased To Be, ceased, 0
+Stopped Being, ceased,0
+Not, not,0
+Not[, not_init,0
+Un, not, 0
+No, not, 0
+No[, not_init,0
 Are Not, isnt, 0
-Weren't, wasnt,0
-Wasn't, wasnt,0
 Is Not, isnt,0
-Was Not, wasnt,0
-Were Not, wasnt,0
-
 Does Not, isnt,0
 Dosn't, isnt,0
 Do Not, isnt,0
 Don't, isnt,0
 
+And, and, 0
+And[, and_init,0
+Or, or, 0
+Or[, or_init,0
+Xor, xor,0
+Xor[, xor_init,0
+Either, xor,0
 
+
+
+
+
+None, none,0
+All, all,0
+Both, all,0
+In, in,0
+Not In,not_in,0
+One, unique, 0
+Exactly One, unique,0
+Uniquely, unique,0
+Any, some,0
+Some, some, 0
+All, all,0
+Each,all,0
+Every,all,0
 

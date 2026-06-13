@@ -40,19 +40,30 @@ class PronounGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
-            #print(self.glyph_list)
+
     
     def _getBinaryArray(self, word):
         self.glossing = word
         self.features = []
-        if(word in self.glyph_list):
-            self.features = self.glyph_list[word]
-            self._makeGlossing(det = "", root = word, case = "Nom")
+        #Set Phrase ie Bindings, no declensions.
+        if word in self.glyph_list:
+            for feature_name, rotation in self.glyph_list[word]:
+                fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
+                fencoding = self.rotateGlyph(fencoding, rotation) 
+                self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+                self.glossing = word
+            return self.binary_array
+        # direct encoding hit — bare feature name, no parsing needed
+        if word in self.encodings:
+            fencoding = np.array(self.encodings[word]).reshape(self.attr_num, self.num)
+            self.binary_array = np.bitwise_or(self.binary_array, fencoding)
+            self.glossing = word
+            return self.binary_array
         else:
             self.features = []
             if ':' in word:
                 det, word = word.split(':', 1)
-                #self.features.append((det.strip() if det.strip() else "",0))
+                self.features.append((det.strip() if det.strip() else "",0))
             else:
                 det = "The "
             if '.' in word:
@@ -61,8 +72,15 @@ class PronounGlyph(glyph):
             else:
                 case = "Nom"
                 case_feature = "Nom"
-            self.features.append((word,0))
-            self.features.append((case_feature,0))
+            root = word.strip()
+            if not root:
+                raise ValueError(f"No root pronoun found in '{word}'")
+            if root not in self.glyph_list:
+                raise KeyError(f"'{root}' not found in C5 glyph_list")
+            # get root and field features from glyph_list, ignore determinant slot
+            for feat, rotation in self.glyph_list[root]:
+                self.features.append((feat, rotation))
+            self.features.append((case_feature, 0))
             self._makeGlossing(root=word, case=case_feature)
         for feature_name, rotation in self.features:
             fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
@@ -71,23 +89,9 @@ class PronounGlyph(glyph):
         return self.binary_array
 
 
-    def _makeGlossing(self,det="The ", root="_", case="Nom"):
-        return_value = ""
-        if case == "Gen":
-            return_value += "of "
-        elif case == "Loc":
-            return_value += "to "
-        elif case == "Ablative":
-            return_value += "from "
-        elif case == "Dat":
-            return_value += "to "
-        elif case == "Inst":
-            return_value += "by "
-        elif case == "Commitative":
-            return_value += "with "
-        else: #case == "Nom" or case == "Acc":
-            case = None
 
+    def _makeGlossing(self,det="The ", root="_", case="Nom"):
+        return_value = self.getDeclension(case, "")
         return_value += det
         return_value += root.title()
         self.glossing = return_value
@@ -96,8 +100,9 @@ class PronounGlyph(glyph):
 
 if __name__ == "__main__":
     test_obj = PronounGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
-    printList = list(test_obj.glyph_list.keys())[:12] #to avoid redundancies
-    commands = test_obj._getSampleCommands()
+    commands = list(test_obj.glyph_list.keys()) #to avoid redundancies
+    #commands = test_obj._getSampleCommands()
+    commands.append("Bindings.Loc")
     test_obj.demoprint(commands, 4)
 
 

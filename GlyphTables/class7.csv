@@ -12,13 +12,17 @@ affix, target,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,1,1,1,1]]"
 
 
 #k=1 (case/conjugation)
-nom_pres, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
-acc_past,case,"[[0,0,1,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+nom, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+pres, case,"[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+
+acc,case,"[[0,0,1,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+past,case,"[[0,0,1,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
 gen,case,"[[0,1,1,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 participle,case,"[[0,1,1,1,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
-dat_pastparticiple,case,"[[1,0,0,0,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+dat,case,"[[1,0,0,0,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+past participle,case,"[[1,0,0,0,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
 loc_presperf,case,"[[1,1,0,1,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
@@ -26,7 +30,9 @@ abl_pstperf,case,"[[0,0,0,0,0,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
 inst_passive,case,"[[1,0,0,0,1,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
 
-com_passiveperf,case,"[[1,1,0,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+prop,case,"[[1,1,0,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+passiveperf,case,"[[1,1,0,1,1,1,1],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
+
 
 #can be used for someting in future
 undefined, _, "[[1,0,0,1,0,1,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]"
@@ -71,22 +77,20 @@ toNoun, null,0, null,0, to_noun,0
 toVerb, null,0, null,0, to_verb,0
 toAdj, null,0, null,0, to_adjective,0
 toAdv, null,0,null,0, to_adverb,0
-Pres, null,0, nom_pres, 0, null,0
-Nom, null,0, nom_pres, 0, null,0
-Acc/Past, null,0, acc_past, 0, null,0
+Nom/Pres, null,0, nom, 0, null,0
+Acc/Past, null,0, acc, 0, null,0
 Gen/Participle, null,0, gen, 0, null,0
-Dat/Past Participle, null,0, dat_pastparticiple, 0, null,0
+Dat/Past Participle, null,0, dat, 0, null,0
 Loc/Perfect, null,0, loc_presperf, 0, null,0
 Ablatiave/Past Perfect, null,0, abl_pstperf, 0, null,0
 Instr/Passive, null,0, inst_passive, 0, null,0
-Comitative/Passive Perfect, null,0, com_passiveperf, 0, null,0
+Prop/PassivePerf, null,0, prop, 0, null,0
+
 Infinitive/Plural, null,0, infinitive, 0, null,0
 
 Reflexive, reflexive,0,null,0, applicative, 0
 Itself,reflexive,0,null,0, applicative, 0
 
-#this is probably wrong.
-In, diminutive, 0, null,0, applicative,0
 
 
 -al, state_of,0, null,0, to_adjective,0

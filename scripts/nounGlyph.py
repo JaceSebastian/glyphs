@@ -111,19 +111,7 @@ class nounGlyph(glyph):
 
 
     def _makeGlossing(self, det, root, case):
-        return_value = ""
-        if case == "Gen":
-            return_value += "of "
-        elif case == "Loc":
-            return_value += "to "
-        elif case == "Dat":
-            return_value += "to "
-        elif case == "Ablative":
-            return_value += "from "
-        elif case == "Inst":
-            return_value += "by "
-        else: #case == "Nom" or case == "Acc":
-            case = None
+        return_value = self.getDeclension(case, "")
 
         if det:
             if det in ["PL","ThePL", "Some", "All", "NoNumber"]: #hardcoded BAD
@@ -147,7 +135,7 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = test_obj._getSampleCommands("base")
+    commands = test_obj._getSampleCommands() #("base")
     test_obj.demoprint(commands,cell_size=1)
 
 

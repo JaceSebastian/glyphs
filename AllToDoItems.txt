@@ -1,16 +1,21 @@
-A) Fix Comitative Case to be: 1. The Proprietive Case
-    In languages like Finnish and various Australian Indigenous languages. 
-    It turns a noun into a modifier that means "equipped with" or "having".
-B) Adjust the case and inflection functions to exist in glyph.py not individual classes.
-C) Figure out what the logical structure is. I think with is going to be handled by case and
-    the addition of a Have /Have not set of n=4 glyphs.
+
 D) Figure out how I want to order adjectives. Might do like Japanese particle, 
     with n=2 glyph as the linking particle. so Red House -> house that-is red. 
     that has to attach to each adj. Old red house -> House that-is red and that-is old.
-E) In smaple texts, either remove or redifine all mentions of bindings, vows, 
+E) In sample texts, either remove or redefine all mentions of bindings, vows, 
     bondservice etc to contract in n=5 or new nouns.
 F) Applicatives??
 G) Flesh out suffixes for n=9
 H) Start working on drawing ligatures.
+J) Fix all sample texts to have correct glyphs after revisions. like with.
+K) Figure out why glow is no longer rendering.
 
 
+###################################3
+B) Adjust the case and inflection functions to exist in glyph.py not individual classes.
+I)Fix Pronoun getBinaryEncodings
+C) Figure out what the logical structure is. I think with is going to be handled by case and
+    the addition of a Have /Have not set of n=4 glyphs.
+A) Fix Comitative Case to be: 1. The Proprietive Case
+    In languages like Finnish and various Australian Indigenous languages. 
+    It turns a noun into a modifier that means "equipped with" or "having".

@@ -11,6 +11,7 @@ Must Not, forbidden, 0
 Ought, omissible, 0
 May, permissable, 0
 
+Can, permissable,0
 Can't, forbidden, 0
 Can Only, obligatory, 0
 Should, omissible, 0

@@ -149,9 +149,6 @@ class glyph:
             self.binary_array = np.bitwise_or(self.binary_array, fencoding)
         return self.binary_array
 
-    def _makeGlossing(self, det=None, root="", case=None):
-        """This should always be overwritten for glyph class"""
-        self.glossing = root
 
     def base_points(self):
         """Return x/y coordinates from the base function."""
@@ -212,6 +209,56 @@ class glyph:
 
     def draw(self, **kwargs):
         GlyphDrawer(self).draw(**kwargs)
+
+
+####### Glossing Functions
+
+    def _makeGlossing(self, det=None, root="", case=None):
+        """This should always be overwritten for glyph class"""
+        self.glossing = root
+
+    def getDeclension(self, case, glossingStr):
+        case = case.lower()
+        if case == "Gen":
+            glossingStr += "of "
+        elif case == "Loc":
+            glossingStr += "to "
+        elif case == "Dat":
+            glossingStr += "to "
+        elif case == "Ablative":
+            glossingStr += "from "
+        elif case == "Inst":
+            glossingStr += "by "
+        elif case == "Prop":
+            glossingStr += "with "
+        else: #case == "Nom" or case == "Acc":
+            case = None
+        return glossingStr
+
+    def getInflection(self, conj, glossingStr):
+        '''Note that this is a temp fix until I find a conjugation package I like that keeps the archaic feel
+        LemmInflect seems good for past participles and irregulars'''
+        if (conj == "Inf"):
+            glossingStr = "to " + glossingStr
+        elif (conj == "Passive"):
+            glossingStr = "be " + glossingStr
+        elif(conj == "Gerundive"):
+             glossingStr = "(the) " + glossingStr
+        elif(conj in ["Continuous", "Present Perfect"]):
+            glossingStr = "is " + glossingStr
+        elif(conj == "Passive Perfect"):
+            glossingStr = "had been "+glossingStr
+        elif(conj =="Past Perfect"):
+            glossingStr = "was " + glossingStr
+        else:
+            pass
+        if(conj =="Pres"):
+            glossingStr += "s"
+        elif(conj in ["Gerundive", "Participle", "Continuous"]):
+            glossingStr += "ing "
+        elif(conj in ["Past","Past Participle", "Passive","Passive Perfect", "Past Perfect", "Present Perfect"]):
+            glossingStr += "ed " if (glossingStr[-1] != 'e') else "d "
+        return glossingStr
 
 
 

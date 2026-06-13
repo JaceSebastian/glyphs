@@ -69,7 +69,7 @@ class morphemeGlyph(glyph):
         if not root:
             raise ValueError(f"No root morpheme found in '{word}'")
         if root not in self.glyph_list:
-            raise KeyError(f"'{root}' not found in glyph_list")
+            raise KeyError(f"'{root}' not found in C9 glyph_list")
         # get root and field features from glyph_list, ignore determinant slot
         for feat, rotation in self.glyph_list[root]:
             features.append((feat, rotation))
@@ -89,22 +89,7 @@ class morphemeGlyph(glyph):
 
     def _makeGlossing(self, root, case):
         '''Note that thisis copied from noun, and not adapted.'''
-        return_value = ""
-        case = case.title()
-        if case == "Gen":
-            return_value += "of "
-        elif case == "Loc":
-            return_value += "to "
-        elif case == "Dat":
-            return_value += "to "
-        elif case == "Ablative":
-            return_value += "from "
-        elif case == "Inst":
-            return_value += "by "
-        else: #case == "Nom" or case == "Acc":
-            case = None
-
-        
+        return_value = self.getDeclension(case, "")
         return_value += root.title()
         self.glossing = return_value
         return return_value

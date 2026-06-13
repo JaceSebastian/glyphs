@@ -111,7 +111,7 @@ Class 7:Morphemes or class changing morphemes
         -Ablative (from)
         -Loc
         -Inst
-        -Comitative
+        -Proprietive Case turns a noun into a modifier that means "equipped with" or "having".
     - Conjugation
         - Infinitive/Gerundive
         - Present Participle

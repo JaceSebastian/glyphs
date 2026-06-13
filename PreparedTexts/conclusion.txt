@@ -28,11 +28,11 @@ May:3
 Write.Passive:10
 Or:4
 Change.Passive:10
-Without:4
+Not:4
 #this is example of how verb is a adjP here
 Inform.Past Participle:10
 And:4
 Willing:9
-Agree:10 + -ment:7
+Agree:10 + -ment.Prop:7
 Each:Party.Gen:12
 Period:1
