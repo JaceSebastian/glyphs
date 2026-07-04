@@ -3,19 +3,19 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-from scripts.punctuationGlyph import punctuationGlyph
-from scripts.appositionGlyph import appositionGlyph
-from scripts.logicalGlyph import logicalGlyph
-from scripts.deonticGlyph import deonticGlyph
-from scripts.pronounGlyph import PronounGlyph
-from scripts.sequiGlyph import sequiGlyph
-from scripts.morphemeGlyph import morphemeGlyph
-from scripts.NumeralGlyph import NumeralGlyph
-from scripts.adjGlyph import adjGlyph
-from scripts.verbGlyph import verbGlyph
-from scripts.syllabaryGlyph import syllableGlyph
-from scripts.nounGlyph import nounGlyph
-from ligatureGlyph import ligatureGlyph
+from punctuationGlyph import punctuationGlyph
+from appositionGlyph import appositionGlyph
+from logicalGlyph import logicalGlyph
+from deonticGlyph import deonticGlyph
+from pronounGlyph import PronounGlyph
+from sequiGlyph import sequiGlyph
+from morphemeGlyph import morphemeGlyph
+from NumeralGlyph import NumeralGlyph
+from adjGlyph import adjGlyph
+from verbGlyph import verbGlyph
+from syllabaryGlyph import syllableGlyph
+from nounGlyph import nounGlyph
+
 
 CLASS_MAP = {
     1: punctuationGlyph,
@@ -32,6 +32,8 @@ CLASS_MAP = {
     12: nounGlyph,
 }
 
+LIGATURE_SPACING = 0.075
+
 # ── Parsing ────────────────────────────────────────────────────────────────────
 
 def parse_feature_token(token: str) -> tuple[str, int]:
@@ -41,6 +43,16 @@ def parse_feature_token(token: str) -> tuple[str, int]:
         return feat.strip(), int(rot.strip())
     return token, 0
 
+
+def OLDparse_spec(spec: str) -> tuple:
+    spec = spec.strip()
+    split_pos = max(i for i, ch in enumerate(spec) if ch == ":")
+    body = spec[:split_pos].strip()
+    class_index = int(spec[split_pos + 1:].strip())
+    if body.startswith("[") and body.endswith("]"):
+        tokens = [t.strip() for t in body[1:-1].split(",")]
+        return [parse_feature_token(t) for t in tokens if t], class_index
+    return body, class_index
 
 def parse_spec(spec: str) -> tuple:
     spec = spec.strip()
@@ -52,42 +64,46 @@ def parse_spec(spec: str) -> tuple:
         return [parse_feature_token(t) for t in tokens if t], class_index
     return body, class_index
 
-
-def parse_ligature(spec: str) -> list[str]:
-    parts, current, depth = [], [], 0
-    for ch in spec:
-        if ch == '[':   depth += 1
-        elif ch == ']': depth -= 1
-        elif ch == '+' and depth == 0:
-            parts.append(''.join(current).strip())
-            current = []
-            continue
-        current.append(ch)
-    parts.append(''.join(current).strip())
-    return parts
-
-
 def parse_file(filepath: str) -> list[str]:
     with open("PreparedTexts/" + filepath) as f:
         return [l.strip() for l in f if l.strip() and not l.lstrip().startswith("#")]
 
 
-def resolve_glyph(spec_str: str):
-    """Build and return a ready-to-draw glyph or ligatureGlyph from a spec string."""
+def resolve_glyph(spec_str: str) -> list:
+    """Returns a list of glyph objects: one element for a plain spec,
+    multiple for a '+'-joined ligature spec. No depth-aware splitting —
+    '+' is always a separator."""
     if '+' in spec_str:
-        sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
-        obj = ligatureGlyph(sub_specs, CLASS_MAP)
-        obj.build()
+        parts = []
+        for s in spec_str.split('+'):
+            lookup, class_index = parse_spec(s)
+            obj = CLASS_MAP[class_index]()
+            obj._getBinaryArray(lookup)
+            parts.append(obj)
+        return parts
     else:
         lookup, class_index = parse_spec(spec_str)
-        if class_index not in CLASS_MAP:
-            raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
         obj = CLASS_MAP[class_index]()
         obj._getBinaryArray(lookup)
-    return obj
+        return [obj]
+    
 
+    
 
 # ── Rendering ──────────────────────────────────────────────────────────────────
+
+def wordWidth(parts, scale):
+
+    width = 0
+
+    for part in parts:
+
+        width += (
+            part.getRightAnchor()[0]
+            - part.getLeftAnchor()[0]
+        ) * scale
+
+    return width
 
 def render_typewriter(
     spec_strings : list[str],
@@ -99,78 +115,114 @@ def render_typewriter(
     scale        : float = 0.5,
     draw_kwargs  : dict  = {},
 ):
-    # ── Build glyph objects ───────────────────────────────────────────────────
-    glyphs = []
+# ── Build groups ───────────────────────────────────────────────────────────
+    groups = []   # list of (parts, gloss) where parts is a list of glyph objs
     for spec_str in spec_strings:
         try:
-            obj = resolve_glyph(spec_str)
-            glyphs.append((obj, obj.glossing))
+            parts = resolve_glyph(spec_str)
+            gloss = "+".join(p.glossing for p in parts)
+            groups.append((parts, gloss))
         except (ValueError, KeyError) as e:
             print(f"Skipping '{spec_str}': {e}")
 
-    # ── Compute x offsets using anchors ───────────────────────────────────────
-    positions = []   # (x_off, y_off) per glyph
-    x_cursor  = 0.0
+    layouts = []
 
-    for obj, _ in glyphs:
-        lx, _ = obj.left_anchor()
-        x_off  = x_cursor - lx * scale
-        rx, _  = obj.right_anchor()
-        x_cursor = x_off + rx * scale + word_gap
-        positions.append((x_off, 0.0))
+    cursor_x = 0
+    cursor_y = 0
 
-    # ── Line-break pass ───────────────────────────────────────────────────────
-    lines         = []   # list of list of (obj, gloss, x_off, y_off)
-    current_line  = []
-    line_x_origin = positions[0][0] if positions else 0.0
+    for parts, gloss in groups:
 
-    for (obj, gloss), (x_off, y_off) in zip(glyphs, positions):
-        rx, _ = obj.right_anchor()
-        extent = x_off + rx * scale - line_x_origin
+        width = wordWidth(parts, scale)
 
-        if current_line and extent > max_width:
-            lines.append(current_line)
-            shift         = x_off
-            line_x_origin = x_off
-            current_line  = [(obj, gloss, x_off, y_off)]
-        else:
-            if not current_line:
-                line_x_origin = x_off
-            current_line.append((obj, gloss, x_off, y_off))
+        if cursor_x > 0 and cursor_x + width > max_width:
+            cursor_x = 0
+            cursor_y -= line_height * scale
 
-    if current_line:
-        lines.append(current_line)
+        #word_start = cursor_x
+        word_start = cursor_x + parts[0].getLeftAnchor()[0] * scale
+
+        glyph_positions = []
+
+        for i, part in enumerate(parts):
+
+            glyph_positions.append(
+                (part, cursor_x, cursor_y)
+            )
+
+            advance = (
+                part.getRightAnchor()[0]
+                - part.getLeftAnchor()[0]
+            )
+
+            cursor_x += advance * scale + LIGATURE_SPACING
+
+        word_end = cursor_x
+
+        layouts.append(
+            (
+                gloss,
+                glyph_positions,
+                word_start,
+                word_end,
+                cursor_y
+            )
+        )
+
+        cursor_x += word_gap * scale
 
     # ── Draw ──────────────────────────────────────────────────────────────────
+    line_ys = sorted({layout[4] for layout in layouts}, reverse=True)
+    num_lines = max(1, len(line_ys))
     fig, ax = plt.subplots(
         1, 1,
-        figsize=(max_width, line_height * scale * len(lines))
+        figsize=(max_width, line_height * scale * num_lines)
     )
     ax.set_aspect('equal')
     ax.set_axis_off()
 
-    for line_idx, line_tokens in enumerate(lines):
-        y_shift = -line_idx * line_height * scale
-        x_shift = -line_tokens[0][2]   # normalise line to start at x=0
+    for gloss, glyph_positions, word_start, word_end, baseline_y in layouts:
 
-        for obj, gloss, x_off, y_off in line_tokens:
-            #the line is not properly offsetting by number of glyphs in ligature
-            x_world = (x_off + x_shift)
-            y_world = y_off + y_shift
+        for part, x, y in glyph_positions:
 
-            obj.draw_offset(axs=ax,
-                     x_offset=x_world, y_offset=y_world,
-                     **draw_kwargs)
+            part.draw_offset(
+                axs=ax,
+                x_offset=x,
+                y_offset=y,
+                **draw_kwargs
+            )
 
-            lx, _ = obj.left_anchor()
-            rx, _ = obj.right_anchor()
-            cx = x_world + (lx + rx) / 2 * scale
+            """This part draws anchor points"""
+            # rx, ry = part.getRightAnchor()
 
-            ax.text(cx, y_world - gloss_offset * scale, gloss,
-                    ha='center', va='top',
-                    fontsize=gloss_size, clip_on=False)
+            # ax.plot(
+            #     x + rx*scale,
+            #     y + ry*scale,
+            #     'o',
+            #     color='blue',
+            #     markersize=5
+            # )
+            # rx, ry = part.getLeftAnchor()
 
-            obj._clear_binary()
+            # ax.plot(
+            #     x + rx*scale,
+            #     y + ry*scale,
+            #     'o',
+            #     color='red',
+            #     markersize=5
+            # )
+
+            part._clear_binary()
+
+        center = (word_start + word_end -word_gap)/2
+
+        ax.text(
+            center,
+            y - gloss_offset*scale,
+            gloss,
+            ha='center',
+            va='top',
+            fontsize=gloss_size
+        )
 
     plt.tight_layout()
     plt.show()
@@ -209,6 +261,7 @@ def main():
         "show_all_paths": args.show_all_paths,
         "line_color":     args.color,
         "savename":       None,
+        "scale":          args.scale,
     }
 
     render_typewriter(

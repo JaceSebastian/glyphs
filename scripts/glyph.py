@@ -79,6 +79,7 @@ class glyph:
                 show_all_paths=True,
                 glow=True,
                 show_name=False,
+                #TODO add line color
                 axs=axes[idx],
                 vertex_num = self.num,
                 **draw_kwargs,
@@ -150,20 +151,41 @@ class glyph:
         return self.binary_array
 
 
-    def base_points(self):
+    def _base_points(self):
         """Return x/y coordinates from the base function."""
         #print(self.base_fn(self.num, *self.base_kwargs))
         return self.base_fn(self.num, *self.base_kwargs)
     
-    def left_anchor(self):
-        x_vals, y_vals = self.base_points()
-        idx = np.argmin(x_vals)
-        return x_vals[idx], y_vals[idx]
+    def getLeftAnchor(self):
+        x, y = self._base_points()
+        return (np.min(x),(np.min(y) + np.max(y)) / 2)
+    
+    def getRightAnchor(self):
+        x, y = self._base_points()
+        return (np.max(x),(np.min(y) + np.max(y)) / 2)
+    
+    def getRightAscendingAnchor(self):
+        """
+        Outgoing attachment point for the upper hex row.
+        """
+        x, y = self._base_points()
 
-    def right_anchor(self):
-        x_vals, y_vals = self.base_points()
-        idx = np.argmax(x_vals)
-        return x_vals[idx], y_vals[idx]
+        xmin = np.min(x)
+        xmax = np.max(x)
+        ymin = np.min(y)
+        ymax = np.max(y)
+
+        width  = xmax - xmin
+        height = ymax - ymin
+
+        return (
+            xmax + width * 0.10,
+            (ymin + ymax)/2 + height/2
+        )
+
+    
+
+
 
     def _getSampleCommands(self, group: str | None = None) -> list[str]:
         """
@@ -195,12 +217,12 @@ class glyph:
         return commands
 
 
-    def draw_offset(self, axs, x_offset=0.0, y_offset=0.0, rotation=0, **draw_kwargs):
+    def draw_offset(self, axs, x_offset=0.0, y_offset=0.0, rotation=0, scale=1.0, **draw_kwargs):
         original_base_fn = self.base_fn
 
         def offset_base_fn(n, *args):
             x_vals, y_vals = original_base_fn(n, *args)
-            return [x + x_offset for x in x_vals], [y + y_offset for y in y_vals]
+            return [x*scale+ x_offset for x in x_vals], [y*scale + y_offset for y in y_vals]
 
         self.base_fn = offset_base_fn
         self.draw(axs=axs, **draw_kwargs)
@@ -219,17 +241,17 @@ class glyph:
 
     def getDeclension(self, case, glossingStr):
         case = case.lower()
-        if case == "Gen":
+        if case == "gen":
             glossingStr += "of "
-        elif case == "Loc":
+        elif case == "loc":
             glossingStr += "to "
-        elif case == "Dat":
+        elif case == "dat":
             glossingStr += "to "
-        elif case == "Ablative":
+        elif case == "ablative":
             glossingStr += "from "
-        elif case == "Inst":
+        elif case == "inst":
             glossingStr += "by "
-        elif case == "Prop":
+        elif case == "prop":
             glossingStr += "with "
         else: #case == "Nom" or case == "Acc":
             case = None

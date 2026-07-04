@@ -2,18 +2,18 @@ import argparse
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from scripts.punctuationGlyph import punctuationGlyph
-from scripts.appositionGlyph import appositionGlyph
-from scripts.logicalGlyph import logicalGlyph
-from scripts.deonticGlyph import deonticGlyph
-from scripts.pronounGlyph import PronounGlyph
-from scripts.sequiGlyph import sequiGlyph
-from scripts.morphemeGlyph import morphemeGlyph
-from scripts.NumeralGlyph import NumeralGlyph
-from scripts.adjGlyph import adjGlyph
-from scripts.verbGlyph import verbGlyph
-from scripts.syllabaryGlyph import syllableGlyph
-from scripts.nounGlyph import nounGlyph
+from punctuationGlyph import punctuationGlyph
+from appositionGlyph import appositionGlyph
+from logicalGlyph import logicalGlyph
+from deonticGlyph import deonticGlyph
+from pronounGlyph import PronounGlyph
+from sequiGlyph import sequiGlyph
+from morphemeGlyph import morphemeGlyph
+from NumeralGlyph import NumeralGlyph
+from adjGlyph import adjGlyph
+from verbGlyph import verbGlyph
+from syllabaryGlyph import syllableGlyph
+from nounGlyph import nounGlyph
 from ligatureGlyph import ligatureGlyph
 
 # ── Class index ────────────────────────────────────────────────────────────────

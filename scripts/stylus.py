@@ -174,7 +174,7 @@ def main():
     parser.add_argument("--savename",       type=str,            default=None)
     parser.add_argument("--cell-size",      type=float,          default=1.25)
     parser.add_argument("--cols",           type=int,            default=7)
-    parser.add_argument("--color", type=str, default="chords")
+    parser.add_argument("--color", type=str, default="summer")
 
     args = parser.parse_args()
 

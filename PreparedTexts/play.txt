@@ -1,0 +1,28 @@
+#If said demon crosses this circle, all the following rules must be obeyed for a bond-service of the shorter duration of 
+#XX years or period until the demon is banished back to the otherworld.
+If:6
+Demon.Nom:5
+cross.Pres:10
+Boundary.Acc:12
+Contract.Gen:5
+Then:6
+All:4
+Subsequent:9
+#check case of this?
+PL:Binding.Nom:12
+Must:3
+Obey.Passive:10
+For.[:6
+NaN:8 + NaN:8
+#How is duration case set?
+PL:Year.Acc:12
+Or:4
+time:12
+Before:6
+Demon.Acc:5
+Banish.Passive Perfect:10
+Otherworld.Loc:12
+Period:1
+
+
+#The demon swears to accept no other bindings while in this summoner's bond service.

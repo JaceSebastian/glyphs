@@ -8,8 +8,7 @@ Summoner.Nom:5
 Swear.Pres:10
 That:6
 No[:4
-New:9
-Bindings.Nom:5
+New:9 + Bindings.Nom:5
 Like:6
 PL:Order.Nom:12
 #to close this as a sequi OR
@@ -22,7 +21,7 @@ Entitle:10 + -ment:7 + Vitality.Loc:5
 That:6
 Currently:9
 Are Not:4
-In:7
+In:4
 The:Contract:12
 May:3
 Write.Passive:10

@@ -7,12 +7,11 @@ import math
 def polygon(n,radius = 1,start_angle = None, x_offset =0.0):
     #Creates x,y data for an n-sided polygon
     if start_angle is None:
-        if n %4 ==0:
-            start_angle = 0
-        elif n %2 == 0:
+        if n in (6,8,10): 
             start_angle = np.pi/n
-        else:
+        else:  #not 12 for sake of symmetry?
             start_angle = 0
+
     small_angle = [start_angle + i * 2*np.pi/n for i in np.arange(1,n+1)]
     x,y = (radius * np.sin(small_angle)+x_offset, radius * np.cos(small_angle))
     return(x,y)

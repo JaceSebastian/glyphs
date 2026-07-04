@@ -54,7 +54,9 @@ Either, xor,0
 
 
 None, none,0
+None of, none,0
 All, all,0
+All of, all,0
 Both, all,0
 In, in,0
 Not In,not_in,0

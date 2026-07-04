@@ -106,7 +106,7 @@ class NumeralGlyph(glyph):
         for feature_name, rotation in features:
             if feature_name not in self.encodings:
                 print(f"Warning: '{feature_name}' not found in encodings, skipping.")
-                print(f"Encodings: '{self.encodings}'.")
+              #  print(f"Encodings: '{self.encodings}'.")
                 continue
             fencoding = np.array(self.encodings[feature_name]).reshape(self.attr_num, self.num)
             fencoding = self.rotateGlyph(fencoding, rotation)
@@ -115,8 +115,9 @@ class NumeralGlyph(glyph):
         return self.binary_array
     
 
-    def _makeGlossing(self, boundary, num, type):
+    def _makeGlossing(self, boundary, num, numtype):
         return_value = ""
+        numtype = numtype.lower()
         match(boundary):
             case "LEQ":
                 return_value += "⩽"
@@ -128,9 +129,12 @@ class NumeralGlyph(glyph):
                 return_value += "⩽"
      
 
-        return_value += num.title() if (num.lower() != "nan") else num
+        if (num.lower() == "nan"):
+            return_value += "NaN"
+        else:
+            return_value += num.title()
 
-        match(type):
+        match(numtype):
             case "percent":
                 return_value +="%"
             case "ordinal":

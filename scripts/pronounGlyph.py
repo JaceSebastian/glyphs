@@ -68,10 +68,10 @@ class PronounGlyph(glyph):
                 det = "The "
             if '.' in word:
                 word, case = word.split('.', 1)
-                case_feature = case.strip() if case.strip() else "Nom"
+                case_feature = case.strip().lower() if case.strip() else "nom"
             else:
-                case = "Nom"
-                case_feature = "Nom"
+                case = "nom"
+                case_feature = "nom"
             root = word.strip()
             if not root:
                 raise ValueError(f"No root pronoun found in '{word}'")
@@ -95,7 +95,7 @@ class PronounGlyph(glyph):
         return_value += det
         return_value += root.title()
         self.glossing = return_value
-        return return_value
+        return self.glossing
 
 
 if __name__ == "__main__":

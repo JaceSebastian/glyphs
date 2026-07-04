@@ -20,7 +20,7 @@ class appositionGlyph(glyph):
         # subclass-specific initialization
         self.num = 2
         self.attr_num = 1
-        self.base_fn = bases.line
+        self.base_fn = bases.polygon
         self.binary_array = np.zeros((self.attr_num,self.num),dtype = int)#recreate array
         self.text_file = self.text_file_base +"class2.csv"
 
@@ -43,6 +43,20 @@ class appositionGlyph(glyph):
                     rotation = int(row[f'rotation{j}'].strip())
                     features.append((feature, rotation))
                 self.glyph_list[word] = features
+
+
+    def getLeftAnchor(self):
+        x, y = self._base_points()
+        height = np.max(y) - np.min(y)
+        return (0,(np.min(y) + np.max(y)) / 2)
+    
+    def getRightAnchor(self):
+        x, y = self._base_points()
+        height = np.max(y) - np.min(y)
+        return (height/3,(np.min(y) + np.max(y)) / 2)
+    
+    def getRightAscendingAnchor(self):
+        return self.getRightAnchor()
 
 
 if __name__ == "__main__":

@@ -6,8 +6,7 @@ Demon.Nom:5
 Swear.Pres:10
 Maintain.Inf:10
 A:Manifestation.Acc:12
-With:4
-The:Capability:12
+The:Capability.Prop:12
 Perceive.Inf:10
 ThePL:Order.Acc:12
 Summoner.Gen:5
@@ -40,8 +39,10 @@ Summoner.Acc:5
 As Far As:6
 Demon.Nom:5
 May:3
-Act.Inf:10
-Without:4
-Die.Gerundive:10
+Act:10
+Not:4
+Certainty.Prop:12
+Death.Gen:12
+
 Period:1
 
