@@ -2,11 +2,11 @@ D) Figure out how I want to order adjectives. Might do like Japanese particle,
     with n=2 glyph as the linking particle. so Red House -> house that-is red. 
     that has to attach to each adj. Old red house -> House that-is red and that-is old.
 F) Applicatives??
-G) Flesh out suffixes for n=9
-H) Start working on drawing ligatures.
-J) Fix all sample texts to have correct glyphs after revisions. like with.
+J) Fix all sample texts to have correct glyphs after revisions. like with. and sequi scope binding.
 L) Fix sequi to read ], ][, ], and other "inflections"
-M) I know that I want ligatures to show scope to some extent, so need to finalize ligatures and start working in typewriter not stylus.
+N) Fix spacing for punctuation glyphs in typewriter.py
+O) fix dots so they are smaller and match the colorscheme instead of staying maroon for everything.
+P) Figure out why syllabary is duplicating some vowels when called on features???
 
 
 ###################################3
@@ -20,3 +20,6 @@ A) Fix Comitative Case to be: 1. The Proprietive Case
 E) In sample texts, either remove or redefine all mentions of bindings, vows, 
     bondservice etc to contract in n=5 or new nouns.
 K) Figure out why glow is no longer rendering. THERE IS SOME CONFLICT WITH default = "chord" that needs to be changed in drawer.
+H) Start working on drawing ligatures.
+G) Flesh out suffixes for n=7
+M) I know that I want ligatures to show scope to some extent, so need to finalize ligatures and start working in typewriter not stylus.

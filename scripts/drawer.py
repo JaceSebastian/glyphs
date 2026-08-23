@@ -68,7 +68,7 @@ class GlyphDrawer:
         savename="output.png",
         output_dpi=200,
         axs=None,
-        dot_color="maroon",
+        #dot_color="maroon",
         line_color="chords",
         dot_size=30,
         legend_fontsize=8,
@@ -97,8 +97,9 @@ class GlyphDrawer:
         axs.margins(0.1)
 
         # draw the points
+        dot_color = colors[0] #cmap(0.3)
         if glow:
-            dot_color = colors[0] #cmap(0.3)
+            
             halos = [(dot_size + 3, 0.05), (dot_size + 2, 0.12), (dot_size + 1, 0.25)]
             for w, a in halos:
                 axs.scatter(x_vals, y_vals, s=w, color=dot_color, alpha=a, edgecolors="none", zorder=2)

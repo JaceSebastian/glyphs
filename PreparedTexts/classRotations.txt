@@ -11,8 +11,8 @@ Cross.Past:10
 g.a:11
 Duration:12
 
-#And:4 + Summoner:5
-#After:6 + -ment:7
+And:4 + Summoner:5
+After:6 + -ment:7
 NaN:8 + NaN:8
-#Hot:9 + Cross.Past:10
+Hot:9 + Cross.Past:10
 

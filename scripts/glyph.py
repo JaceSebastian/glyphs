@@ -9,7 +9,6 @@ from drawer import GlyphDrawer
 import os
 import bases
 import line_shapes
-import ligatureGlyph
 
 import csv
 import ast

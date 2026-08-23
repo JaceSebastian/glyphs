@@ -1,23 +1,23 @@
 feature,group,encoding
-null, _,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
-prior, sequencing,"[[0,1,0,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
-posterior, sequencing,"[[0,1,0,0,1,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
-simultaineous, sequencing,"[[1,1,1,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
-hypothetical, sequencing,"[[1,0,1,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+null, _,                    "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+prior, sequencing,          "[[0,1,0,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+posterior, sequencing,      "[[0,1,0,0,1,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+simultaineous, sequencing,  "[[1,1,1,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+hypothetical, sequencing,   "[[1,0,1,1,0,1],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
 
-condition, sequent,"[[0,0,0,0,0,0],[1,1,0,1,1,0],[0,0,0,0,0,0]]"
-concession, sequent,"[[0,0,0,0,0,0],[0,1,0,1,0,1],[0,0,0,0,0,0]]"
-exception, sequent,"[[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]"
-comparison, sequent,"[[0,0,0,0,0,0],[1,0,0,1,0,0],[0,0,0,0,0,0]]"
-purpose, consequence,"[[0,0,0,0,0,0],[0,1,0,1,0,0],[0,0,0,0,0,0]]"
-cause, consequence,"[[0,0,0,0,0,0],[0,0,0,1,1,0],[0,0,0,0,0,0]]"
-result, consequence,"[[0,0,0,0,0,0],[1,1,1,1,1,1],[0,0,0,0,0,0]]"
+condition, sequent,         "[[0,0,0,0,0,0],[1,1,0,1,1,0],[0,0,0,0,0,0]]"
+concession, sequent,        "[[0,0,0,0,0,0],[0,1,0,1,0,1],[0,0,0,0,0,0]]"
+exception, sequent,         "[[0,0,0,0,0,0],[0,0,0,1,0,0],[0,0,0,0,0,0]]"
+comparison, sequent,        "[[0,0,0,0,0,0],[1,0,0,1,0,0],[0,0,0,0,0,0]]"
+purpose, consequence,       "[[0,0,0,0,0,0],[0,1,0,1,0,0],[0,0,0,0,0,0]]"
+cause, consequence,         "[[0,0,0,0,0,0],[0,0,0,1,1,0],[0,0,0,0,0,0]]"
+result, consequence,        "[[0,0,0,0,0,0],[1,1,1,1,1,1],[0,0,0,0,0,0]]"
 
-open, brackets,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,0,0,0,0,0]]"
-UNUSED, brackets, "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,1,0,0,0]]"
-#Default:
-close-open,brackets, "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
-close-close-open, brackets,"[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
+implicit, brackets,         "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]"
+open, brackets,             "[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,0,0,0,0,0]]"
+close-open,brackets,        "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,1,1,0,0,0]]"
+close-close-open, brackets, "[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
+    close, brakets,         "[[0,0,0,0,0,0],[0,0,0,0,0,0],[1,1,1,0,0,0]]"
 
 
 Glyphs
@@ -70,8 +70,7 @@ Therefore,posterior, 0, null, 0, result, 0
 About,simultaineous, 0, null, 0, result, 0
 Immediately,hypothetical, 0, null, 0, result, 0
 
-
-
+#Synonyms
 Yet,null, 0, exception, 0, null, 0
 Hence,posterior, 0, null, 0, result, 0
 As Soon As,hypothetical, 0, null, 0, result, 0
