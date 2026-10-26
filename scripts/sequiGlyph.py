@@ -108,12 +108,10 @@ class sequiGlyph(glyph):
 
 
     def _makeGlossing(self, root, case):
-        '''Note that thisis copied from noun, and not adapted.'''
+        '''Note that this is copied from noun, and not adapted.'''
         return_value = ""
         case = case.title()
-        if case == "]":
-            return_value += "] "
-        elif case == ")":
+        if case == "close":
             return_value += ", "
         else:
             case = None
@@ -131,7 +129,7 @@ if __name__ == "__main__":
                      line_kwargs=[])
 
     #commands = list(test_obj.glyph_list.keys())
-    commands = test_obj._getSampleCommands()#"glyphs"
+    commands = test_obj._getSampleCommands("glyphs")#"glyphs"
     test_obj.demoprint(commands, cols=5, cell_size=1)
 
 

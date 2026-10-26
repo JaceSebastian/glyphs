@@ -7,6 +7,8 @@ L) Fix sequi to read ], ][, ], and other "inflections"
 N) Fix spacing for punctuation glyphs in typewriter.py
 O) fix dots so they are smaller and match the colorscheme instead of staying maroon for everything.
 P) Figure out why syllabary is duplicating some vowels when called on features???
+Q) handle null in glyph_list for all classes, since this throws an error for decomonpositions.txt. 
+R) add a return to the typewriter, so i can have lines of text
 
 
 ###################################3

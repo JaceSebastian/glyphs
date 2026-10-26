@@ -1,0 +1,28 @@
+#Art is never Finished, only Abandoned
+#Learning never exhausts the mind.
+#Where the spirit does not work with the hand, there is no art.
+#All our nowledge has its origins in our perceptions.
+#the natural desire of good men is knowledge.
+#Nature never breaks her own laws.
+
+#Art:12
+#Never:9
+#become.Pres:10
+#Complete:9
+#So:6
+#Art:12
+#Can Only:3
+#Ever:9
+#Abandon.Passive Past:10
+
+Where:6
+The:Soul:12
+work.Present:10
+Not:4
+The:Hand.Prop:12
+Thence:6
+No:4
+Art:12
+May:3
+Birth.Passive:10   
+Period:1

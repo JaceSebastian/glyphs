@@ -67,6 +67,7 @@ In the Instance,hypothetical, 0, null, 0, cause, 1
 Such That,null,0, null, 0, result, 0
 Once, prior, 0, null, 0,result, 0
 Therefore,posterior, 0, null, 0, result, 0
+So, posterior, 0, null, 0, result, 0
 About,simultaineous, 0, null, 0, result, 0
 Immediately,hypothetical, 0, null, 0, result, 0
 

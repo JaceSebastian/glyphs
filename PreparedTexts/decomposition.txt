@@ -12,9 +12,9 @@ closed:9
 Loyal.superlative:9
 
 # Less than 6 percent
-LEQ:8
-six:8
-percent:8
+#LEQ:null:8
+#six:8
+null.percent:8
 LEQ:six.percent:8
 
 #of X-ment

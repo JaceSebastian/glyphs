@@ -72,10 +72,12 @@ class PronounGlyph(glyph):
             else:
                 case = "nom"
                 case_feature = "nom"
-            root = word.strip()
-            if not root:
-                raise ValueError(f"No root pronoun found in '{word}'")
-            if root not in self.glyph_list:
+            if word != "null":
+                root = word.strip()
+            else: root = "null"
+          #  if not root:
+               # raise ValueError(f"No root pronoun found in '{word}'")
+            if root not in self.glyph_list and root != "null":
                 raise KeyError(f"'{root}' not found in C5 glyph_list")
             # get root and field features from glyph_list, ignore determinant slot
             for feat, rotation in self.glyph_list[root]:

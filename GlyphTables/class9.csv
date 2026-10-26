@@ -63,6 +63,7 @@ Entire, quantity,0, full,0, null,0
 Entirely, quantity,0,full,0, adverb,0
 None (of), quantity,0, empty,0, null,0
 Always, quantity,0, full,0, adverb,0
+Ever, quantity,0, full,0, adverb,0
 Never,quantity,0, empty,0, adverb,0
 Usually,quantity,0, big,0, adverb,0
 Sometimes, quantity,0, unclear,0,adverb,0

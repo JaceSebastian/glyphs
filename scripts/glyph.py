@@ -242,9 +242,7 @@ class glyph:
         case = case.lower()
         if case == "gen":
             glossingStr += "of "
-        elif case == "loc":
-            glossingStr += "to "
-        elif case == "dat":
+        elif case == "loc" or case == "dat":
             glossingStr += "to "
         elif case == "ablative":
             glossingStr += "from "
@@ -260,24 +258,24 @@ class glyph:
         '''Note that this is a temp fix until I find a conjugation package I like that keeps the archaic feel
         LemmInflect seems good for past participles and irregulars'''
         if (conj == "Inf"):
-            glossingStr = "to " + glossingStr
-        elif (conj == "Passive"):
-            glossingStr = "be " + glossingStr
+            glossingStr = "To " + glossingStr
+        elif (conj == "Passive" or conj == "Passive Past"):
+            glossingStr = "Be " + glossingStr
         elif(conj == "Gerundive"):
-             glossingStr = "(the) " + glossingStr
+             glossingStr = "(The) " + glossingStr
         elif(conj in ["Continuous", "Present Perfect"]):
-            glossingStr = "is " + glossingStr
+            glossingStr = "Is " + glossingStr
         elif(conj == "Passive Perfect"):
-            glossingStr = "had been "+glossingStr
+            glossingStr = "Had Been "+glossingStr
         elif(conj =="Past Perfect"):
-            glossingStr = "was " + glossingStr
+            glossingStr = "Was " + glossingStr
         else:
             pass
         if(conj =="Pres"):
             glossingStr += "s"
         elif(conj in ["Gerundive", "Participle", "Continuous"]):
             glossingStr += "ing "
-        elif(conj in ["Past","Past Participle", "Passive","Passive Perfect", "Past Perfect", "Present Perfect"]):
+        elif(conj in ["Past","Past Participle", "Passive","Passive Perfect", "Past Perfect", "Present Perfect", "Passive Past"]):
             glossingStr += "ed " if (glossingStr[-1] != 'e') else "d "
         return glossingStr
 
