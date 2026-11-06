@@ -25,6 +25,7 @@ Genitive, null, 0, gen,0
 Dative, null, 0, dat, 0
 Locative, null, 0, loc, 0
 Instrumental, null, 0, inst, 0
+Propriative, null, 0, prop, 0
 
 Summoner, summoner, 0, null, 0
 Demon, demon, 0, null,0
