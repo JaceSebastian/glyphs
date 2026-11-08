@@ -34,23 +34,59 @@ pharengealized, secondaries,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0
 labialized, secondaries,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,1,1,1,1,1],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
 palatalized, secondaries,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
 unvoiced, secondaries,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+#can add tone to vowels here too.
 
-voiced plosive, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-unvoiced plosive, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-nasal, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-voiced fricative, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-unvoiced fricative, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-approximate, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
-lateral approximate, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+voiced plosive, manner,     "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+unvoiced plosive, manner,   "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+nasal, manner,              "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+voiced fricative, manner,   "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,0,1,1,0,1,0,1],[0,0,0,0,0,0,0,0,0,0,0]]"
+unvoiced fricative, manner, "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+approximate, manner,        "[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+lateral approximate, manner,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,1,0,1,0,1,0,1,0,1,0],[0,0,0,0,0,0,0,0,0,0,0]]"
+#unvoiced approximate
 
 cv, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0]]"
 vc, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0]]"
 c onset, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,1]]"
 c coda, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,1,1,0,1]]"
-v onset, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,1,1]]"
+v, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,1,1]]"
+v onset, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,0,0,1,1,0,0,0,1,0,0]]"
 v coda, syllable,"[[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,1,0,0,1,1,0,0]]"
 Glyphs
 command, feature1, rotation1, feature2, rotation2, feature3, rotation3, feature4, rotation4, feature5, rotation5
+
+#basic consonants
+p, null,0, bilabial,0, null,0, unvoiced plosive,0, null,0
+b, null,0, bilabial,0,null,0, voiced plosive,0, null,0
+t, null,0, alveolar,0,null,0, unvoiced plosive,0, null,0
+d, null,0, alveolar,0,null,0, voiced plosive,0, null,0
+k, null,0, velar,0,null,0, unvoiced plosive,0, null,0
+g, null,0, velar,0,null,0, voiced plosive,0, null,0
+
+m, null,0, bilabial, 0, null,0, nasal, 0, null ,0
+n, null,0, alveolar, 0, null,0, nasal, 0, null ,0
+ny, null,0, palatal, 0, null,0, nasal, 0, null ,0
+ng, null,0, velar, 0, null,0, nasal, 0, null ,0
+
+f, null,0, labiodental, 0, null,0, unvoiced fricative, 0, null, 0
+v, null,0, labiodental, 0, null,0, voiced fricative, 0, null, 0
+th, null,0, dental, 0, null,0, unvoiced fricative, 0, null, 0
+dh, null,0, dental, 0, null,0, voiced fricative, 0, null, 0
+s, null,0, alveolar, 0, null,0, unvoiced fricative, 0, null, 0
+z, null,0, alveolar, 0, null,0, voiced fricative, 0, null, 0
+sh, null,0, postalveolar, 0, null,0, unvoiced fricative, 0, null, 0
+zh, null,0, postalveolar, 0, null,0, voiced fricative, 0, null, 0   
+h, null,0, glottal, 0, null,0, unvoiced fricative, 0, null, 0
+?, null,0, pharyngeal, 0, null,0, voiced fricative, 0, null, 0
+
+l, null,0, alveolar, 0, null,0, lateral approximate, 0, null, 0
+r, null,0, alveolar, 0, null,0, approximate, 0, null, 0
+j, null,0, palatal, 0, null,0, approximate, 0, null, 0
+
+i, i,0, null,0, null, 0, null,0, null,0
+a, a, 0, null, 0, null,0, null,0,null,0 
+
+#DEMO
 "Pʰa",a, 0, bilabial, 0, aspirated, 0, unvoiced plosive, 0, null,0
 "Ve'",e, 0, labiodental, 0, aspirated vowel,0, voiced fricative, 0, null,0
 "Dĩ",i, 0, alveolar, 0, nasal vowel, 0,voiced plosive, 0, null,0
@@ -76,13 +112,4 @@ command, feature1, rotation1, feature2, rotation2, feature3, rotation3, feature4
 "tˀa", a, 0, alveolar, 0, pharengealized, 0, unvoiced plosive, 0, null, 0
 "tʷa", a, 0, alveolar, 0, labialized, 0, unvoiced plosive, 0, null, 0
 "tʲa", a, 0, alveolar, 0, palatalized, 0, unvoiced plosive, 0, null, 0
-
-#basic consonants
-p, null,0, bilabial,0, null,0, unvoiced plosive,0, null,0
-b, null,0, bilabial,0,null,0, voiced plosive,0, null,0
-t, null,0, alveolar,0,null,0, unvoiced plosive,0, null,0
-d, null,0, alveolar,0,null,0, voiced plosive,0, null,0
-k, null,0, velar,0,null,0, unvoiced plosive,0, null,0
-g, null,0, velar,0,null,0, voiced plosive,0, null,0
-
 

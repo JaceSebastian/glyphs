@@ -1,0 +1,16 @@
+
+#aziraphail
+V:a:11
+z.i:11
+r.a:11
+f.a:11
+v coda:i:11
+c coda:l:11
+
+#behemot
+#solomon
+#b.o:11
+#s.o:11
+#l.o:11
+#m.o:11
+#c coda:n:11   
