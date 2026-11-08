@@ -47,6 +47,7 @@ class syllableGlyph(glyph):
         if ':' in syllable:
             style, syllable = syllable.split(':', 1)
             self.features.append((style.strip() if style.strip() else "",0))
+            if style in ["v", "V", "vowel"]: style = "vowel"
         else:
             style = "CV" 
         if '.' in syllable:
@@ -88,7 +89,8 @@ class syllableGlyph(glyph):
             self.glossing = syllable
             return self.binary_array
         else:
-            self._getCompositeBinaryArray(syllable)          
+            self._getCompositeBinaryArray(syllable)     
+            return self.binary_array     
 
     def _makeGlossing(self, consonant, vowel=None, style="CV", features=None):
         return_value = ""
@@ -100,10 +102,12 @@ class syllableGlyph(glyph):
                 return_value = consonant + vowel
             case "VC":
                 return_value = vowel +consonant
-            case "V":
+            case "vowel":
                 return_value = consonant #note this is becaue of ordering
             case "c coda":
                 return_value = "-"+consonant
+            case "v coda":
+                return_value = "-"+consonant#note this is becaue of ordering
             case _:
                 return_value = consonant + vowel
         #return_value += consonant.title()
@@ -117,10 +121,10 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    #commands = ["p.a", "unvoiced plosive.bilabial", "coda:a.long vowel"]
+    commands = ["p.a", "v coda:a.long vowel"]
     
    # commands = list(test_obj.glyph_list.keys())
-    commands = list(test_obj.encodings.keys())
+    #commands = list(test_obj.encodings.keys())
     test_obj.demoprint(commands, 8)
 
 
