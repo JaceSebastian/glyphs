@@ -1,11 +1,19 @@
+#pretty boy 
+c onset:p:11
+r.e:11
+t.i:11
+b.o:11
+v coda:y:11
+
+
 
 #aziraphail
-V:a:11
-z.i:11
-r.a:11
-f.a:11
-v coda:i:11
-c coda:l:11
+#V:a:11
+#z.i:11
+#r.a:11
+#f.a:11
+#v coda:i:11
+#c coda:l:11
 
 #behemot
 #solomon

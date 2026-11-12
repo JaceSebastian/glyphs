@@ -1,6 +1,6 @@
 If:6
-The Demon:5
-Cross.Pres:10
+The:Demon:5
+Cross.Present:10
 The:Boundary:12
 The:Circle.Gen:12
 Then:6
@@ -13,12 +13,13 @@ For:6
 The:Duration:12
 Bondservice.Gen:5
 (ie:2
-1:8+2:8
+#1:8+2:8
 PL:Year.Nom:12
 ):2
 Or:4
 Until:6
-The Demon:5
+The:Demon:5
 Banish.Passive Perfect:10
-Otherworld.Loc:5
-Before:6+After:6
+Otherworld.Loc:12
+Period:1
+#Not sure why this is here? Before:6+After:6

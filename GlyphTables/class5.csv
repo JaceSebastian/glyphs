@@ -3,6 +3,7 @@ null,"", "[[0,0,0,0,0],[0,0,0,0,0]]"
 summoner, "Summoner","[[0,0,0,0,0],[0,0,1,1,1]]"
 demon,"Demon","[[0,0,0,0,0],[1,0,1,0,0]]"
 contract, "Bondservice","[[0,0,0,0,0],[1,1,0,1,0]]"
+#Find something better than place to use for this slot. obviate pronoun seems good but risky.
 place, "Place", "[[0,0,0,0,0],[1,1,1,0,1]]"
 vitality,"Vitality","[[0,0,0,0,0],[1,1,1,1,1]]"
 thing, "", "[[0,0,0,0,0],[1,1,0,0,0]]"
@@ -28,13 +29,18 @@ Instrumental, null, 0, inst, 0
 Propriative, null, 0, prop, 0
 
 Summoner, summoner, 0, null, 0
+    Inscriber, summoner, 0, null,0
+    Author, summoner, 0, null,0
 Demon, demon, 0, null,0
-Bindings, contract, 0, null, 0
+    It, demon,0, null,0
 Contract, contract, 0, null,0
+    Bondservice, contract, 0, null,0
+    Bindings, contract, 0, null, 0
 Vitality, vitality, 0, null,0
 Person, person, 0, null, 0
 Place, place, 0, null,0
 Thing, thing, 0, null,0
+
 
 
 

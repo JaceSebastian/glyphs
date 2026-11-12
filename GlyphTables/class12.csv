@@ -76,6 +76,7 @@ command, root, rotation1, field, rotation2
 Art, beauty, 0, essence, 0
 
 Summoning Circle,circle, 0, place, 0
+    Circle,circle, 0, place, 0
 Year, circle, 0, time, 0
 Party, circle,0, person,0
 

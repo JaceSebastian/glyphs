@@ -46,8 +46,9 @@ class syllableGlyph(glyph):
         self.features = []
         if ':' in syllable:
             style, syllable = syllable.split(':', 1)
-            self.features.append((style.strip() if style.strip() else "",0))
             if style in ["v", "V", "vowel"]: style = "vowel"
+            self.features.append((style.strip() if style.strip() else "",0))
+            
         else:
             style = "CV" 
         if '.' in syllable:
@@ -121,10 +122,10 @@ if __name__ == "__main__":
                      line_fn=line_shapes.straight,
                      line_kwargs=[])
 
-    commands = ["p.a", "v coda:a.long vowel"]
+    #commands = ["p.a", "v coda:a.long vowel"]
     
    # commands = list(test_obj.glyph_list.keys())
-    #commands = list(test_obj.encodings.keys())
+    commands = list(test_obj.encodings.keys())
     test_obj.demoprint(commands, 8)
 
 

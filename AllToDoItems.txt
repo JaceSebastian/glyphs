@@ -5,11 +5,9 @@ F) Applicatives??
 J) Fix all sample texts to have correct glyphs after revisions. like with. and sequi scope binding.
 L) Fix sequi to read ], ][, ], and other "inflections"
 N) Fix spacing for punctuation glyphs in typewriter.py
-O) fix dots so they are smaller and match the colorscheme instead of staying maroon for everything.
 P) Figure out why syllabary is duplicating some vowels when called on features???
-Q) 
+Q) Confirm all encodings are symetrically oriented as intended.
 R) add a return to the typewriter, so i can have lines of text
-S) Fill out syllabary
 U) Migrate all conjugations to the glyph class (In progress)
 
 
@@ -29,3 +27,5 @@ H) Start working on drawing ligatures.
 G) Flesh out suffixes for n=7
 M) I know that I want ligatures to show scope to some extent, so need to finalize ligatures and start working in typewriter not stylus.
 T) Make alt pronouns
+S) Fill out syllabary (Note, some vowels still not finalized)
+O) fix dots so they are smaller and match the colorscheme instead of staying maroon for everything.

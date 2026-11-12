@@ -22,7 +22,7 @@ class PronounGlyph(glyph):
         self.text_file = self.text_file_base +"class5.csv"
 
         with open(self.text_file, newline="") as f:
-            featurereader = csv.DictReader(f, skipinitialspace=True)
+            featurereader =  csv.DictReader((line for line in f if line.strip() and not line.lstrip().startswith("#")), skipinitialspace=True)
             for row in featurereader:
                 if row["feature"] == "Glyphs":  # sentinel keyword
                     break
@@ -63,7 +63,7 @@ class PronounGlyph(glyph):
             self.features = []
             if ':' in word:
                 det, word = word.split(':', 1)
-                self.features.append((det.strip() if det.strip() else "",0))
+                #self.features.append((det.strip() if det.strip() else "",0))
             else:
                 det = "The "
             if '.' in word:
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     test_obj = PronounGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
     commands = list(test_obj.glyph_list.keys()) #to avoid redundancies
     #commands = test_obj._getSampleCommands()
-    commands.append("Bindings.Loc")
+    #commands.append("Bindings.Loc")
     test_obj.demoprint(commands, 4)
 
 

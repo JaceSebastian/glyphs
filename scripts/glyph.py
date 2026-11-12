@@ -271,7 +271,7 @@ class glyph:
             glossingStr = "Was " + glossingStr
         else:
             pass
-        if(conj =="Pres"):
+        if(conj =="Present"):
             glossingStr += "s"
         elif(conj in ["Gerundive", "Participle", "Continuous"]):
             glossingStr += "ing "

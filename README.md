@@ -9,6 +9,9 @@ $ python3 ./scripts/deonticGlyph.py
 
 For the stylus:
 ```
+$ python ./scripts/stylus.py --file ./Syllabary.txt
+```
+```
 # defaults — clean output
 python stylus.py --words NOM:5 ACC:5
 

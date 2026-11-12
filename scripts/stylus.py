@@ -102,8 +102,11 @@ def parse_file(filepath: str) -> list[str]:
 def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
     if '+' in spec_str:
         sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
-       # obj = ligatureGlyph(sub_specs, CLASS_MAP)
-        print("Figure out ligatureGlyph?")
+        print("Ligature detected:", sub_specs)
+        obj = None #ligatureGlyph(sub_specs, CLASS_MAP)
+        raise NotImplementedError(
+            f"Ligature rendering is not implemented: {spec_str}"
+        )
         #obj.build()
     else:
         lookup, class_index = parse_spec(spec_str)
