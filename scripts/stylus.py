@@ -104,6 +104,7 @@ def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
         sub_specs = [s for s in parse_ligature(spec_str)]
         print("Ligature detected:", sub_specs)
         ligature_ordinal =0
+        glossing =""
         for spec in sub_specs:
             lookup, class_index = parse_spec(spec)
             if class_index not in CLASS_MAP:
@@ -112,27 +113,28 @@ def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
             obj._getBinaryArray(lookup)
             obj.draw_ligature(ligature_ordinal, axs=ax, **draw_kwargs)
             ligature_ordinal +=1
-
-
-       # raise NotImplementedError(f"Ligature rendering is not implemented: {spec_str}")
-        
+            glossing += obj.glossing
+            obj._clear_binary() 
     else:
         lookup, class_index = parse_spec(spec_str)
         if class_index not in CLASS_MAP:
             raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
         obj = CLASS_MAP[class_index]()
         obj._getBinaryArray(lookup)
-
-    obj.draw(axs=ax, **draw_kwargs)
-    glossing = obj.glossing
-    obj._clear_binary()
+        obj.draw(axs=ax, **draw_kwargs)
+        glossing = obj.glossing
+        obj._clear_binary()
+   
     return glossing
 
 
-def plot_glyphs(spec_strings: list[str], n: int | None = None,
+def OLDplot_glyphs(spec_strings: list[str], n: int | None = None,
                 cols: int = 5, cell_size: float = 2.25, draw_kwargs: dict = {}):
     if n is not None:
         spec_strings = spec_strings[:n]
+    if not spec_strings:
+        print("Nothing to plot")
+        return
 
     count = len(spec_strings)
     cols = min(cols, count)
@@ -161,7 +163,44 @@ def plot_glyphs(spec_strings: list[str], n: int | None = None,
 
 
 
-    
+def plot_glyphs(spec_strings: list[str], n: int | None = None,
+                cols: int = 5, cell_size: float = 2.25, draw_kwargs: dict = {}):
+    if n is not None:
+        spec_strings = spec_strings[:n]
+    if not spec_strings:
+        return
+
+    # Width of each spec in grid columns: one per glyph in a ligature, else 1
+    spans = [len(parse_ligature(s)) if '+' in s else 1 for s in spec_strings]
+
+    # Place specs left to right; wrap to the next row when one doesn't fit
+    placements, row, col = [], 0, 0
+    for spec, span in zip(spec_strings, spans):
+        if span > cols:
+            raise ValueError(f"Ligature '{spec}' needs {span} columns, grid has {cols}.")
+        if col + span > cols:
+            row, col = row + 1, 0
+        placements.append((spec, row, col, span))
+        col += span
+    rows = row + 1
+
+    # Fixed cell height means every glyph renders at the same size
+    fig = plt.figure(figsize=(cols * cell_size, rows * cell_size))
+    gs = fig.add_gridspec(rows, cols)
+
+    for spec, r, c, span in placements:
+        ax = fig.add_subplot(gs[r, c:c + span])  # ligatures span multiple columns
+        try:
+            label = resolve_and_draw(spec, ax, draw_kwargs)
+            ax_width_inches = ax.get_position().width * fig.get_size_inches()[0]
+            fontsize = max(ax_width_inches * 10/span, 8)  # minimum font size of 8
+            ax.set_title(label, pad=-6, y=-0.1, fontsize=fontsize)
+        except (ValueError, KeyError) as e:
+            print(f"Skipping '{spec}': {e}")
+            ax.set_visible(False)
+
+    plt.tight_layout()
+    plt.show()
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
@@ -189,7 +228,7 @@ def main():
     parser.add_argument("--show-name",      action="store_true", default=False)
     parser.add_argument("--savename",       type=str,            default=None)
     parser.add_argument("--cell-size",      type=float,          default=1.25)
-    parser.add_argument("--cols",           type=int,            default=7)
+    parser.add_argument("--cols",           type=int,            default=8)
     parser.add_argument("--color", type=str, default="summer")
 
     args = parser.parse_args()

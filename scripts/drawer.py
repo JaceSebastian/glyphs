@@ -262,3 +262,9 @@ class GlyphDrawer:
             axs.set_title(g.__name__)
         if savename is not None:
             plt.savefig(savename, dpi=output_dpi, bbox_inches="tight", pad_inches=0.5, transparent=True)
+
+class GlossingParser:
+    def __init__(self):
+        pass
+    def handle_numerals(self):
+        pass
