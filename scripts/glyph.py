@@ -231,6 +231,9 @@ class glyph:
     def draw(self, **kwargs):
         GlyphDrawer(self).draw(**kwargs)
 
+    def draw_ligature(self, ordinalval, **kwargs):
+        GlyphDrawer(self).draw_ligature(ligature_ordinal=ordinalval, **kwargs)
+
 
 ####### Glossing Functions
 

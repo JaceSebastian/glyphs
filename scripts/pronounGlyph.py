@@ -102,7 +102,8 @@ class PronounGlyph(glyph):
 
 if __name__ == "__main__":
     test_obj = PronounGlyph(bases.polygon,base_kwargs=[],line_fn=line_shapes.straight,line_kwargs=[])
-    commands = list(test_obj.glyph_list.keys()) #to avoid redundancies
+    #commands = list(test_obj.glyph_list.keys()) #to avoid redundancies
+    commands = list(test_obj.encodings.keys())
     #commands = test_obj._getSampleCommands()
     #commands.append("Bindings.Loc")
     test_obj.demoprint(commands, 4)

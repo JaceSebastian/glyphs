@@ -16,7 +16,6 @@ from verbGlyph import verbGlyph
 from syllabaryGlyph import syllableGlyph
 from nounGlyph import nounGlyph
 
-
 CLASS_MAP = {
     1: punctuationGlyph,
     2: appositionGlyph,
@@ -42,17 +41,6 @@ def parse_feature_token(token: str) -> tuple[str, int]:
         feat, rot = token.rsplit(":", 1)
         return feat.strip(), int(rot.strip())
     return token, 0
-
-
-def OLDparse_spec(spec: str) -> tuple:
-    spec = spec.strip()
-    split_pos = max(i for i, ch in enumerate(spec) if ch == ":")
-    body = spec[:split_pos].strip()
-    class_index = int(spec[split_pos + 1:].strip())
-    if body.startswith("[") and body.endswith("]"):
-        tokens = [t.strip() for t in body[1:-1].split(",")]
-        return [parse_feature_token(t) for t in tokens if t], class_index
-    return body, class_index
 
 def parse_spec(spec: str) -> tuple:
     spec = spec.strip()
@@ -134,12 +122,15 @@ def render_typewriter(
 
         width = wordWidth(parts, scale)
 
+
         if cursor_x > 0 and cursor_x + width > max_width:
             cursor_x = 0
             cursor_y -= line_height * scale
 
         #word_start = cursor_x
         word_start = cursor_x + parts[0].getLeftAnchor()[0] * scale
+        if(word_start == cursor_x): word_start -= word_gap
+
 
         glyph_positions = []
 
@@ -153,6 +144,8 @@ def render_typewriter(
                 part.getRightAnchor()[0]
                 - part.getLeftAnchor()[0]
             )
+            advance = max(advance, 3*word_gap)
+            
 
             cursor_x += advance * scale + LIGATURE_SPACING
 
@@ -239,7 +232,7 @@ def main():
     source.add_argument("--file",  metavar="PATH")
 
     parser.add_argument("--n",            type=int,   default=None)
-    parser.add_argument("--max-width",    type=float, default=15.0)
+    parser.add_argument("--max-width",    type=float, default=20.0)
     parser.add_argument("--word-gap",     type=float, default=0.5)
     parser.add_argument("--line-height",  type=float, default=3.5)
     parser.add_argument("--gloss-offset", type=float, default=1.8)

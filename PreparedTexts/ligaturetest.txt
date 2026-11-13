@@ -1,0 +1,5 @@
+one:8 + two:8
+Before:6 + After:6
+Demon:5+Summoner.Loc:5
+LEQ:nan.percent:8
+one:percent:8

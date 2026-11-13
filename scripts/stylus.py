@@ -101,13 +101,21 @@ def parse_file(filepath: str) -> list[str]:
 #def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict, gap: float = 0.2):
 def resolve_and_draw(spec_str: str, ax, draw_kwargs: dict):
     if '+' in spec_str:
-        sub_specs = [parse_spec(s) for s in parse_ligature(spec_str)]
+        sub_specs = [s for s in parse_ligature(spec_str)]
         print("Ligature detected:", sub_specs)
-        obj = None #ligatureGlyph(sub_specs, CLASS_MAP)
-        raise NotImplementedError(
-            f"Ligature rendering is not implemented: {spec_str}"
-        )
-        #obj.build()
+        ligature_ordinal =0
+        for spec in sub_specs:
+            lookup, class_index = parse_spec(spec)
+            if class_index not in CLASS_MAP:
+                raise ValueError(f"Class index {class_index} not in CLASS_MAP.")
+            obj = CLASS_MAP[class_index]()
+            obj._getBinaryArray(lookup)
+            obj.draw_ligature(ligature_ordinal, axs=ax, **draw_kwargs)
+            ligature_ordinal +=1
+
+
+       # raise NotImplementedError(f"Ligature rendering is not implemented: {spec_str}")
+        
     else:
         lookup, class_index = parse_spec(spec_str)
         if class_index not in CLASS_MAP:
@@ -150,6 +158,10 @@ def plot_glyphs(spec_strings: list[str], n: int | None = None,
 
     plt.tight_layout()
     plt.show()
+
+
+
+    
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 

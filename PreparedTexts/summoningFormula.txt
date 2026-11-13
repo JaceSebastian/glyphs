@@ -10,7 +10,8 @@ Summoner.Nom:5
 Invoke.Pres:10
 Demon.Acc:5
 True Name.Inst:12
-(ie:2 + p.a:11 + vc.p.a:11 +  ):2
+ie:2 
+p.a:11 + sh.a:11 + b.o:11
 And Simultaineously:6
 Commit.Pres:10
 LEQ:NaN.Percent:8

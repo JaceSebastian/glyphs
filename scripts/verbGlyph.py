@@ -67,6 +67,7 @@ class verbGlyph(glyph):
         features = []
         if '.' in word:
             word, conjugation = word.split('.', 1)
+            if "Pres" in conjugation: conjugation = "Present"
             conj = (conjugation.strip() if conjugation.strip() else "Inf",0)
         else:
             conjugation = "Inf"

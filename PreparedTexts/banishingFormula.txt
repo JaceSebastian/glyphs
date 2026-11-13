@@ -1,9 +1,9 @@
-Supposing:6
+Upon:6
 The:Completion:12
 Bondservice.Gen:5
 Or:4
 Banish:10 + -ment:7
-Otherworld.Loc:5
+Otherworld.Loc:12
 True Name.Inst:12
 Demon.Gen:5
 Thence:6
@@ -11,7 +11,7 @@ Demon.Nom:5
 Swear.Pres:10
 Transit.Inf:10
 Itself:7
-Otherworld.Ablative:5
+Otherworld.Ablative:12
 Such That:6
 Demon.Nom:5
 Must Not:3
@@ -24,13 +24,13 @@ Transit:10
 Any:4 + Thing:12
 That:6
 Is Not:4
-Know.Participle:10 + toAdverb:7
+Know.Participle:10 + toAdv:7
 Gift.Past:10
 Demon.Dat:5
 And:4
 Must Not:3
 Use:10
-GT:7.Percent:8 + GT:7.Percent:8
+GT:Seven.percent:8 + GT:seven.percent:8
 Established:9 + Vitality.Nom:5
 Summoner.Gen:5
 Period:1

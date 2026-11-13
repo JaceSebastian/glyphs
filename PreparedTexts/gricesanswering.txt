@@ -12,9 +12,9 @@ true.adverb:9
 And[:4
 Relevant.adverb:9
 And[:4
-#Information:12 + -al:7 + -ly:7
+Information:12 + -al:7 + -ly:7
 And[:4
-#Understand:10 + -able:7
+Understand:10 + -able:7 + -ly:7
 And:4
 clear.adverb:9
 Period:1

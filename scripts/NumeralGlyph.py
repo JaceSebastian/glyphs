@@ -78,7 +78,7 @@ class NumeralGlyph(glyph):
             word, numtype = word.split('.', 1)
             numtype = numtype.strip() if numtype.strip() else None
         else:
-            numtype = None
+            numtype = "null"
 
         # num slot
         root = word.strip().lower()

@@ -163,3 +163,102 @@ class GlyphDrawer:
                 Q = [x_vals[(i + k) % g.num], y_vals[(i + k) % g.num]]
                 line_x, line_y = g.line_fn(P, Q, *g.line_kwargs)
                 axs.plot(line_x, line_y, ls=all_ls, color=all_c, alpha=all_alpha, lw=all_lw, zorder=4)
+
+
+    def draw_ligature(
+        self,
+        ligature_ordinal=0,
+        glow=False,
+        show_all_paths=False,
+        savename="output.png",
+        output_dpi=200,
+        axs=None,
+        line_color="chords",
+        dot_size=30,
+        legend_fontsize=8,
+        legend_anchor=(1, 0.75),
+        show_name=False,
+        vertex_num=13,
+    ):
+        g = self.g
+        assert g.num == g.binary_array.shape[1]
+        assert g.attr_num == g.binary_array.shape[0]
+
+        colors = get_palette(glow, vertex_num, line_color)
+
+        if g.num:
+            dot_size = max(dot_size / (g.num / 6), 6)
+            dot_size = min(dot_size, 40)
+
+        x_vals, y_vals = g.base_fn(g.num, *g.base_kwargs)
+        x_vals = np.asarray(x_vals, dtype=float)
+        y_vals = np.asarray(y_vals, dtype=float)
+
+        if axs is None:
+            fig, axs = plt.subplots(1, 1)
+        else:
+            fig = plt.gcf()
+
+        axs.set_aspect("equal")
+        axs.margins(0.1)
+
+        def _pick(xs, ys, rightmost):
+            # extreme-x vertex; ties broken by closeness to the glyph's horizontal midline
+            target = xs.max() if rightmost else xs.min()
+            cands = np.where(np.isclose(xs, target))[0]
+            return cands[np.argmin(np.abs(ys[cands] - ys.mean()))]
+
+        # shift this glyph so its leftmost vertex lands on the previous glyph's rightmost vertex
+        if ligature_ordinal > 0 and getattr(axs, "_lig_anchor", None) is not None:
+            li = _pick(x_vals, y_vals, rightmost=False)
+            dx = axs._lig_anchor[0] - x_vals[li]
+            dy = axs._lig_anchor[1] - y_vals[li]
+            x_vals = x_vals + dx
+            y_vals = y_vals + dy
+
+        # record this glyph's rightmost vertex as the anchor for the next one
+        ri = _pick(x_vals, y_vals, rightmost=True)
+        axs._lig_anchor = (x_vals[ri], y_vals[ri])
+
+        # draw the points
+        dot_color = colors[0]
+        if glow:
+            halos = [(dot_size + 3, 0.05), (dot_size + 2, 0.12), (dot_size + 1, 0.25)]
+            for w, a in halos:
+                axs.scatter(x_vals, y_vals, s=w, color=dot_color, alpha=a, edgecolors="none", zorder=2)
+
+        axs.scatter(x_vals, y_vals, s=dot_size, color=dot_color, zorder=2)
+
+        if show_all_paths:
+            self.draw_all_paths(x_vals, y_vals, axs)
+
+        for i in range(g.attr_num):
+            k = i + 1
+            color = colors[i]
+            linewidth = 3 if glow else 2
+
+            for j, elem in enumerate(g.binary_array[i]):
+                if elem == 1:
+                    P = [x_vals[j], y_vals[j]]
+                    Q = [x_vals[(j + k) % g.num], y_vals[(j + k) % g.num]]
+                    line_x, line_y = g.line_fn(P, Q, *g.line_kwargs)
+
+                    if glow:
+                        halos = [
+                            (linewidth + 5, 0.05),
+                            (linewidth + 2, 0.1),
+                            (linewidth + 0.5, 0.3),
+                        ]
+                        (line,) = axs.plot(line_x, line_y, lw=linewidth, color=color, zorder=1)
+                        line.set_path_effects(
+                            [pe.Stroke(linewidth=w, foreground=color, alpha=a) for w, a in halos]
+                            + [pe.Normal()]
+                        )
+                    else:
+                        axs.plot(line_x, line_y, ls="-", lw=linewidth, color=color, zorder=0)
+
+        axs.set_axis_off()
+        if show_name:
+            axs.set_title(g.__name__)
+        if savename is not None:
+            plt.savefig(savename, dpi=output_dpi, bbox_inches="tight", pad_inches=0.5, transparent=True)
